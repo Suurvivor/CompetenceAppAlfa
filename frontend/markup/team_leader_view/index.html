@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <script
+         src="https://kit.fontawesome.com/5e4c917eea.js"
+         crossorigin="anonymous"
+      ></script>
+      <script
+         src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"
+         integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ=="
+         crossorigin="anonymous"
+         referrerpolicy="no-referrer"
+      ></script>
+      <meta charset="UTF-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="stylesheet" href="css/main.css" />
+      <title>Team view</title>
+   </head>
+   <body>
+      <div id="main">
+         <nav>
+            <ul>
+               <li>Home</li>
+               <li>Info</li>
+               <li>Some</li>
+               <li>Login</li>
+            </ul>
+         </nav>
+
+         <div id="team_leader_view">
+            <div id="team_leader_flex_row">
+               <div id="team_info">
+                  <span id="department">Dział: Narzędziownia</span>
+                  <span id="shift">Zmiana: I</span>
+               </div>
+               <div id="search">
+                  <input
+                     id="user_search"
+                     type="text"
+                     placeholder="Search User"
+                  />
+                  <button id="search_user">
+                     <i class="fa-solid fa-magnifying-glass"></i>
+                  </button>
+               </div>
+               <div id="overall_stats">
+                  <div class="skill">
+                     <div class="outer">
+                        <div class="inner">
+                           <span id="overall_title">As a Team</span>
+                           <div id="number"></div>
+                        </div>
+                     </div>
+                     <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        version="1.1"
+                        width="160px"
+                        height="160px"
+                     >
+                        <defs>
+                           <linearGradient id="GradientColor">
+                              <stop offset="0%" stop-color="#e91e63" />
+                              <stop offset="100%" stop-color="#673ab7" />
+                           </linearGradient>
+                        </defs>
+                        <circle cx="80" cy="80" r="77" stroke-linecap="round" />
+                     </svg>
+                  </div>
+               </div>
+            </div>
+            <table>
+               <thead>
+                  <tr>
+                     <th>
+                        <div class="team_leader_view_th">
+                           <span id="team_leader_view_title"
+                              >Grupy Kompetencji</span
+                           >
+                           <div id="team_leader_search_competence">
+                              <input
+                                 type="text"
+                                 name="search_comp"
+                                 id="search_comp"
+                                 placeholder="Search signle Competence or group"
+                              /><i
+                                 class="fa-solid fa-magnifying-glass"
+                                 id="team_leader_search_competence_icon"
+                              ></i>
+                           </div>
+                        </div>
+                     </th>
+                     <th>
+                        <div class="team_leader_view_th">
+                           <i
+                              class="fa-solid fa-circle-user team_leader_view_user_icon"
+                           ></i>
+                           <span class="team_leader_view_username"
+                              >Marian <br />Wązkowsky</span
+                           >
+                        </div>
+                     </th>
+                     <th>
+                        <div class="team_leader_view_th">
+                           <i
+                              class="fa-solid fa-circle-user team_leader_view_user_icon"
+                           ></i>
+                           <span class="team_leader_view_username"
+                              >Marian <br />Wązkowsky</span
+                           >
+                        </div>
+                     </th>
+                     <th>
+                        <div class="team_leader_view_th">
+                           <i
+                              class="fa-solid fa-circle-user team_leader_view_user_icon"
+                           ></i>
+                           <span class="team_leader_view_username"
+                              >Marian <br />Wązkowsky</span
+                           >
+                        </div>
+                     </th>
+                     <th>
+                        <div class="team_leader_view_th">
+                           <i
+                              class="fa-solid fa-circle-user team_leader_view_user_icon"
+                           ></i>
+                           <span class="team_leader_view_username"
+                              >Marian <br />Wązkowsky</span
+                           >
+                        </div>
+                     </th>
+                     <th>
+                        <div class="team_leader_view_th">
+                           <i
+                              class="fa-solid fa-circle-user team_leader_view_user_icon"
+                           ></i>
+                           <span class="team_leader_view_username"
+                              >Marian <br />Wązkowsky</span
+                           >
+                        </div>
+                     </th>
+                     <th>
+                        <div class="team_leader_view_th">
+                           <i
+                              class="fa-solid fa-circle-user team_leader_view_user_icon"
+                           ></i>
+                           <span class="team_leader_view_username"
+                              >Marian <br />Wązkowsky</span
+                           >
+                        </div>
+                     </th>
+                     <th>
+                        <div class="team_leader_view_th">
+                           <i
+                              class="fa-solid fa-circle-user team_leader_view_user_icon"
+                           ></i>
+                           <span class="team_leader_view_username"
+                              >Marian <br />Wązkowsky</span
+                           >
+                        </div>
+                     </th>
+                     <th>
+                        <div class="team_leader_view_th">
+                           <i
+                              class="fa-solid fa-circle-user team_leader_view_user_icon"
+                           ></i>
+                           <span class="team_leader_view_username"
+                              >Marian <br />Wązkowsky</span
+                           >
+                        </div>
+                     </th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr>
+                     <td>BHP</td>
+                     <td>9/10</td>
+                     <td>9/10</td>
+                     <td>9/10</td>
+                     <td>9/10</td>
+                     <td>9/10</td>
+                     <td>9/10</td>
+                     <td>9/10</td>
+                     <td>9/10</td>
+                  </tr>
+                  <tr>
+                     <td>Przezbrajanie form</td>
+                     <td>9/10</td>
+                     <td>9/10</td>
+                     <td>9/10</td>
+                     <td>9/10</td>
+                     <td>9/10</td>
+                     <td>9/10</td>
+                     <td>9/10</td>
+                     <td>9/10</td>
+                  </tr>
+                  <tr>
+                     <td>Czyszczenie form</td>
+                     <td>9/10</td>
+                     <td>9/10</td>
+                     <td>9/10</td>
+                     <td>9/10</td>
+                     <td>9/10</td>
+                     <td>9/10</td>
+                     <td>9/10</td>
+                     <td>9/10</td>
+                  </tr>
+                  <tr>
+                     <td>Obsługa maszyn wtryskowych Engel</td>
+                     <td>9/10</td>
+                     <td>9/10</td>
+                     <td>9/10</td>
+                     <td>9/10</td>
+                     <td>9/10</td>
+                     <td>9/10</td>
+                     <td>9/10</td>
+                     <td>9/10</td>
+                  </tr>
+               </tbody>
+            </table>
+         </div>
+      </div>
+      <script>
+         const fill = 74;
+
+         const get_fill = (procenty) => Math.round((procenty * 490) / 100);
+         const get_fill_time = (fill) => Math.round((490 * 20) / fill);
+
+         document.documentElement.style.setProperty(
+            '--offset',
+            get_fill(100 - fill)
+         );
+
+         let number = document.getElementById('number');
+         let counter = 0;
+         number.innerHTML = counter + '%';
+         setInterval(() => {
+            if (counter == fill) {
+               clearInterval();
+            } else {
+               counter += 1;
+               number.innerHTML = counter + '%';
+            }
+         }, get_fill_time(get_fill(fill)));
+      </script>
+      <script src="./js/chart.js"></script>
+   </body>
+</html>

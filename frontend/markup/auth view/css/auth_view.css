@@ -1,0 +1,61 @@
+:root {
+   --button-color: #4361ee;
+}
+
+#login_view {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   margin-bottom: 200px;
+   padding: 30px 30px;
+   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+      rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+      rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+#login_view_title {
+   font-size: 1.7rem;
+   margin-bottom: 70px;
+}
+
+.login_input_text {
+   margin-bottom: 40px;
+   padding: 15px 15px;
+   width: 400px;
+   font-size: 1.2rem;
+}
+
+.login_view_flex_row {
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+   align-items: center;
+   width: 100%;
+}
+
+.login_view_button {
+   padding: 10px 15px;
+   cursor: pointer;
+   min-width: 100px;
+   font-size: 1.2rem;
+   background-color: var(--thead);
+   color: white;
+   border: none;
+}
+
+.login_view_link {
+   font-size: 13.5px;
+   text-decoration: none;
+   color: var(--thead);
+}
+
+#login_view_terms_container {
+   cursor: pointer;
+   border: 1px dotted var(--thead);
+   padding: 2px 5px;
+}
+
+input[type='checkbox'] {
+   cursor: pointer;
+}

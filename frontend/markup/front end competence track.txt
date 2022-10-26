@@ -1,0 +1,18 @@
+COMPONENTS:
+	make clean
+	-font weights
+	-TOOLTIPS FOLOWING CUROSOR WHILE ON ELEMENT
+	- Calendar:
+		-planing trainging
+		
+	- Login -> markup done, tooltips to do
+
+	- Register -> markup done, tooltips to do
+
+	- User View -> markup Done - > TO DO MORE STATISTICS
+
+	- Team Leader View -> markup done -> alot searches to do
+	- Teams Leader View
+	- Competence view
+	- Admin Panel
+	

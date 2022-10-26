@@ -1,0 +1,45 @@
+* {
+   padding: 0;
+   margin: 0;
+   box-sizing: border-box;
+}
+
+body {
+   height: 100vh;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+.competenceList {
+   display: grid;
+   grid-template-columns: 1fr 4fr 1fr 1fr;
+}
+
+.competenceList_id {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+}
+
+.competenceList_name {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+}
+
+.competenceList_rating {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+}
+
+.competenceList_action {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+}

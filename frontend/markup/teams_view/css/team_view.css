@@ -1,0 +1,9 @@
+.user_list_item {
+   display: flex;
+   padding: 5px 30px;
+}
+
+.user_list_title {
+   margin: 0 auto;
+   padding: 15px 10px;
+}

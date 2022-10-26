@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <script
+         src="https://kit.fontawesome.com/5e4c917eea.js"
+         crossorigin="anonymous"
+      ></script>
+      <script
+         src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"
+         integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ=="
+         crossorigin="anonymous"
+         referrerpolicy="no-referrer"
+      ></script>
+      <meta charset="UTF-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="stylesheet" href="css/main.css" />
+      <title>User page</title>
+   </head>
+   <body>
+      <div id="main">
+         <nav>
+            <ul>
+               <li>Home</li>
+               <li>Info</li>
+               <li>Some</li>
+               <li>Login</li>
+            </ul>
+         </nav>
+         <div id="user_dashboard">
+            <div id="user_dashboard_info">
+               <i
+                  class="fa-solid fa-user-tie"
+                  id="user_dashborad_info_avatar"
+               ></i>
+               <span id="user_dashboard_info_name">John Doe</span>
+               <span id="user_dashboard_info_position"
+                  >Position: Ustawiacz Maszyn</span
+               >
+               <span id="user_dashboard_info_department"
+                  >Department: Produkcja - Wtrysk</span
+               >
+            </div>
+            <div id="user_dashboard_reminders">
+               <span id="user_dashboard_reminders_title"
+                  >Zaplanowane szkolenia</span
+               >
+               <div class="user_dashboard_reminders_item">
+                  <i
+                     class="fa-regular fa-bell"
+                     id="user_dashboard_reminders_item_icon"
+                  ></i>
+                  <span id="reminders_item_title"
+                     >Przezbrajanie formy wtryskowej nr W0345</span
+                  >
+                  <div id="reminders_item_date">
+                     <span class="badge badge-error">20.01.3021</span>
+                  </div>
+               </div>
+
+               <div class="user_dashboard_reminders_item">
+                  <i
+                     class="fa-regular fa-bell"
+                     id="user_dashboard_reminders_item_icon"
+                  ></i>
+                  <span id="reminders_item_title"
+                     >Przezbrajanie formy wtryskowej nr W0345</span
+                  >
+                  <div id="reminders_item_date">
+                     <span class="badge badge-error">20.01.3021</span>
+                  </div>
+               </div>
+               <div class="user_dashboard_reminders_item">
+                  <i
+                     class="fa-regular fa-bell"
+                     id="user_dashboard_reminders_item_icon"
+                  ></i>
+                  <span id="reminders_item_title"
+                     >Przezbrajanie formy wtryskowej nr W0345</span
+                  >
+                  <div id="reminders_item_date">
+                     <span class="badge badge-error">20.01.3021</span>
+                  </div>
+               </div>
+            </div>
+            <div id="user_dashboard_statistics">
+               <div id="user_dashboard_statistics_chart">
+                  <canvas id="myChart"></canvas>
+               </div>
+               <div class="skill" id="user_dashboard_statistics_skill">
+                  <div class="outer">
+                     <div class="inner">
+                        <div id="number"></div>
+                     </div>
+                  </div>
+                  <svg
+                     xmlns="http://www.w3.org/2000/svg"
+                     version="1.1"
+                     width="160px"
+                     height="160px"
+                  >
+                     <defs>
+                        <linearGradient id="GradientColor">
+                           <stop offset="0%" stop-color="#e91e63" />
+                           <stop offset="100%" stop-color="#673ab7" />
+                        </linearGradient>
+                     </defs>
+                     <circle cx="80" cy="80" r="77" stroke-linecap="round" />
+                  </svg>
+               </div>
+            </div>
+         </div>
+         <div id="container">
+            <div class="flex-row">
+               <div class="flex-column">
+                  <div class="item">
+                     <table>
+                        <thead>
+                           <tr>
+                              <th>Id</th>
+                              <th>BHP</th>
+                              <th>Ocena</th>
+                              <th>Action</th>
+                           </tr>
+                        </thead>
+                        <tbody>
+                           <tr>
+                              <td>1</td>
+                              <td>Przezbrajanie formy nr W034342</td>
+                              <td><i class="fa-solid fa-check green"></i></td>
+                              <td>
+                                 <i class="fa-solid fa-calendar-plus"></i
+                                 ><i class="fa-solid fa-gears"></i>
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>1</td>
+                              <td>Przezbrajanie formy nr W034342</td>
+                              <td>
+                                 <div id="circle">
+                                    <div id="circle_number">3</div>
+                                    <div id="box_top_left"></div>
+                                    <div id="box_top_right"></div>
+                                    <div id="box_bot_left"></div>
+                                    <div id="box_bot_right"></div>
+                                 </div>
+                              </td>
+                              <td>
+                                 <i class="fa-solid fa-calendar-plus"></i>
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>1</td>
+                              <td>Przezbrajanie formy nr W034342</td>
+                              <td>
+                                 <i class="fa-solid fa-xmark red"></i>
+                              </td>
+                              <td></td>
+                           </tr>
+                           <tr>
+                              <td>1</td>
+                              <td>Przezbrajanie formy nr W034342</td>
+                              <td></td>
+                              <td></td>
+                           </tr>
+                        </tbody>
+                     </table>
+                  </div>
+                  <div class="item item-empty">
+                     <i class="fa-solid fa-plus fa-4x"></i>
+                     <p>Dodaj nową grupe kompetencji</p>
+                  </div>
+               </div>
+               <div class="flex-column">
+                  <div class="item">
+                     <table>
+                        <thead>
+                           <tr>
+                              <th>Id</th>
+                              <th>Przezbrajanie form wtryskowych</th>
+                              <th>Ocena</th>
+                              <th>Action</th>
+                           </tr>
+                        </thead>
+                        <tbody>
+                           <tr>
+                              <td>1</td>
+                              <td>Przezbrajanie formy nr W034342</td>
+                              <td>1</td>
+                              <td></td>
+                           </tr>
+                        </tbody>
+                     </table>
+                  </div>
+                  <div class="item">
+                     <table>
+                        <thead>
+                           <tr>
+                              <th>Id</th>
+                              <th>Nazwa kompetencji</th>
+                              <th>Ocena</th>
+                              <th>Action</th>
+                           </tr>
+                        </thead>
+                        <tbody>
+                           <tr>
+                              <td>1</td>
+                              <td>Przezbrajanie formy nr W034342</td>
+                              <td><i class="fa-solid fa-check green"></i></td>
+                              <td>
+                                 <i class="fa-solid fa-calendar-days"></i
+                                 ><i class="fa-solid fa-gears"></i>
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>1</td>
+                              <td>Przezbrajanie formy nr W034342</td>
+                              <td><i class="fa-solid fa-check green"></i></td>
+                              <td>
+                                 <i class="fa-solid fa-calendar-plus"></i>
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>1</td>
+                              <td>Przezbrajanie formy nr W034342</td>
+                              <td>
+                                 <i class="fa-solid fa-xmark red"></i>
+                              </td>
+                              <td></td>
+                           </tr>
+                           <tr>
+                              <td>1</td>
+                              <td>Przezbrajanie formy nr W034342</td>
+                              <td></td>
+                              <td></td>
+                           </tr>
+                        </tbody>
+                     </table>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <script>
+         const fill = 74;
+
+         const get_fill = (procenty) => Math.round((procenty * 490) / 100);
+         const get_fill_time = (fill) => Math.round((490 * 20) / fill);
+
+         document.documentElement.style.setProperty(
+            '--offset',
+            get_fill(100 - fill)
+         );
+
+         let number = document.getElementById('number');
+         let counter = 0;
+         number.innerHTML = counter + '%';
+         setInterval(() => {
+            if (counter == fill) {
+               clearInterval();
+            } else {
+               counter += 1;
+               number.innerHTML = counter + '%';
+            }
+         }, get_fill_time(get_fill(fill)));
+      </script>
+      <script src="./js/chart.js"></script>
+   </body>
+</html>

@@ -1,0 +1,119 @@
+:root {
+   --thead: #212529;
+   --trFirst: #dee2e6;
+   --trEven: #ced4da;
+}
+
+* {
+   box-sizing: border-box;
+   margin: 0;
+   padding: 0;
+}
+
+nav {
+   width: 100%;
+   align-self: center;
+   background-color: var(--thead);
+   color: white;
+   font-size: 1.2rem;
+}
+nav > ul {
+   display: flex;
+   justify-content: flex-end;
+}
+
+nav > ul > li {
+   padding: 15px 30px;
+   text-decoration: none;
+   list-style-type: none;
+   cursor: pointer;
+   opacity: 0.7;
+}
+nav > ul > li:hover {
+   opacity: 1;
+}
+body {
+   background-color: #e9ecef;
+}
+
+#main {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
+
+#container {
+   width: 80%;
+   padding-top: 20px;
+}
+
+.flex-row {
+   display: flex;
+   flex-direction: row;
+   justify-content: center;
+}
+.flex-column {
+   display: flex;
+   flex-direction: column;
+   width: 700px;
+}
+
+.green {
+   color: green;
+}
+
+.red {
+   color: red;
+}
+
+.fa-check,
+.fa-xmark {
+   font-size: 1.2rem;
+}
+
+i {
+   font-size: 1.2rem;
+   cursor: pointer;
+}
+
+.item {
+   margin: 20px 20px;
+   box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+      rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+}
+
+.item > table {
+   width: 100%;
+   border-collapse: collapse;
+}
+
+thead {
+   background-color: var(--thead);
+   color: white;
+}
+
+th {
+   font-size: 1.1rem;
+   padding: 13px 10px;
+}
+
+tbody > tr {
+   background-color: var(--trFirst);
+}
+
+tbody > tr:nth-child(even) {
+   background-color: var(--trEven);
+}
+
+td {
+   padding: 15px 10px;
+   text-align: center;
+}
+
+tr {
+   border-bottom: 1px solid var(--thead);
+}
+
+tr:last-child {
+   border-bottom: none;
+}
