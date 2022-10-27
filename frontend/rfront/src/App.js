@@ -13,6 +13,7 @@ import AuthState from './context/auth/AuthState';
 import TreeState from './context/tree/TreeState';
 import { Tree } from './components/tree/Tree';
 import AlertState from './context/alert/AlertState';
+import Alerts from './components/layout/Alerts';
 
 axios.defaults.baseURL = 'http://localhost:5000/api/v1';
 
@@ -31,6 +32,7 @@ function App() {
                <BrowserRouter>
                   <div id='main'>
                      <Header />
+                     <Alerts />
                      <Routes>
                         <Route
                            path='/'

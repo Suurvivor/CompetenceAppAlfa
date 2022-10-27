@@ -523,3 +523,19 @@ input[type='checkbox'] {
 .treeUlDepartments > li:hover {
    opacity: 1;
 }
+
+.alert_container {
+   margin-top: 20px;
+}
+
+.alert {
+   border: 1px solid red;
+   padding: 4px 20px;
+   list-style-type: none;
+   min-width: 400px;
+}
+
+.alert > i {
+   margin-right: 15px;
+   color: red;
+}
