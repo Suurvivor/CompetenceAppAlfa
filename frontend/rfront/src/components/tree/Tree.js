@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useAuth } from '../../context/auth/AuthState';
 import { useTree, getDepartments } from '../../context/tree/TreeState';
 import DepartmentList from './DepartmentList';
+import WorkplaceList from './WorkplaceList';
 import Spinner from '../layout/Spinner';
 
 export const Tree = () => {
@@ -17,6 +18,7 @@ export const Tree = () => {
    return (
       <>
          <DepartmentList />
+         <WorkplaceList />
       </>
    );
 };
