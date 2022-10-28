@@ -14,5 +14,9 @@ export const Tree = () => {
    }, []);
 
    if (loading || !departments) return <Spinner />;
-   return <DepartmentList departments={departments} />;
+   return (
+      <>
+         <DepartmentList />
+      </>
+   );
 };

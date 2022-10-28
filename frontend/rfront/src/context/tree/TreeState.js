@@ -4,7 +4,12 @@ import TreeContext from './treeContext';
 import treeReducer from './treeReducer';
 import AlertContext from '../alert/alertContext';
 import { errorHandler } from '../../utils/requestErrorHandler';
-import { CLEAR_ERRORS, TREE_LOAD_DEPARTMENTS, TREE_LOAD_FAIL } from '../types';
+import {
+   CLEAR_ERRORS,
+   TREE_LOAD_DEPARTMENTS,
+   TREE_LOAD_FAIL,
+   TREE_LOAD_WORKPLACES,
+} from '../types';
 
 // Create a custom hook to use the auth context
 
@@ -17,6 +22,15 @@ export const getDepartments = async (dispatch) => {
    try {
       const res = await axios.get('/departments');
       dispatch({ type: TREE_LOAD_DEPARTMENTS, payload: res.data.data });
+   } catch (error) {
+      errorHandler(error, dispatch, TREE_LOAD_FAIL);
+   }
+};
+
+export const getWorkplaces = async (dispatch, departmentId) => {
+   try {
+      const res = await axios.get(`/departments/${departmentId}/workplaces`);
+      dispatch({ type: TREE_LOAD_WORKPLACES, payload: res.data.data });
    } catch (error) {
       errorHandler(error, dispatch, TREE_LOAD_FAIL);
    }

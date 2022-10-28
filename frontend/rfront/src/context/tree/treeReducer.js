@@ -3,6 +3,7 @@ import {
    NETWORK_ERROR,
    TREE_LOAD_DEPARTMENTS,
    TREE_LOAD_FAIL,
+   TREE_LOAD_WORKPLACES,
 } from '../types';
 
 const treeReducer = (state, action) => {
@@ -11,6 +12,12 @@ const treeReducer = (state, action) => {
          return {
             ...state,
             departments: action.payload,
+            loading: false,
+         };
+      case TREE_LOAD_WORKPLACES:
+         return {
+            ...state,
+            workplaces: action.payload,
             loading: false,
          };
       case NETWORK_ERROR:

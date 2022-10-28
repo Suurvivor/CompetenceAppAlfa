@@ -1,13 +1,10 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { useTree, getDepartments } from '../../context/tree/TreeState';
+import { useTree, getWorkplaces } from '../../context/tree/TreeState';
 import Spinner from '../layout/Spinner';
 
 const DepartmentList = () => {
    const [treeState, treeDispatch] = useTree();
 
-   useEffect(() => {
-      getDepartments(treeDispatch);
-   }, []);
    if (treeState.loading) return <Spinner />;
    return (
       <>
@@ -15,7 +12,15 @@ const DepartmentList = () => {
             <div id='treeDepartments'>
                <ul className='treeUlDepartments'>
                   {treeState.departments.map((department, index) => (
-                     <li key={index}>{department.name}</li>
+                     <li
+                        key={department._id}
+                        id={department._id}
+                        onClick={(e) =>
+                           getWorkplaces(treeDispatch, e.target.id)
+                        }
+                     >
+                        {department.name}
+                     </li>
                   ))}
                   {}
                </ul>
