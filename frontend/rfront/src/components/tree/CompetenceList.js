@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import CompetenceListGroup from './CompetenceListGroup';
-import { useTree, getCompetences } from '../../context/tree/TreeState';
+import { useTree } from '../../context/tree/TreeState';
 
 const CompetenceList = () => {
    const [treeState, treeDispatch] = useTree();
