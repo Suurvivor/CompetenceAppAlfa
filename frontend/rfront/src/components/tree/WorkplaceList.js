@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useTree, getCompetences } from '../../context/tree/TreeState';
 import Spinner from '../layout/Spinner';
 const WorkplaceList = () => {
    const [treeState, treeDispatch] = useTree();
-
    if (treeState.loading) return <Spinner />;
    if (treeState.workplaces) {
-      getCompetences(treeDispatch, treeState.workplaces[0]._id);
+      console.log(`cos`);
+      //why this is in loop coz of refreshing state ?
+      //getCompetences(treeDispatch, treeState.workplaces[0]._id);
       return (
          <>
             <label htmlFor='workplaces'>Choose Workplace:</label>
@@ -14,10 +15,7 @@ const WorkplaceList = () => {
             <select
                name='workplaces'
                onChange={(e) => {
-                  getCompetences(
-                     treeDispatch,
-                     e.target.options[e.target.selectedIndex].id
-                  );
+                  getCompetences(treeDispatch, e.target.options[e.target.selectedIndex].id);
                }}
             >
                {treeState.workplaces.map((workplace, index) => (

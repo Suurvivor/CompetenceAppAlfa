@@ -38,9 +38,8 @@ export const getWorkplaces = async (dispatch, departmentId) => {
 };
 
 export const getCompetences = async (dispatch, workplaceId) => {
-   console.log(`zalacza sie`);
    try {
-      const res = await axios.get(`/workplaces/${workplaceId}/competences`);
+      const res = await axios.get(`/groupcompetences/workplace/${workplaceId}`);
       dispatch({ type: TREE_LOAD_COMPETENCES, payload: res.data.data });
    } catch (error) {
       errorHandler(error, dispatch, TREE_LOAD_FAIL);
@@ -69,11 +68,7 @@ const TreeState = (props) => {
       }
    }, [error]);
 
-   return (
-      <TreeContext.Provider value={{ state: state, dispatch }}>
-         {props.children}
-      </TreeContext.Provider>
-   );
+   return <TreeContext.Provider value={{ state: state, dispatch }}>{props.children}</TreeContext.Provider>;
 };
 
 export default TreeState;
