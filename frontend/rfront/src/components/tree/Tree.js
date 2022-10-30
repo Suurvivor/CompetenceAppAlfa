@@ -4,6 +4,7 @@ import { useTree, getDepartments } from '../../context/tree/TreeState';
 import DepartmentList from './DepartmentList';
 import WorkplaceList from './WorkplaceList';
 import Spinner from '../layout/Spinner';
+import CompetenceList from './CompetenceList';
 
 export const Tree = () => {
    const [authState] = useAuth();
@@ -19,6 +20,7 @@ export const Tree = () => {
       <>
          <DepartmentList />
          <WorkplaceList />
+         <CompetenceList />
       </>
    );
 };

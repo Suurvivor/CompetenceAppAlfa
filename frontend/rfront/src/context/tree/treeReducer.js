@@ -1,9 +1,10 @@
 import {
    CLEAR_ERRORS,
    NETWORK_ERROR,
-   TREE_LOAD_DEPARTMENTS,
    TREE_LOAD_FAIL,
+   TREE_LOAD_DEPARTMENTS,
    TREE_LOAD_WORKPLACES,
+   TREE_LOAD_COMPETENCES,
 } from '../types';
 
 const treeReducer = (state, action) => {
@@ -18,6 +19,12 @@ const treeReducer = (state, action) => {
          return {
             ...state,
             workplaces: action.payload,
+            loading: false,
+         };
+      case TREE_LOAD_COMPETENCES:
+         return {
+            ...state,
+            competences: action.payload,
             loading: false,
          };
       case NETWORK_ERROR:

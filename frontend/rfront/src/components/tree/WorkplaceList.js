@@ -1,24 +1,34 @@
 import React from 'react';
-import { useTree } from '../../context/tree/TreeState';
+import { useTree, getCompetences } from '../../context/tree/TreeState';
 import Spinner from '../layout/Spinner';
 const WorkplaceList = () => {
    const [treeState, treeDispatch] = useTree();
 
    if (treeState.loading) return <Spinner />;
-   if (treeState.workplaces)
+   if (treeState.workplaces) {
+      getCompetences(treeDispatch, treeState.workplaces[0]._id);
       return (
          <>
-            <label htmlFor='cars'>Choose Workplace:</label>
+            <label htmlFor='workplaces'>Choose Workplace:</label>
 
-            <select name='cars' id='cars'>
+            <select
+               name='workplaces'
+               onChange={(e) => {
+                  getCompetences(
+                     treeDispatch,
+                     e.target.options[e.target.selectedIndex].id
+                  );
+               }}
+            >
                {treeState.workplaces.map((workplace, index) => (
-                  <option key={index} value={workplace.name}>
+                  <option id={workplace._id} key={index} value={workplace.name}>
                      {workplace.name}
                   </option>
                ))}
             </select>
          </>
       );
+   }
 };
 
 export default WorkplaceList;

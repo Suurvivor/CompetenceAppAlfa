@@ -9,6 +9,7 @@ import {
    TREE_LOAD_DEPARTMENTS,
    TREE_LOAD_FAIL,
    TREE_LOAD_WORKPLACES,
+   TREE_LOAD_COMPETENCES,
 } from '../types';
 
 // Create a custom hook to use the auth context
@@ -31,6 +32,16 @@ export const getWorkplaces = async (dispatch, departmentId) => {
    try {
       const res = await axios.get(`/departments/${departmentId}/workplaces`);
       dispatch({ type: TREE_LOAD_WORKPLACES, payload: res.data.data });
+   } catch (error) {
+      errorHandler(error, dispatch, TREE_LOAD_FAIL);
+   }
+};
+
+export const getCompetences = async (dispatch, workplaceId) => {
+   console.log(`zalacza sie`);
+   try {
+      const res = await axios.get(`/workplaces/${workplaceId}/competences`);
+      dispatch({ type: TREE_LOAD_COMPETENCES, payload: res.data.data });
    } catch (error) {
       errorHandler(error, dispatch, TREE_LOAD_FAIL);
    }
