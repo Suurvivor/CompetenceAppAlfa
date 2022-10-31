@@ -5,7 +5,6 @@ const WorkplaceList = () => {
    const [treeState, treeDispatch] = useTree();
    if (treeState.loading) return <Spinner />;
    if (treeState.workplaces) {
-      console.log(`cos`);
       //why this is in loop coz of refreshing state ?
       //getCompetences(treeDispatch, treeState.workplaces[0]._id);
       return (

@@ -114,7 +114,7 @@ exports.getGroupedCompetencesByWorkplaceId = asyncHandler(async (req, res, next)
       workplaceId: req.params.workplaceid,
    }).populate({
       path: 'competenceListId',
-      select: '_id name',
+      select: '_id name ratingSetting',
    });
    if (competenceGroups.length === 0) {
       return next(
@@ -138,6 +138,7 @@ exports.getGroupedCompetencesCompareWithUserRating = asyncHandler(async (req, re
    const user = await User.findById(req.params.userid);
    const newCompetenceList = [];
    const backup = competenceGroups;
+   console.log(backup.competenceListId);
    //for each rating
    for (let x = 0; x < user.rating.length; x++) {
       //for each group
@@ -164,14 +165,14 @@ exports.getGroupedCompetencesCompareWithUserRating = asyncHandler(async (req, re
 
                backup[i].competenceListIdWithRating.push(obj);
             } else {
-               let obj = {
+               let obj2 = {
                   competenceId: backup[i].competenceListId[y]._id,
                   competenceName: backup[i].competenceListId[y].name,
                   rating: null,
                   trainer: null,
                   trainDate: null,
                };
-               backup[i].competenceListIdWithRating.push(obj);
+               backup[i].competenceListIdWithRating.push(obj2);
             }
          }
       }
