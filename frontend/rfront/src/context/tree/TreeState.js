@@ -10,6 +10,7 @@ import {
    TREE_LOAD_FAIL,
    TREE_LOAD_WORKPLACES,
    TREE_LOAD_COMPETENCES,
+   TREE_UPDATE_COMPETENCE,
 } from '../types';
 
 // Create a custom hook to use the auth context
@@ -41,6 +42,15 @@ export const getCompetences = async (dispatch, workplaceId) => {
    try {
       const res = await axios.get(`/groupcompetences/workplace/${workplaceId}`);
       dispatch({ type: TREE_LOAD_COMPETENCES, payload: res.data.data });
+   } catch (error) {
+      errorHandler(error, dispatch, TREE_LOAD_FAIL);
+   }
+};
+
+export const updateCompetence = async (dispatch, competence) => {
+   try {
+      const res = await axios.put(`/competences/${competence._id}`, competence);
+      dispatch({ type: TREE_UPDATE_COMPETENCE, payload: res.data.data });
    } catch (error) {
       errorHandler(error, dispatch, TREE_LOAD_FAIL);
    }

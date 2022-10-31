@@ -5,6 +5,7 @@ import {
    TREE_LOAD_DEPARTMENTS,
    TREE_LOAD_WORKPLACES,
    TREE_LOAD_COMPETENCES,
+   TREE_UPDATE_COMPETENCE,
 } from '../types';
 
 const treeReducer = (state, action) => {
@@ -25,6 +26,21 @@ const treeReducer = (state, action) => {
          return {
             ...state,
             competences: action.payload,
+            loading: false,
+         };
+      case TREE_UPDATE_COMPETENCE:
+         return {
+            ...state,
+            competences: state.competences.map((comp) => {
+               if (comp._id === action.payload._id) {
+                  console.log(comp._id);
+                  console.log(`rowne`);
+                  return comp;
+               } else {
+                  console.log(`${comp._id} nie jest rowne ${action.payload._id}`);
+                  return comp;
+               }
+            }),
             loading: false,
          };
       case NETWORK_ERROR:

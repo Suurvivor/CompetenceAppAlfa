@@ -15,7 +15,7 @@ const CompetenceListGroup = ({ group }) => {
             </thead>
             <tbody>
                {group.competenceListId.map((competenceList, index) => (
-                  <CompetenceListGroupItem key={index} index={index} name={competenceList.name} />
+                  <CompetenceListGroupItem key={index} index={index} competence={competenceList} />
                ))}
             </tbody>
          </table>
