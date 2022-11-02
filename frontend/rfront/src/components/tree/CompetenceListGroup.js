@@ -2,6 +2,7 @@ import React from 'react';
 import CompetenceListGroupItem from './CompetenceListGroupItem';
 
 const CompetenceListGroup = ({ group }) => {
+   //console.log(group);
    return (
       <div className='item'>
          <table>

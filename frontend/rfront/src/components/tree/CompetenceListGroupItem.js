@@ -7,7 +7,7 @@ const CompetenceListItem = ({ index, competence }) => {
 
    useEffect(() => {
       updateCompetence(treeDispatch, competenceForm);
-      console.log(competenceForm);
+      //console.log(competenceForm);
    }, [competenceForm]);
 
    const onChange = (e) => {

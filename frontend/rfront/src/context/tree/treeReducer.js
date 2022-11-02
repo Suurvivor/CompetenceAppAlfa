@@ -31,15 +31,11 @@ const treeReducer = (state, action) => {
       case TREE_UPDATE_COMPETENCE:
          return {
             ...state,
-            competences: state.competences.map((comp) => {
-               if (comp._id === action.payload._id) {
-                  console.log(comp._id);
-                  console.log(`rowne`);
-                  return comp;
-               } else {
-                  console.log(`${comp._id} nie jest rowne ${action.payload._id}`);
-                  return comp;
-               }
+            competences: state.competences.map((competenceGroup) => {
+               let editedlistofcompetences = competenceGroup.competenceListId.map((competenceItem) =>
+                  competenceItem._id === action.payload._id ? action.payload : competenceItem
+               );
+               return { ...competenceGroup, competenceListId: editedlistofcompetences };
             }),
             loading: false,
          };
