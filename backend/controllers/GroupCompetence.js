@@ -114,7 +114,6 @@ exports.getGroupedCompetencesByWorkplaceId = asyncHandler(async (req, res, next)
       workplaceId: req.params.workplaceid,
    }).populate({
       path: 'competenceListId',
-      select: '_id name ratingSetting',
    });
    if (competenceGroups.length === 0) {
       return next(

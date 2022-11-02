@@ -32,10 +32,10 @@ const treeReducer = (state, action) => {
          return {
             ...state,
             competences: state.competences.map((competenceGroup) => {
-               let editedlistofcompetences = competenceGroup.competenceListId.map((competenceItem) =>
+               let editedListOfCompetences = competenceGroup.competenceListId.map((competenceItem) =>
                   competenceItem._id === action.payload._id ? action.payload : competenceItem
                );
-               return { ...competenceGroup, competenceListId: editedlistofcompetences };
+               return { ...competenceGroup, competenceListId: editedListOfCompetences };
             }),
             loading: false,
          };
