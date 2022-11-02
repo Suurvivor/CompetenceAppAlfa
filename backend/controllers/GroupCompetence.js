@@ -117,7 +117,7 @@ exports.getGroupedCompetencesByWorkplaceId = asyncHandler(async (req, res, next)
    });
    if (competenceGroups.length === 0) {
       return next(
-         new ErrorResponse(`Could not find any grouped competences with workplace ID ${req.params.workplaceid}`)
+         new ErrorResponse(`Could not find any grouped competences with workplace ID ${req.params.workplaceid}`, 400)
       );
    }
 
