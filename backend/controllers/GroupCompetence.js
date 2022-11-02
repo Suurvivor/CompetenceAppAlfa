@@ -108,7 +108,7 @@ exports.deleteCompetenceFromGroup = asyncHandler(async (req, res, next) => {
 });
 
 exports.getGroupedCompetencesByWorkplaceId = asyncHandler(async (req, res, next) => {
-   if (!req.params.workplaceid) return next(new ErrorResponse(`provide workplaceId in params of`, 500));
+   if (!req.params.workplaceid) return next(new ErrorResponse(`provide workplaceId in params of`, 400));
 
    const competenceGroups = await GroupCompetence.find({
       workplaceId: req.params.workplaceid,
