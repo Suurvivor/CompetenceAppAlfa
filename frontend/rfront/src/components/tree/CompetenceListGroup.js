@@ -18,6 +18,12 @@ const CompetenceListGroup = ({ group }) => {
       }
    };
 
+   const onAdd = () => {
+      addCompetenceAndAddToGroup(treeDispatch, newComp, group._id, group.workplaceId);
+      setNewComp({ name: null, ratingSetting: 'from0to1' });
+      setShow(false);
+   };
+
    //console.log(group);
    return (
       <div className='item'>
@@ -54,13 +60,7 @@ const CompetenceListGroup = ({ group }) => {
                         </select>
                      </td>
                      <td>
-                        <button
-                           onClick={() =>
-                              addCompetenceAndAddToGroup(treeDispatch, newComp, group._id, group.workplaceId)
-                           }
-                        >
-                           Dodaj
-                        </button>
+                        <button onClick={onAdd}>Dodaj</button>
                      </td>
                   </tr>
                )}
