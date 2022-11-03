@@ -25,9 +25,9 @@ const CompetenceListGroup = ({ group }) => {
             <thead>
                <tr className='thead_menu'>
                   <th>
-                     <i class='fa-solid fa-plus' onClick={() => setShow(true)}></i>
-                     <i class='fa-solid fa-file-pen'></i>
-                     <i class='fa-solid fa-gear'></i>
+                     <i className='fa-solid fa-plus' onClick={() => setShow(true)}></i>
+                     <i className='fa-solid fa-file-pen'></i>
+                     <i className='fa-solid fa-gear'></i>
                   </th>
                </tr>
                <tr>
