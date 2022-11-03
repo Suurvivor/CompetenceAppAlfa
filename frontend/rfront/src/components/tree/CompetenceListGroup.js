@@ -7,9 +7,16 @@ const CompetenceListGroup = ({ group }) => {
       <div className='item'>
          <table>
             <thead>
+               <tr className='thead_menu'>
+                  <th>
+                     <i class='fa-solid fa-plus'></i>
+                     <i class='fa-solid fa-file-pen'></i>
+                     <i class='fa-solid fa-gear'></i>
+                  </th>
+               </tr>
                <tr>
                   <th>Id</th>
-                  <th>{group.name}</th>
+                  <th className='th_name'>{group.name}</th>
                   <th>Ocena</th>
                   <th>Action</th>
                </tr>

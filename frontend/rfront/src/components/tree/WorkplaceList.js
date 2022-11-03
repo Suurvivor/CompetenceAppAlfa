@@ -3,10 +3,11 @@ import { useTree, getCompetences } from '../../context/tree/TreeState';
 import Spinner from '../layout/Spinner';
 const WorkplaceList = () => {
    const [treeState, treeDispatch] = useTree();
+   useEffect(() => {
+      if (treeState.workplaces) getCompetences(treeDispatch, treeState.workplaces[0]._id);
+   }, [treeState.workplaces]);
    if (treeState.loading) return <Spinner />;
    if (treeState.workplaces) {
-      //why this is in loop coz of refreshing state ?
-      //getCompetences(treeDispatch, treeState.workplaces[0]._id);
       return (
          <>
             <label htmlFor='workplaces'>Choose Workplace:</label>

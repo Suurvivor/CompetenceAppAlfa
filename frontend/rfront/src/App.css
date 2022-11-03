@@ -2,7 +2,7 @@
 :root {
    --stroke: 490;
    --offset: 0;
-   --thead: #212529;
+   --thead: #223a79;
    --trFirst: #dee2e6;
    --trEven: #ced4da;
    --circle-total-size: 25px;
@@ -176,8 +176,7 @@ i {
 }
 
 .item {
-   box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
-      rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+   box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
    margin: 20px 10px;
 }
 
@@ -190,8 +189,7 @@ i {
    flex-direction: column;
    align-items: center;
    cursor: pointer;
-   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
-      rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
       rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
@@ -213,10 +211,35 @@ thead {
    color: white;
 }
 
+.thead_menu {
+   background-color: #121839;
+   opacity: 1;
+   cursor: default;
+   display: flex;
+   justify-content: end;
+}
+
+.thead_menu > th > i {
+   font-size: 1.2rem;
+   padding: 0px 5px;
+   cursor: pointer;
+}
+
+.thead_menu > th > i:hover {
+   color: #20dacb;
+}
+
 th {
    font-size: 1.1rem;
    font-weight: 300;
    padding: 13px 10px;
+}
+.th_name {
+   width: 100%;
+}
+.thead_menu > th {
+   display: flex;
+   justify-content: space-between;
 }
 
 tbody > tr {
@@ -235,7 +258,6 @@ td {
 
 tr:hover {
    opacity: 1;
-   cursor: pointer;
 }
 
 tr {
@@ -306,8 +328,7 @@ tr:last-child {
    height: 160px;
    width: 160px;
    border-radius: 50%;
-   box-shadow: 6px 6px 10px -1px rgba(0, 0, 0, 0.15),
-      -6px 6px 10px -1px rgba(255, 255, 255, 1);
+   box-shadow: 6px 6px 10px -1px rgba(0, 0, 0, 0.15), -6px 6px 10px -1px rgba(255, 255, 255, 1);
    display: flex;
    justify-content: center;
    align-items: center;
@@ -320,10 +341,8 @@ tr:last-child {
    height: 155px;
    width: 155px;
    border-radius: 50%;
-   box-shadow: inset 4px 4px 6px -1px rgba(0, 0, 0, 0.2),
-      inset -4px -4px 6px -1px rgba(255, 255, 255, 0.7),
-      -0.5px -0.5px 0px rgba(255, 255, 255, 1),
-      0.5px 0.5px 0px rgba(0, 0, 0, 0.25),
+   box-shadow: inset 4px 4px 6px -1px rgba(0, 0, 0, 0.2), inset -4px -4px 6px -1px rgba(255, 255, 255, 0.7),
+      -0.5px -0.5px 0px rgba(255, 255, 255, 1), 0.5px 0.5px 0px rgba(0, 0, 0, 0.25),
       0px 12px 10px -10px rgba(0, 0, 0, 0.1);
 }
 
@@ -373,8 +392,7 @@ svg {
    width: var(--circle-total-size);
    height: var(--circle-total-size);
    border-radius: 50%;
-   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
-      rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
       rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
@@ -444,8 +462,7 @@ svg {
    justify-content: center;
    align-items: center;
    padding: 30px 30px;
-   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
-      rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
       rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 

@@ -10,7 +10,7 @@ const CompetenceList = () => {
             <div className='flex-row'>
                <div className='flex-column'>
                   {treeState.competences.map((competence, index) => {
-                     if (index <= treeState.competences.length / 2) {
+                     if (index < treeState.competences.length / 2) {
                         return <CompetenceListGroup key={index} group={competence} />;
                      }
                   })}
