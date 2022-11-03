@@ -6,6 +6,7 @@ import {
    TREE_LOAD_WORKPLACES,
    TREE_LOAD_COMPETENCES,
    TREE_UPDATE_COMPETENCE,
+   TREE_ADD_COMPETENCE,
 } from '../types';
 
 const treeReducer = (state, action) => {
@@ -36,6 +37,17 @@ const treeReducer = (state, action) => {
                   competenceItem._id === action.payload._id ? action.payload : competenceItem
                );
                return { ...competenceGroup, competenceListId: editedListOfCompetences };
+            }),
+            loading: false,
+         };
+      case TREE_ADD_COMPETENCE:
+         return {
+            ...state,
+            competences: state.competences.map((competenceGroup) => {
+               if (competenceGroup._id === action.payload.groupId) {
+                  competenceGroup.competenceListId.push(action.payload);
+               }
+               return { ...competenceGroup };
             }),
             loading: false,
          };

@@ -11,6 +11,7 @@ import {
    TREE_LOAD_WORKPLACES,
    TREE_LOAD_COMPETENCES,
    TREE_UPDATE_COMPETENCE,
+   TREE_ADD_COMPETENCE,
 } from '../types';
 
 // Create a custom hook to use the auth context
@@ -51,6 +52,17 @@ export const updateCompetence = async (dispatch, competence) => {
    try {
       const res = await axios.put(`/competences/${competence._id}`, competence);
       dispatch({ type: TREE_UPDATE_COMPETENCE, payload: res.data.data });
+   } catch (error) {
+      errorHandler(error, dispatch, TREE_LOAD_FAIL);
+   }
+};
+
+export const addCompetenceAndAddToGroup = async (dispatch, formData, groupCompetenceId, workplaceId) => {
+   try {
+      const res = await axios.post(`/workplaces/${workplaceId}/competences`, formData);
+      const res2 = await axios.post(`/groupcompetences/${groupCompetenceId}`, { competenceId: res.data.data._id });
+
+      dispatch({ type: TREE_ADD_COMPETENCE, payload: { ...res.data.data, groupId: groupCompetenceId } });
    } catch (error) {
       errorHandler(error, dispatch, TREE_LOAD_FAIL);
    }

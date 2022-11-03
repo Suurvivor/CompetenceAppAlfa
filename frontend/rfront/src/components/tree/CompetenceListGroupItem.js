@@ -4,7 +4,6 @@ const CompetenceListItem = ({ index, competence }) => {
    const [treeState, treeDispatch] = useTree();
    const [competenceForm, setCompetenceForm] = useState(competence);
    const { name, ratingSetting } = competenceForm;
-
    useEffect(() => {
       updateCompetence(treeDispatch, competenceForm);
       //console.log(competenceForm);

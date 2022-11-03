@@ -1,7 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import CompetenceListGroupItem from './CompetenceListGroupItem';
+import { useTree, addCompetenceAndAddToGroup } from '../../context/tree/TreeState';
 
 const CompetenceListGroup = ({ group }) => {
+   const [treeState, treeDispatch] = useTree();
+   const [show, setShow] = useState(false);
+   const [newComp, setNewComp] = useState({ name: null, ratingSetting: 'from0to1' });
+
+   const onChange = (e) => {
+      if (e.target.name == 'ratingSetting') {
+         setNewComp({
+            ...newComp,
+            [e.target.name]: e.target.options[e.target.selectedIndex].value,
+         });
+      } else {
+         setNewComp({ ...newComp, [e.target.name]: e.target.value });
+      }
+   };
+
    //console.log(group);
    return (
       <div className='item'>
@@ -9,7 +25,7 @@ const CompetenceListGroup = ({ group }) => {
             <thead>
                <tr className='thead_menu'>
                   <th>
-                     <i class='fa-solid fa-plus'></i>
+                     <i class='fa-solid fa-plus' onClick={() => setShow(true)}></i>
                      <i class='fa-solid fa-file-pen'></i>
                      <i class='fa-solid fa-gear'></i>
                   </th>
@@ -25,6 +41,29 @@ const CompetenceListGroup = ({ group }) => {
                {group.competenceListId.map((competenceList, index) => (
                   <CompetenceListGroupItem key={index} index={index} competence={competenceList} />
                ))}
+               {show && (
+                  <tr>
+                     <td>New</td>
+                     <td>
+                        <input type='text' name='name' placeholder='Provide competence name' onChange={onChange} />
+                     </td>
+                     <td>
+                        <select name='ratingSetting' defaultValue='from0to1' onChange={onChange}>
+                           <option value='from0to1'>0 - 1</option>
+                           <option value='from0to4'>0 - 4</option>
+                        </select>
+                     </td>
+                     <td>
+                        <button
+                           onClick={() =>
+                              addCompetenceAndAddToGroup(treeDispatch, newComp, group._id, group.workplaceId)
+                           }
+                        >
+                           Dodaj
+                        </button>
+                     </td>
+                  </tr>
+               )}
             </tbody>
          </table>
       </div>
