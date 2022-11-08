@@ -42,6 +42,8 @@ exports.updateGroup = asyncHandler(async (req, res, next) => {
    const competenceGroup = await GroupCompetence.findByIdAndUpdate(req.params.groupid, req.body, {
       new: true,
       runValidators: true,
+   }).populate({
+      path: 'competenceListId',
    });
 
    res.status(201).json({

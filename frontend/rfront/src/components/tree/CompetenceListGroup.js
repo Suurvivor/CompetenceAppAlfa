@@ -1,11 +1,16 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import CompetenceListGroupItem from './CompetenceListGroupItem';
-import { useTree, addCompetenceAndAddToGroup } from '../../context/tree/TreeState';
+import { useTree, addCompetenceAndAddToGroup, updateGroup } from '../../context/tree/TreeState';
 
 const CompetenceListGroup = ({ group }) => {
    const [treeState, treeDispatch] = useTree();
    const [show, setShow] = useState(false);
    const [newComp, setNewComp] = useState({ name: null, ratingSetting: 'from0to1' });
+   const [grName, setGrName] = useState(group.name || null);
+
+   useEffect(() => {
+      updateGroup(treeDispatch, grName, group._id);
+   }, [grName]);
 
    const onChange = (e) => {
       if (e.target.name == 'ratingSetting') {
@@ -38,7 +43,9 @@ const CompetenceListGroup = ({ group }) => {
                </tr>
                <tr>
                   <th>Id</th>
-                  <th className='th_name'>{group.name}</th>
+                  <th className='th_name'>
+                     <input type='text' value={grName} onChange={(e) => setGrName(e.target.value)} />
+                  </th>
                   <th>Ocena</th>
                   <th>Action</th>
                </tr>
@@ -62,6 +69,7 @@ const CompetenceListGroup = ({ group }) => {
                      <td>
                         <button onClick={onAdd}>Dodaj</button>
                      </td>
+                     <i className='fa-solid fa-xmark' onClick={() => setShow(false)}></i>
                   </tr>
                )}
             </tbody>

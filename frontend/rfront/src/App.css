@@ -5,6 +5,7 @@
    --thead: #223a79;
    --trFirst: #dee2e6;
    --trEven: #ced4da;
+   --onHover: #20dacb;
    --circle-total-size: 25px;
    --circle-quarter: 12.5px;
    --circle-rating-color: #f07167;
@@ -237,6 +238,37 @@ th {
 .th_name {
    width: 100%;
 }
+
+.th_name > input[type='text'] {
+   width: 80%;
+   padding: 5px 7px;
+   border: none;
+   font-size: 1.1rem;
+   font-weight: 300;
+   background-color: var(--thead);
+   color: white;
+   opacity: 0.8;
+}
+.th_name > input[type='text']:focus {
+   border: none;
+   opacity: 1;
+}
+.th_name_button {
+   padding: 5px 12px;
+   background-color: white;
+   margin: 2px;
+   color: black;
+   border: none;
+   font-size: 1.1rem;
+   border-radius: 50px;
+}
+
+.th_name_button:hover {
+   cursor: pointer;
+   background-color: var(--onHover);
+   color: white;
+}
+
 .thead_menu > th {
    display: flex;
    justify-content: space-between;
@@ -517,6 +549,49 @@ svg {
 input[type='checkbox'] {
    cursor: pointer;
 }
+.tree_dashboard {
+   display: flex;
+   margin-top: 40px;
+   padding: 30px 15px;
+   border-top: 2px solid var(--thead);
+   width: 800px;
+   justify-content: space-between;
+   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+.tree_dashboard_ul_item {
+   display: flex;
+   border: 1px solid black;
+   justify-content: space-between;
+   padding-right: 3px;
+   align-items: center;
+}
+
+.tree_dashboard_ul_item_new {
+   margin-top: 10px;
+}
+.tree_delete_icon {
+   cursor: pointer;
+   color: red;
+   opacity: 0.6;
+}
+
+.tree_delete_icon:hover {
+   cursor: pointer;
+   color: red;
+   opacity: 1;
+}
+
+.tree_dash_icon {
+   font-size: 1.7rem;
+   padding: 0px 5px;
+   cursor: pointer;
+   color: green;
+   opacity: 0.8;
+}
+
+.tree_dash_icon:hover {
+   opacity: 1;
+}
 
 .treeWrapper {
    padding: 20px;
@@ -526,19 +601,31 @@ input[type='checkbox'] {
    text-decoration: none;
    list-style-type: none;
    display: flex;
-   flex-flow: row wrap;
-   margin-top: 60px;
+   flex-direction: column;
+   flex-flow: column wrap;
 }
 
-.treeUlDepartments > li {
+.tree_dashboard_ul_button {
+   width: 100%;
+   padding: 5px 12px;
+   cursor: pointer;
+   margin-top: 10px;
+}
+
+.treeUlDepartments > div > li {
    margin-right: 20px;
    padding: 10px 15px;
-   border: 1px solid black;
    cursor: pointer;
    opacity: 0.6;
 }
-.treeUlDepartments > li:hover {
+.treeUlDepartments > div > li:hover {
    opacity: 1;
+}
+
+.tree_dashboard_ul_item_input {
+   border: none;
+   width: 100%;
+   padding: 5px 12px;
 }
 
 .alert_container {

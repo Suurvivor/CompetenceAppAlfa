@@ -18,8 +18,15 @@ export const Tree = () => {
    if (loading || !departments) return <Spinner />;
    return (
       <>
-         <DepartmentList />
-         <WorkplaceList />
+         <div className='tree_dashboard'>
+            <div>
+               <DepartmentList />
+            </div>
+            <div>
+               <WorkplaceList />
+            </div>
+         </div>
+
          <CompetenceList />
       </>
    );

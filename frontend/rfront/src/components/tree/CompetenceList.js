@@ -1,9 +1,13 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import CompetenceListGroup from './CompetenceListGroup';
 import { useTree } from '../../context/tree/TreeState';
+import ItemEmpty from './ItemEmpty';
+import CompetenceGroupEmpty from './CompetenceGroupAdd';
 
 const CompetenceList = () => {
    const [treeState, treeDispatch] = useTree();
+   const [showAddGroup, setShowAddGroup] = useState(false);
+
    if (treeState.competences)
       return (
          <div id='container'>
@@ -14,12 +18,12 @@ const CompetenceList = () => {
                         return <CompetenceListGroup key={index} group={competence} />;
                      }
                   })}
-                  {treeState.competences.length === 1 && (
-                     <div className='item item-empty'>
-                        <i className='fa-solid fa-plus fa-4x'></i>
-                        <p>Dodaj nową grupe kompetencji</p>
-                     </div>
-                  )}
+                  {treeState.competences.length === 1 &&
+                     (showAddGroup ? (
+                        <CompetenceGroupEmpty setShow={setShowAddGroup} />
+                     ) : (
+                        <ItemEmpty setShow={setShowAddGroup} />
+                     ))}
                </div>
                <div className='flex-column'>
                   {treeState.competences.map((competence, index) => {
@@ -27,12 +31,12 @@ const CompetenceList = () => {
                         return <CompetenceListGroup key={index + 1000} group={competence} />;
                      }
                   })}
-                  {treeState.competences.length !== 1 && (
-                     <div className='item item-empty'>
-                        <i className='fa-solid fa-plus fa-4x'></i>
-                        <p>Dodaj nową grupe kompetencji</p>
-                     </div>
-                  )}
+                  {treeState.competences.length !== 0 &&
+                     (showAddGroup ? (
+                        <CompetenceGroupEmpty setShow={setShowAddGroup} />
+                     ) : (
+                        <ItemEmpty setShow={setShowAddGroup} />
+                     ))}
                </div>
             </div>
          </div>
