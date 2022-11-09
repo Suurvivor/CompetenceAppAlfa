@@ -5,7 +5,11 @@ import {
    TREE_LOAD_DEPARTMENTS,
    TREE_CREATE_DEPARTMNET,
    TREE_DELETE_DEPARTMNET,
+   TREE_SET_CURRENT_DEPARTMENT,
    TREE_LOAD_WORKPLACES,
+   TREE_CREATE_WORKPLACE,
+   TREE_DELETE_WORKPLACE,
+   TREE_SET_CURRENT_WORKPLACE,
    TREE_LOAD_COMPETENCES,
    TREE_UPDATE_COMPETENCE,
    TREE_ADD_COMPETENCE,
@@ -33,11 +37,34 @@ const treeReducer = (state, action) => {
             departments: state.departments.filter((department) => department._id !== action.payload),
             loading: false,
          };
+      case TREE_SET_CURRENT_DEPARTMENT:
+         return {
+            ...state,
+            currentDepartment: action.payload,
+            loading: false,
+         };
       case TREE_LOAD_WORKPLACES:
          return {
             ...state,
             workplaces: action.payload,
             loading: false,
+         };
+      case TREE_CREATE_WORKPLACE:
+         return {
+            ...state,
+            workplaces: [...state.workplaces, action.payload],
+            loading: false,
+         };
+      case TREE_DELETE_WORKPLACE:
+         return {
+            ...state,
+            workplaces: state.workplaces.filter((workplace) => workplace._id !== action.payload),
+            loading: false,
+         };
+      case TREE_SET_CURRENT_WORKPLACE:
+         return {
+            ...state,
+            currentWorkplace: action.payload,
          };
       case TREE_LOAD_COMPETENCES:
          return {

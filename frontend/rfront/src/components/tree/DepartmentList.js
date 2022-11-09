@@ -1,5 +1,11 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { useTree, getWorkplaces, createDepartment, deleteDepartment } from '../../context/tree/TreeState';
+import {
+   useTree,
+   getWorkplaces,
+   createDepartment,
+   deleteDepartment,
+   setCurrentDepartment,
+} from '../../context/tree/TreeState';
 import Spinner from '../layout/Spinner';
 
 const DepartmentList = () => {
@@ -13,6 +19,11 @@ const DepartmentList = () => {
       setDepartmentName(null);
    };
 
+   const onPick = (departId) => {
+      getWorkplaces(treeDispatch, departId);
+      setCurrentDepartment(treeDispatch, departId);
+   };
+
    if (treeState.loading) return <Spinner />;
    return (
       <>
@@ -21,15 +32,11 @@ const DepartmentList = () => {
                <ul className='treeUlDepartments'>
                   {treeState.departments.map((department, index) => (
                      <div className='tree_dashboard_ul_item'>
-                        <li
-                           key={department._id}
-                           id={department._id}
-                           onClick={(e) => getWorkplaces(treeDispatch, e.target.id)}
-                        >
+                        <li key={department._id} id={department._id} onClick={(e) => onPick(e.target.id)}>
                            {department.name}
                         </li>
                         <i
-                           class='fa-solid fa-circle-minus tree_delete_icon'
+                           className='fa-solid fa-circle-minus tree_delete_icon'
                            onClick={() => deleteDepartment(treeDispatch, department._id)}
                         ></i>
                      </div>
@@ -45,7 +52,7 @@ const DepartmentList = () => {
                            onChange={(e) => setDepartmentName(e.target.value)}
                         />
 
-                        <i class='fa-solid fa-xmark tree_delete_icon' onClick={() => setShowAdd(false)}></i>
+                        <i className='fa-solid fa-xmark tree_delete_icon' onClick={() => setShowAdd(false)}></i>
                      </div>
                      <button className='tree_dashboard_ul_button' onClick={onCreate}>
                         Stwórz

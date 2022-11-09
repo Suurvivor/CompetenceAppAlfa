@@ -9,8 +9,12 @@ import {
    TREE_LOAD_DEPARTMENTS,
    TREE_CREATE_DEPARTMNET,
    TREE_DELETE_DEPARTMNET,
+   TREE_SET_CURRENT_DEPARTMENT,
    TREE_LOAD_FAIL,
    TREE_LOAD_WORKPLACES,
+   TREE_CREATE_WORKPLACE,
+   TREE_DELETE_WORKPLACE,
+   TREE_SET_CURRENT_WORKPLACE,
    TREE_LOAD_COMPETENCES,
    TREE_UPDATE_COMPETENCE,
    TREE_ADD_COMPETENCE,
@@ -52,6 +56,10 @@ export const deleteDepartment = async (dispatch, departmentId) => {
    }
 };
 
+export const setCurrentDepartment = (dispatch, id) => {
+   dispatch({ type: TREE_SET_CURRENT_DEPARTMENT, payload: id });
+};
+
 export const getWorkplaces = async (dispatch, departmentId) => {
    try {
       const res = await axios.get(`/departments/${departmentId}/workplaces`);
@@ -59,6 +67,28 @@ export const getWorkplaces = async (dispatch, departmentId) => {
    } catch (error) {
       errorHandler(error, dispatch, TREE_LOAD_FAIL);
    }
+};
+
+export const createWorkplace = async (dispatch, departmentId, name) => {
+   try {
+      const res = await axios.post(`/departments/${departmentId}/workplaces`, { name: name });
+      dispatch({ type: TREE_CREATE_WORKPLACE, payload: res.data.data });
+   } catch (error) {
+      errorHandler(error, dispatch, TREE_LOAD_FAIL);
+   }
+};
+
+export const deleteWorkplace = async (dispatch, workplaceId) => {
+   try {
+      const res = await axios.delete(`/workplaces/${workplaceId}`);
+      dispatch({ type: TREE_DELETE_WORKPLACE, payload: workplaceId });
+   } catch (error) {
+      errorHandler(error, dispatch, TREE_LOAD_FAIL);
+   }
+};
+
+export const setCurrentWorkplace = (dispatch, id) => {
+   dispatch({ type: TREE_SET_CURRENT_WORKPLACE, payload: id });
 };
 
 export const getCompetences = async (dispatch, workplaceId) => {
@@ -115,7 +145,9 @@ const TreeState = (props) => {
 
    const initialState = {
       departments: null,
+      currentDepartment: null,
       workplaces: null,
+      currentWorkplace: null,
       competences: null,
       error: null,
       loading: true,
