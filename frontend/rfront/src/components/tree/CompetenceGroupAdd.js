@@ -5,7 +5,7 @@ const CompetenceGroupAdd = ({ setShow }) => {
    const [treeState, treeDispatch] = useTree();
    const [groupName, setGroupName] = useState(null);
    const onClick = () => {
-      createGroup(treeDispatch, treeState.competences[0].workplaceId, groupName);
+      createGroup(treeDispatch, treeState.currentWorkplace, groupName);
       setShow(false);
    };
    const onChange = (value) => {

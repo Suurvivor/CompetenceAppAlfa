@@ -13,7 +13,7 @@ function Header() {
       <nav>
          <ul>
             <Link to='/'>Home</Link>
-            <Link to='/register'>Register</Link>
+
             {isAuthenticated ? (
                <>
                   <Link to='/tree'>Tree</Link>
@@ -22,7 +22,10 @@ function Header() {
                   </Link>
                </>
             ) : (
-               <Link to='/login'>Login</Link>
+               <>
+                  <Link to='/login'>Login</Link>
+                  <Link to='/register'>Register</Link>
+               </>
             )}
          </ul>
       </nav>

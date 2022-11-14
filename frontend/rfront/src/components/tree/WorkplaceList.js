@@ -6,13 +6,16 @@ import {
    createWorkplace,
    deleteWorkplace,
 } from '../../context/tree/TreeState';
+
 import Spinner from '../layout/Spinner';
+
 const WorkplaceList = () => {
    const [treeState, treeDispatch] = useTree();
    const [showAdd, setShowAdd] = useState(false);
    const [workplaceName, setWorkplaceName] = useState(false);
+
    useEffect(() => {
-      if (treeState.workplaces) {
+      if (treeState.workplaces.length > 0) {
          setCurrentWorkplace(treeDispatch, treeState.workplaces[0]._id);
          getCompetences(treeDispatch, treeState.workplaces[0]._id);
       }
@@ -29,7 +32,7 @@ const WorkplaceList = () => {
    };
 
    if (treeState.loading) return <Spinner />;
-   if (treeState.workplaces) {
+   if (treeState.workplaces.length > 0) {
       return (
          <div className='tree_workplace_list'>
             <label htmlFor='workplaces'>Choose Workplace:</label>
@@ -41,6 +44,29 @@ const WorkplaceList = () => {
                   </option>
                ))}
             </select>
+            {showAdd && (
+               <>
+                  <input
+                     type='text'
+                     placeholder='Podaj nazwe stanowiska pracy'
+                     onChange={(e) => setWorkplaceName(e.target.value)}
+                  />
+                  <button onClick={onCreate}>Stwórz</button>
+               </>
+            )}
+            {!showAdd && (
+               <>
+                  <button onClick={() => setShowAdd(true)}>Stworz nowe stanowisko pracy</button>{' '}
+                  <button onClick={() => deleteWorkplace(treeDispatch, treeState.currentWorkplace)}>
+                     Usuń wybrane stanowisko pracy z listy
+                  </button>
+               </>
+            )}
+         </div>
+      );
+   } else {
+      return (
+         <div className='tree_workplace_list'>
             {showAdd && (
                <>
                   <input

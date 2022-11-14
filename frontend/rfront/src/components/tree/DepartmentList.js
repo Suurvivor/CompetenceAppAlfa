@@ -31,7 +31,7 @@ const DepartmentList = () => {
             <div id='treeDepartments'>
                <ul className='treeUlDepartments'>
                   {treeState.departments.map((department, index) => (
-                     <div className='tree_dashboard_ul_item'>
+                     <div className='tree_dashboard_ul_item' key={department._id}>
                         <li key={department._id} id={department._id} onClick={(e) => onPick(e.target.id)}>
                            {department.name}
                         </li>

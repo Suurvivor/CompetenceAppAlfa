@@ -29,7 +29,6 @@ const CompetenceListGroup = ({ group }) => {
       setShow(false);
    };
 
-   //console.log(group);
    return (
       <div className='item'>
          <table>
@@ -44,7 +43,12 @@ const CompetenceListGroup = ({ group }) => {
                <tr>
                   <th>Id</th>
                   <th className='th_name'>
-                     <input type='text' value={grName} onChange={(e) => setGrName(e.target.value)} />
+                     <input
+                        type='text'
+                        value={grName}
+                        onChange={(e) => setGrName(e.target.value)}
+                        onBlur={() => updateGroup(treeDispatch, grName, group._id)}
+                     />
                   </th>
                   <th>Ocena</th>
                   <th>Action</th>
@@ -52,7 +56,7 @@ const CompetenceListGroup = ({ group }) => {
             </thead>
             <tbody>
                {group.competenceListId.map((competenceList, index) => (
-                  <CompetenceListGroupItem key={index} index={index} competence={competenceList} />
+                  <CompetenceListGroupItem key={competenceList._id} index={index} competence={competenceList} />
                ))}
                {show && (
                   <tr>

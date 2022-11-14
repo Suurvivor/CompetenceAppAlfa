@@ -9,9 +9,11 @@ import {
    TREE_LOAD_WORKPLACES,
    TREE_CREATE_WORKPLACE,
    TREE_DELETE_WORKPLACE,
+   TREE_GET_WORKPLACE_FAIL,
    TREE_SET_CURRENT_WORKPLACE,
    TREE_LOAD_COMPETENCES,
    TREE_UPDATE_COMPETENCE,
+   TREE_GET_COMPETENCES_FAIL,
    TREE_ADD_COMPETENCE,
    TREE_UPDATE_GROUP,
    TREE_CREATE_GROUP,
@@ -61,6 +63,14 @@ const treeReducer = (state, action) => {
             workplaces: state.workplaces.filter((workplace) => workplace._id !== action.payload),
             loading: false,
          };
+      case TREE_GET_WORKPLACE_FAIL:
+         return {
+            ...state,
+            competences: [],
+            workplaces: [],
+            currentWorkplace: null,
+            loading: false,
+         };
       case TREE_SET_CURRENT_WORKPLACE:
          return {
             ...state,
@@ -70,6 +80,12 @@ const treeReducer = (state, action) => {
          return {
             ...state,
             competences: action.payload,
+            loading: false,
+         };
+      case TREE_GET_COMPETENCES_FAIL:
+         return {
+            ...state,
+            competences: [],
             loading: false,
          };
       case TREE_UPDATE_COMPETENCE:

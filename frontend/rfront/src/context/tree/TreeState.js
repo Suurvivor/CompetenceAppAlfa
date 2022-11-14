@@ -14,8 +14,10 @@ import {
    TREE_LOAD_WORKPLACES,
    TREE_CREATE_WORKPLACE,
    TREE_DELETE_WORKPLACE,
+   TREE_GET_WORKPLACE_FAIL,
    TREE_SET_CURRENT_WORKPLACE,
    TREE_LOAD_COMPETENCES,
+   TREE_GET_COMPETENCES_FAIL,
    TREE_UPDATE_COMPETENCE,
    TREE_ADD_COMPETENCE,
    TREE_UPDATE_GROUP,
@@ -65,7 +67,7 @@ export const getWorkplaces = async (dispatch, departmentId) => {
       const res = await axios.get(`/departments/${departmentId}/workplaces`);
       dispatch({ type: TREE_LOAD_WORKPLACES, payload: res.data.data });
    } catch (error) {
-      errorHandler(error, dispatch, TREE_LOAD_FAIL);
+      errorHandler(error, dispatch, TREE_GET_WORKPLACE_FAIL);
    }
 };
 
@@ -96,7 +98,8 @@ export const getCompetences = async (dispatch, workplaceId) => {
       const res = await axios.get(`/groupcompetences/workplace/${workplaceId}`);
       dispatch({ type: TREE_LOAD_COMPETENCES, payload: res.data.data });
    } catch (error) {
-      errorHandler(error, dispatch, TREE_LOAD_FAIL);
+      console.log(error);
+      errorHandler(error, dispatch, TREE_GET_COMPETENCES_FAIL);
    }
 };
 
@@ -144,11 +147,11 @@ const TreeState = (props) => {
    const { setAlert } = alertContext;
 
    const initialState = {
-      departments: null,
+      departments: [],
       currentDepartment: null,
-      workplaces: null,
+      workplaces: [],
       currentWorkplace: null,
-      competences: null,
+      competences: [],
       error: null,
       loading: true,
    };
