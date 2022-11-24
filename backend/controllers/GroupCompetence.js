@@ -123,7 +123,7 @@ exports.getGroupedCompetencesByWorkplaceId = asyncHandler(async (req, res, next)
       );
    }
 
-   res.status(201).json({
+   res.status(200).json({
       succes: true,
       data: competenceGroups,
    });
@@ -139,7 +139,6 @@ exports.getGroupedCompetencesCompareWithUserRating = asyncHandler(async (req, re
    const user = await User.findById(req.params.userid);
    const newCompetenceList = [];
    const backup = competenceGroups;
-   console.log(backup.competenceListId);
    //for each rating
    for (let x = 0; x < user.rating.length; x++) {
       //for each group
@@ -151,6 +150,7 @@ exports.getGroupedCompetencesCompareWithUserRating = asyncHandler(async (req, re
                   let obj = {
                      competenceId: backup[i].competenceListId[y]._id,
                      competenceName: backup[i].competenceListId[y].name,
+                     ratingSetting: backup[i].competenceListId[y].ratingSetting,
                      rating: user.rating[x].rating,
                      trainer: user.rating[x].created_by,
                      trainDate: user.rating[x].created_at,
@@ -159,6 +159,7 @@ exports.getGroupedCompetencesCompareWithUserRating = asyncHandler(async (req, re
                let obj = {
                   competenceId: backup[i].competenceListId[y]._id,
                   competenceName: backup[i].competenceListId[y].name,
+                  ratingSetting: backup[i].competenceListId[y].ratingSetting,
                   rating: user.rating[x].rating,
                   trainer: user.rating[x].lastmodify_by,
                   trainDate: user.rating[x].lastmodify,
@@ -169,6 +170,7 @@ exports.getGroupedCompetencesCompareWithUserRating = asyncHandler(async (req, re
                let obj2 = {
                   competenceId: backup[i].competenceListId[y]._id,
                   competenceName: backup[i].competenceListId[y].name,
+                  ratingSetting: backup[i].competenceListId[y].rattingSetting,
                   rating: null,
                   trainer: null,
                   trainDate: null,

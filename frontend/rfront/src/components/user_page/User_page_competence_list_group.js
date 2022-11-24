@@ -1,20 +1,24 @@
 import React from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import { User_page_competence_list_group_item } from './User_page_competence_list_group_item';
 
-export const User_page_competence_list_group = () => {
+export const User_page_competence_list_group = ({ name, competenceList }) => {
    return (
       <div className='item'>
          <table>
             <thead>
                <tr>
                   <th>Id</th>
-                  <th>Przezbrajanie form</th>
+                  <th>{name}</th>
                   <th>Ocena</th>
                   <th>Action</th>
                </tr>
             </thead>
             <tbody>
-               <User_page_competence_list_group_item />
+               {competenceList.map((competence, index) => (
+                  <User_page_competence_list_group_item key={uuidv4()} competence={competence} index={index} />
+               ))}
+
                <tr>
                   <td>1</td>
                   <td>Przezbrajanie formy nr W034342</td>
