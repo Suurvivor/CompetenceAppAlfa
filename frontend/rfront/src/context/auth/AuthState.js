@@ -91,6 +91,7 @@ const AuthState = (props) => {
       loading: true,
       user: null,
       error: null,
+      blur: false,
    };
 
    const [state, dispatch] = useReducer(authReducer, initialState);
@@ -108,11 +109,7 @@ const AuthState = (props) => {
       setAuthToken(state.token);
    }, [state.token]);
 
-   return (
-      <AuthContext.Provider value={{ state: state, dispatch }}>
-         {props.children}
-      </AuthContext.Provider>
-   );
+   return <AuthContext.Provider value={{ state: state, dispatch }}>{props.children}</AuthContext.Provider>;
 };
 
 export default AuthState;

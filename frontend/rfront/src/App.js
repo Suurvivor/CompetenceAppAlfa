@@ -14,6 +14,8 @@ import TreeState from './context/tree/TreeState';
 import { Tree } from './components/tree/Tree';
 import AlertState from './context/alert/AlertState';
 import Alerts from './components/layout/Alerts';
+import BoxMidCardState from './context/boxMidCard/BoxMidCardState';
+import BoxMidCard from './components/layout/BoxMidCard';
 
 axios.defaults.baseURL = 'http://localhost:5000/api/v1';
 
@@ -22,34 +24,25 @@ function App() {
       <AuthState>
          <AlertState>
             <TreeState>
-               =
-               <Helmet>
-                  <script
-                     src='https://kit.fontawesome.com/5e4c917eea.js'
-                     crossorigin='anonymous'
-                  ></script>
-               </Helmet>
-               <BrowserRouter>
-                  <div id='main'>
-                     <Header />
-                     <Alerts />
-                     <Routes>
-                        <Route
-                           path='/'
-                           element={
-                              <PrivateRoute component={User_page_index} />
-                           }
-                        />
-                        <Route path='login' element={<Login />} />
-                        <Route path='register' element={<Register />} />
+               <BoxMidCardState>
+                  <Helmet>
+                     <script src='https://kit.fontawesome.com/5e4c917eea.js' crossorigin='anonymous'></script>
+                  </Helmet>
+                  <BrowserRouter>
+                     <div id='main'>
+                        <Header />
+                        <Alerts />
+                        <BoxMidCard />
+                        <Routes>
+                           <Route path='/' element={<PrivateRoute component={User_page_index} />} />
+                           <Route path='login' element={<Login />} />
+                           <Route path='register' element={<Register />} />
 
-                        <Route
-                           path='tree'
-                           element={<PrivateRoute component={Tree} />}
-                        />
-                     </Routes>
-                  </div>
-               </BrowserRouter>
+                           <Route path='tree' element={<PrivateRoute component={Tree} />} />
+                        </Routes>
+                     </div>
+                  </BrowserRouter>
+               </BoxMidCardState>
             </TreeState>
          </AlertState>
       </AuthState>

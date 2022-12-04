@@ -473,6 +473,10 @@ svg {
    opacity: var(--circle-background-opacity);
 }
 
+#display_none {
+   display: none;
+}
+
 @media screen and (max-width: 1400px) {
    .flex-row {
       grid-template-columns: 1fr;
@@ -642,4 +646,65 @@ input[type='checkbox'] {
 .alert > i {
    margin-right: 15px;
    color: red;
+}
+
+.boxMidCard {
+   position: fixed;
+   z-index: 1;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   min-width: 450px;
+   background-color: #e9ecef;
+   min-height: 200px;
+   box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+   padding: 13px 30px;
+}
+
+.boxMidCard_topBar {
+   display: flex;
+}
+
+.boxMidCard_topBarTitle {
+   width: 100%;
+   font-size: 1.4rem;
+   padding-right: 40px;
+}
+
+.boxMidCard_topBarIcon {
+   font-size: 1.6rem;
+   cursor: pointer;
+}
+.boxMidCard_topBarIcon:hover {
+   color: red;
+}
+
+.blur {
+   position: fixed;
+   width: 100%;
+   height: 100%;
+   opacity: 0.6;
+   background-color: black;
+}
+
+.BMCard_competenceContainer {
+   width: 700px;
+   font-size: 0.85rem;
+}
+
+.BMCard_competenceTitle {
+   margin: 0 auto;
+}
+.BMCard_competenceInfo {
+   font-size: 0.7rem;
+   padding-top: 100px;
+}
+
+.BMCard_competenceContainer {
+   display: flex;
+   justify-content: space-between;
+}
+
+.BMCard_competenceContainer > ul {
+   list-style: none;
 }

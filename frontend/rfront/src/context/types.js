@@ -26,3 +26,5 @@ export const TREE_CREATE_GROUP = 'TREE_CREATE_GROUP';
 export const TREE_LOAD_FAIL = 'TREE_LOAD_FAIL';
 export const SET_ALERT = 'SET_ALERT';
 export const REMOVE_ALERT = 'REMOVE_ALERT';
+export const SET_BOX_MID_CARD = 'SET_BOX_MID_CARD';
+export const CLOSE_BOX_MID_CARD = 'CLOSE_BOX_MID_CARD';
