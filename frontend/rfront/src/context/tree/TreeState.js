@@ -103,12 +103,13 @@ export const getCompetences = async (dispatch, workplaceId) => {
    }
 };
 
-export const updateCompetence = async (dispatch, competence) => {
+export const updateCompetence = async (dispatch, competence, cbError) => {
    try {
       const res = await axios.put(`/competences/${competence._id}`, competence);
       dispatch({ type: TREE_UPDATE_COMPETENCE, payload: res.data.data });
    } catch (error) {
       errorHandler(error, dispatch, TREE_LOAD_FAIL);
+      cbError();
    }
 };
 

@@ -62,7 +62,13 @@ const CompetenceListGroup = ({ group }) => {
                   <tr>
                      <td>New</td>
                      <td>
-                        <input type='text' name='name' placeholder='Provide competence name' onChange={onChange} />
+                        <input
+                           className='competence_list_group_item_input'
+                           type='text'
+                           name='name'
+                           placeholder='Provide competence name'
+                           onChange={onChange}
+                        />
                      </td>
                      <td>
                         <select name='ratingSetting' defaultValue='from0to1' onChange={onChange}>
@@ -70,10 +76,12 @@ const CompetenceListGroup = ({ group }) => {
                            <option value='from0to4'>0 - 4</option>
                         </select>
                      </td>
-                     <td>
-                        <button onClick={onAdd}>Dodaj</button>
+                     <td className='td_flex'>
+                        <button onClick={onAdd} className='competence_list_group_item_buttonSave'>
+                           Dodaj
+                        </button>
+                        <i className='fa-solid fa-xmark tree_competence_close_icon' onClick={() => setShow(false)}></i>
                      </td>
-                     <i className='fa-solid fa-xmark' onClick={() => setShow(false)}></i>
                   </tr>
                )}
             </tbody>

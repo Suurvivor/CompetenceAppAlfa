@@ -287,6 +287,9 @@ td {
    position: relative;
    text-align: center;
 }
+.td_flex {
+   display: flex;
+}
 
 tr:hover {
    opacity: 1;
@@ -632,8 +635,47 @@ input[type='checkbox'] {
    padding: 5px 12px;
 }
 
+.tree_competence_close_icon {
+   padding: 3px 4px 0px 0px;
+   position: relative;
+   top: 4px;
+   right: 4px;
+   transform: translate(60%, -60%);
+   margin-left: 20px;
+}
+.tree_competence_close_icon:hover {
+   cursor: pointer;
+   color: red;
+}
+
+.competence_list_group_item_container {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+.competence_list_group_item_input {
+   padding: 2px 5px;
+   font-size: 1.1rem;
+   font-weight: 300;
+}
+
+.competence_list_group_item_buttonSave {
+   padding: 5px 5px;
+   margin-left: 5px;
+}
+.competence_list_group_item_buttonSave:hover {
+   background-color: var(--thead);
+   cursor: pointer;
+   color: white;
+   border-color: var(--thead);
+}
+
 .alert_container {
-   margin-top: 20px;
+   position: fixed;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -80%);
 }
 
 .alert {
@@ -707,4 +749,8 @@ input[type='checkbox'] {
 
 .BMCard_competenceContainer > ul {
    list-style: none;
+}
+
+.cursor_pointer {
+   cursor: pointer;
 }

@@ -1,13 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useTree, updateCompetence } from '../../context/tree/TreeState';
 const CompetenceListItem = ({ index, competence }) => {
    const [treeState, treeDispatch] = useTree();
    const [competenceForm, setCompetenceForm] = useState(competence);
+   const [inputView, setInputView] = useState(false);
    const { name, ratingSetting } = competenceForm;
-   useEffect(() => {
-      updateCompetence(treeDispatch, competenceForm);
-      //console.log(competenceForm);
-   }, [competenceForm]);
+
+   const onErrorUpdate = () => {
+      setCompetenceForm({ ...competenceForm, name: competence.name });
+   };
+
+   const onSave = () => {
+      setInputView(false);
+      updateCompetence(treeDispatch, competenceForm, onErrorUpdate);
+   };
 
    const onChange = (e) => {
       if (e.target.name == 'ratingSetting') {
@@ -22,8 +28,20 @@ const CompetenceListItem = ({ index, competence }) => {
    return (
       <tr>
          <td>{index}</td>
-         <td>
-            <input type='text' name='name' value={name} onChange={onChange} />
+         <td className='cursor_pointer'>
+            {inputView ? (
+               <div className='competence_list_group_item_container'>
+                  <input
+                     className='competence_list_group_item_input'
+                     type='text'
+                     name='name'
+                     value={name}
+                     onChange={onChange}
+                  />
+               </div>
+            ) : (
+               <p onClick={() => setInputView(true)}>{competence.name}</p>
+            )}
          </td>
          <td>
             <select name='ratingSetting' defaultValue={ratingSetting} onChange={onChange}>
@@ -32,7 +50,13 @@ const CompetenceListItem = ({ index, competence }) => {
             </select>
          </td>
          <td>
-            <i className='fa-solid fa-gears'></i>
+            {inputView ? (
+               <button className='competence_list_group_item_buttonSave' onClick={onSave}>
+                  save
+               </button>
+            ) : (
+               <i className='fa-solid fa-gears'></i>
+            )}
          </td>
       </tr>
    );
