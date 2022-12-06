@@ -22,9 +22,9 @@ export const Tree = () => {
             <div>
                <DepartmentList />
             </div>
-            <div>
+            <>
                <WorkplaceList />
-            </div>
+            </>
          </div>
 
          <CompetenceList />

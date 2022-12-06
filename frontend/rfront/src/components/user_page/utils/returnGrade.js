@@ -13,7 +13,7 @@ const returnGrade = (grade, ratingSetting) => {
             return <i className='fa-solid fa-check green'></i>;
 
          default:
-            break;
+            return <i className='fa-solid fa-xmark red'></i>;
       }
    } else if (ratingSetting === 'from0to4') {
       switch (grade) {

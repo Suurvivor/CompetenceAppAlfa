@@ -98,7 +98,6 @@ export const getCompetences = async (dispatch, workplaceId) => {
       const res = await axios.get(`/groupcompetences/workplace/${workplaceId}`);
       dispatch({ type: TREE_LOAD_COMPETENCES, payload: res.data.data });
    } catch (error) {
-      console.log(error);
       errorHandler(error, dispatch, TREE_GET_COMPETENCES_FAIL);
    }
 };

@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import returnGrade from './utils/returnGrade';
 
-import { useBoxMidCard, setBoxMidCard, closeBoxMidCard } from '../../context/boxMidCard/BoxMidCardState';
+import { useBoxMidCard, setBoxMidCard } from '../../context/boxMidCard/BoxMidCardState';
 
 export const User_page_competence_list_group_item = ({ index, competence }) => {
    const [boxMidCardState, boxMidCardDispatch] = useBoxMidCard();

@@ -13,6 +13,7 @@ const WorkplaceList = () => {
    const [treeState, treeDispatch] = useTree();
    const [showAdd, setShowAdd] = useState(false);
    const [workplaceName, setWorkplaceName] = useState(false);
+   const [selectedWorkplace, setSelectedWorkplace] = useState(null);
 
    useEffect(() => {
       if (treeState.workplaces.length > 0) {
@@ -32,62 +33,61 @@ const WorkplaceList = () => {
    };
 
    if (treeState.loading) return <Spinner />;
-   if (treeState.workplaces.length > 0) {
-      return (
-         <div className='tree_workplace_list'>
-            <label htmlFor='workplaces'>Choose Workplace:</label>
 
-            <select name='workplaces' onChange={(e) => onChange(e.target.options[e.target.selectedIndex].id)}>
-               {treeState.workplaces.map((workplace, index) => (
-                  <option id={workplace._id} key={index} value={workplace.name}>
-                     {workplace.name}
-                  </option>
-               ))}
-            </select>
-            {showAdd && (
-               <>
-                  <input
-                     type='text'
-                     placeholder='Podaj nazwe stanowiska pracy'
-                     onChange={(e) => setWorkplaceName(e.target.value)}
-                  />
-                  <button onClick={onCreate}>Stwórz</button>
-               </>
-            )}
-            {!showAdd && (
-               <>
-                  <button onClick={() => setShowAdd(true)}>Stworz nowe stanowisko pracy</button>{' '}
-                  <button onClick={() => deleteWorkplace(treeDispatch, treeState.currentWorkplace)}>
-                     Usuń wybrane stanowisko pracy z listy
+   return (
+      <div className='tree_workplace_list'>
+         {treeState.workplaces.length > !-1 && (
+            <>
+               <label htmlFor='workplaces'>Choose Workplace:</label>
+
+               <select
+                  className='tree_dashboard_workplace_select'
+                  name='workplaces'
+                  onChange={(e) => onChange(e.target.options[e.target.selectedIndex].id)}
+               >
+                  {treeState.workplaces.map((workplace, index) => (
+                     <option id={workplace._id} key={index} value={workplace.name}>
+                        {workplace.name}
+                     </option>
+                  ))}
+               </select>
+            </>
+         )}
+
+         {showAdd && (
+            <>
+               <i
+                  className='fa-solid fa-xmark tree_dashboard_workplace_close_icon'
+                  onClick={() => setShowAdd(false)}
+               ></i>
+               <input
+                  type='text'
+                  placeholder='Podaj nazwe stanowiska pracy'
+                  onChange={(e) => setWorkplaceName(e.target.value)}
+                  className='tree_dashboard_workplace_input'
+               />
+               <button onClick={onCreate} className='tree_dashboard_ul_button'>
+                  Stwórz
+               </button>
+            </>
+         )}
+         {!showAdd && (
+            <>
+               <button onClick={() => setShowAdd(true)} className='tree_dashboard_ul_button'>
+                  Stworz nowe stanowisko pracy
+               </button>
+               {treeState.workplaces.length > !-1 && (
+                  <button
+                     onClick={() => deleteWorkplace(treeDispatch, treeState.currentWorkplace)}
+                     className='tree_dashboard_ul_button'
+                  >
+                     Usuń {treeState.currentWorkplace}
                   </button>
-               </>
-            )}
-         </div>
-      );
-   } else {
-      return (
-         <div className='tree_workplace_list'>
-            {showAdd && (
-               <>
-                  <input
-                     type='text'
-                     placeholder='Podaj nazwe stanowiska pracy'
-                     onChange={(e) => setWorkplaceName(e.target.value)}
-                  />
-                  <button onClick={onCreate}>Stwórz</button>
-               </>
-            )}
-            {!showAdd && (
-               <>
-                  <button onClick={() => setShowAdd(true)}>Stworz nowe stanowisko pracy</button>{' '}
-                  <button onClick={() => deleteWorkplace(treeDispatch, treeState.currentWorkplace)}>
-                     Usuń wybrane stanowisko pracy z listy
-                  </button>
-               </>
-            )}
-         </div>
-      );
-   }
+               )}
+            </>
+         )}
+      </div>
+   );
 };
 
 export default WorkplaceList;

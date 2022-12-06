@@ -13,6 +13,10 @@ const DepartmentList = () => {
    const [showAdd, setShowAdd] = useState(false);
    const [departmentName, setDepartmentName] = useState(null);
 
+   useEffect(() => {
+      onPick(treeState.departments[0]._id);
+   }, []);
+
    const onCreate = () => {
       createDepartment(treeDispatch, departmentName);
       setShowAdd(false);

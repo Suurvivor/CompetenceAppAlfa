@@ -556,13 +556,18 @@ svg {
 input[type='checkbox'] {
    cursor: pointer;
 }
+
+.tree_workplace_list {
+   width: 100%;
+}
+
 .tree_dashboard {
    display: flex;
    margin-top: 40px;
    padding: 30px 15px;
    border-top: 2px solid var(--thead);
    width: 800px;
-   justify-content: space-between;
+   gap: 50px;
    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
 .tree_dashboard_ul_item {
@@ -635,6 +640,11 @@ input[type='checkbox'] {
    padding: 5px 12px;
 }
 
+.tree_dashboard_workplace_input {
+   padding: 10px 10px;
+   width: 100%;
+}
+
 .tree_competence_close_icon {
    padding: 3px 4px 0px 0px;
    position: relative;
@@ -643,9 +653,30 @@ input[type='checkbox'] {
    transform: translate(60%, -60%);
    margin-left: 20px;
 }
+
 .tree_competence_close_icon:hover {
    cursor: pointer;
    color: red;
+}
+
+.tree_dashboard_workplace_close_icon {
+   padding: 3px 4px 0px 0px;
+   position: relative;
+   top: 4px;
+   right: 4px;
+   transform: translate(20%, 80%);
+   float: right;
+}
+
+.tree_dashboard_workplace_close_icon:hover {
+   cursor: pointer;
+   color: red;
+}
+
+.tree_dashboard_workplace_select {
+   padding: 4px 7px;
+   margin-bottom: 5px;
+   width: 100%;
 }
 
 .competence_list_group_item_container {
