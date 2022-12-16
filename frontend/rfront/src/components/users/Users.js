@@ -1,31 +1,31 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import UsersList from './UsersList';
+import UsersSearchInput from './UsersSearchInput';
 
 const Users = () => {
-   const getUsers = async () => {
-      const req = await axios.get('users/?s=kevc&&select=name&&page=2');
-      console.log(req);
-   };
-   getUsers();
+   const [users, setUsers] = useState(null);
+   const [searchInput, setSearchInput] = useState('');
 
-   const nowafunc = () => {
-      let re = new RegExp(`hello`);
-      console.log(re);
+   useEffect(() => {
+      getUsers();
+   }, [searchInput]);
+
+   const getUsers = async () => {
+      const req = await axios.get(`users/?s=${searchInput}`);
+      const dataUsers = req.data.data.map((user) =>
+         user.name.toString().length >= 10
+            ? { ...user, shortName: `${user.name.slice(0, 10)}..` }
+            : { ...user, shortName: user.name }
+      );
+      setUsers(dataUsers);
    };
-   nowafunc();
 
    return (
       <div className='users'>
          <p className='users_title'>Users</p>
-         <div className='users_search_container'>
-            <input
-               className='users_search_input'
-               type='text'
-               name='users_search_input'
-               placeholder='Search for users'
-            />
-            <i className='fa-solid fa-magnifying-glass user_search_input_icon'></i>
-         </div>
+         <UsersSearchInput setSearchInput={setSearchInput} />
+         <UsersList users={users} />
       </div>
    );
 };
