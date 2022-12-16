@@ -12,8 +12,17 @@ const Users = () => {
    const { userId } = useParams();
 
    useEffect(() => {
-      getUsers();
-   }, [searchInput]);
+      if (userId) {
+         getUser(userId);
+      } else {
+         getUsers();
+      }
+   }, [searchInput, userId]);
+
+   const getUser = async (userId) => {
+      const req = await axios.get(`users/${userId}`);
+      setUser(req.data.data);
+   };
 
    const getUsers = async () => {
       const req = await axios.get(`users/?s=${searchInput}`);
