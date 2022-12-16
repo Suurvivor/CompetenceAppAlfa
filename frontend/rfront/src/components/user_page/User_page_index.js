@@ -8,8 +8,14 @@ export const User_page_index = () => {
    if (!authState.user) return <Spinner />;
    return (
       <>
-         <User_Dashboard />
-         {authState.user.workplace && <User_Competence_Board />}
+         {authState.user.workplace ? (
+            <>
+               <User_Dashboard />
+               <User_Competence_Board />
+            </>
+         ) : (
+            <div>You need to be added to some department please contact with your supervisor.</div>
+         )}
       </>
    );
 };

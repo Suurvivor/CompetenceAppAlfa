@@ -1,18 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
-import { useAuth } from '../../context/auth/AuthState';
 import { User_page_competence_list_group } from '../user_page/User_page_competence_list_group';
 import Spinner from '../layout/Spinner';
 
 export const UsersInspect = ({ user }) => {
-   //const [AuthState] = useAuth();
-
    const [competenceGroups, setCompetenceGroups] = useState({ groups: [], loading: true });
    useEffect(() => {
       const res = async () => {
-         if (!user || !user.workplace) return <div>Error</div>;
          const groups = await axios.get(`/groupcompetences/workplace/${user.workplace._id}`);
+         console.log(groups);
          const groupsWithUserRating = groups.data.data.map((group) => {
             let compListEdited = group.competenceListId.map((competence) => {
                let rating = user.rating.find((rat1) => rat1.competence_id === competence._id);
