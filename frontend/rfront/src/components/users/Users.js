@@ -1,47 +1,38 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
 import UsersList from './UsersList';
 import UsersSearchInput from './UsersSearchInput';
 import UsersInspect from './UsersInspect';
+import { useUsers, getUser, getUsers, clearUser } from '../../context/users/UsersState';
 
 const Users = () => {
-   const [users, setUsers] = useState(null);
+   const [usersState, usersDispatch] = useUsers();
    const [searchInput, setSearchInput] = useState('');
-   const [user, setUser] = useState();
    const { userId } = useParams();
 
    useEffect(() => {
       if (userId) {
-         getUser(userId);
+         getUser(usersDispatch, userId);
       } else {
-         getUsers();
+         getUsers(usersDispatch, searchInput);
       }
    }, [searchInput, userId]);
 
-   const getUser = async (userId) => {
-      const req = await axios.get(`users/${userId}`);
-      setUser(req.data.data);
-   };
-
-   const getUsers = async () => {
-      const req = await axios.get(`users/?s=${searchInput}`);
-      const dataUsers = req.data.data.map((user) =>
-         user.name.toString().length >= 10
-            ? { ...user, shortName: `${user.name.slice(0, 10)}..` }
-            : { ...user, shortName: user.name }
+   if (usersState.user) {
+      return (
+         <>
+            <i className='fa-solid fa-chevron-left fa-2x cursor_pointer' onClick={() => clearUser(usersDispatch)}>
+               back
+            </i>
+            <UsersInspect user={usersState.user} />;
+         </>
       );
-      setUsers(dataUsers);
-   };
-
-   if (user) {
-      return <UsersInspect user={user} />;
    } else {
       return (
          <div className='users'>
             <p className='users_title'>Users</p>
             <UsersSearchInput setSearchInput={setSearchInput} />
-            <UsersList users={users} setUser={setUser} />
+            <UsersList users={usersState.users} />
          </div>
       );
    }

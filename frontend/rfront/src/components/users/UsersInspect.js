@@ -4,13 +4,8 @@ import { v4 as uuidv4 } from 'uuid';
 import { User_page_competence_list_group } from '../user_page/User_page_competence_list_group';
 import Spinner from '../layout/Spinner';
 
-export const UsersInspect = ({ user, userId }) => {
+export const UsersInspect = ({ user }) => {
    const [competenceGroups, setCompetenceGroups] = useState({ groups: [], loading: true });
-
-   // const getUser = async () => {
-   //    const req = await axios.get(`users/${userId}`);
-   //    setUser(req.data.data);
-   // };
 
    const getCompetenceGroups = async () => {
       const groups = await axios.get(`/groupcompetences/workplace/${user.workplace._id}`);
@@ -40,40 +35,49 @@ export const UsersInspect = ({ user, userId }) => {
       setCompetenceGroups({ groups: groupsWithUserRating, loading: false });
    };
    useEffect(() => {
-      //getUser();
-
       getCompetenceGroups();
    }, []);
    if (competenceGroups.loading) return <Spinner />;
    return (
-      <div id='container'>
-         <div className='flex-row'>
-            <div className='flex-column'>
-               {competenceGroups.groups.map((group, index) => {
-                  if (index < competenceGroups.groups.length / 2)
-                     return (
-                        <User_page_competence_list_group
-                           name={group.name}
-                           competenceList={group.competenceListId}
-                           key={uuidv4()}
-                        />
-                     );
-               })}
+      <>
+         <div id='user_dashboard'>
+            <div id='user_dashboard_info'>
+               <i className='fa-solid fa-user-tie' id='user_dashborad_info_avatar'></i>
+               <span id='user_dashboard_info_name'>{user.name}</span>
+               <span id='user_dashboard_info_position'>Department: {user.workplace.department.name}</span>
+               <span id='user_dashboard_info_department'>Workplace: {user.workplace.name}</span>
             </div>
-            <div className='flex-column'>
-               {competenceGroups.groups.map((group, index) => {
-                  if (index >= competenceGroups.groups.length / 2)
-                     return (
-                        <User_page_competence_list_group
-                           name={group.name}
-                           competenceList={group.competenceListId}
-                           key={uuidv4()}
-                        />
-                     );
-               })}
+            <div id='user_dashboard_statistics'>to do</div>
+         </div>
+         <div id='container'>
+            <div className='flex-row'>
+               <div className='flex-column'>
+                  {competenceGroups.groups.map((group, index) => {
+                     if (index < competenceGroups.groups.length / 2)
+                        return (
+                           <User_page_competence_list_group
+                              name={group.name}
+                              competenceList={group.competenceListId}
+                              key={uuidv4()}
+                           />
+                        );
+                  })}
+               </div>
+               <div className='flex-column'>
+                  {competenceGroups.groups.map((group, index) => {
+                     if (index >= competenceGroups.groups.length / 2)
+                        return (
+                           <User_page_competence_list_group
+                              name={group.name}
+                              competenceList={group.competenceListId}
+                              key={uuidv4()}
+                           />
+                        );
+                  })}
+               </div>
             </div>
          </div>
-      </div>
+      </>
    );
 };
 

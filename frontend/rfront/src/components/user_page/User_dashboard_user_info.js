@@ -1,11 +1,9 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useAuth } from '../../context/auth/AuthState';
 import { useBoxMidCard, setBoxMidCard } from '../../context/boxMidCard/BoxMidCardState';
 export const User_dashboard_user_info = () => {
    const [authState] = useAuth();
    const [boxMidCardState, boxMidCardDispatch] = useBoxMidCard();
-   const [dashboardInfo, setDashboardInfo] = useState({ department: '', workplace: '' });
    const { name, role, workplace } = authState.user;
    const editProfile = () => {
       return <p>Hello edit your shots</p>;

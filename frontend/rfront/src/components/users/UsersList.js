@@ -8,7 +8,7 @@ const UsersList = ({ users, setUser }) => {
    return (
       <div className='users_list_container'>
          {users.map((user) => {
-            return <UsersListItem user={user} key={uuidv4()} setUser={setUser} />;
+            return <UsersListItem user={user} key={uuidv4()} />;
          })}
       </div>
    );
