@@ -39,6 +39,7 @@ function App() {
                            <Route path='login' element={<Login />} />
                            <Route path='register' element={<Register />} />
                            <Route path='users' element={<PrivateRoute component={Users} />} />
+                           <Route path='users/:userId' element={<PrivateRoute component={Users} />} />
                            <Route path='tree' element={<PrivateRoute component={Tree} />} />
                         </Routes>
                      </div>

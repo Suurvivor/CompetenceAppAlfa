@@ -10,7 +10,7 @@ export const User_page_competence_list = () => {
    const [competenceGroups, setCompetenceGroups] = useState({ groups: [], loading: true });
    useEffect(() => {
       const res = async () => {
-         const groups = await axios.get(`/groupcompetences/workplace/${AuthState.user.workplace}`);
+         const groups = await axios.get(`/groupcompetences/workplace/${AuthState.user.workplace._id}`);
          const groupsWithUserRating = groups.data.data.map((group) => {
             let compListEdited = group.competenceListId.map((competence) => {
                let rating = AuthState.user.rating.find((rat1) => rat1.competence_id === competence._id);

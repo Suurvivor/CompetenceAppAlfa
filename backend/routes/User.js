@@ -6,7 +6,7 @@ const { addUser, getUsers, getUser, updateUser, deleteUser } = require('../contr
 
 const router = express.Router();
 
-router.route('/').get(advancedResults(User), getUsers).post(addUser);
+router.route('/').get(advancedResults(User, 'workplace'), getUsers).post(addUser);
 
 router.route('/:id').get(getUser).put(updateUser).delete(deleteUser);
 

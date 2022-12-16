@@ -7,16 +7,6 @@ export const User_dashboard_user_info = () => {
    const [boxMidCardState, boxMidCardDispatch] = useBoxMidCard();
    const [dashboardInfo, setDashboardInfo] = useState({ department: '', workplace: '' });
    const { name, role, workplace } = authState.user;
-
-   useEffect(() => {
-      const getDashboardInfo = async () => {
-         const workplaceData = await axios.get(`/workplaces/${workplace}`);
-         const departmentData = await axios.get(`/departments/${workplaceData.data.data.department}`);
-         setDashboardInfo({ department: departmentData.data.data.name, workplace: workplaceData.data.data.name });
-      };
-      getDashboardInfo();
-   }, []);
-
    const editProfile = () => {
       return <p>Hello edit your shots</p>;
    };
@@ -29,8 +19,8 @@ export const User_dashboard_user_info = () => {
             onClick={() => setBoxMidCard('Edit your profile', editProfile, boxMidCardDispatch)}
          ></i>
          <span id='user_dashboard_info_name'>{name}</span>
-         <span id='user_dashboard_info_position'>Department: {dashboardInfo.department}</span>
-         <span id='user_dashboard_info_department'>Workplace: {dashboardInfo.workplace}</span>
+         <span id='user_dashboard_info_position'>Department: {workplace.department.name}</span>
+         <span id='user_dashboard_info_department'>Workplace: {workplace.name}</span>
       </div>
    );
 };

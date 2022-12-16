@@ -24,7 +24,12 @@ exports.getUsers = asyncHandler(async (req, res, next) => {
 //@route Get /api/v1/users/:id
 //@access Private
 exports.getUser = asyncHandler(async (req, res, next) => {
-   const user = await User.findById(req.params.id);
+   const user = await User.findById(req.params.id).populate({
+      path: 'workplace',
+      populate: {
+         path: 'department',
+      },
+   });
    if (!user) {
       return next(new ErrorResponse(`Could not find user of id ${req.params.id}`, 400));
    }

@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import UsersList from './UsersList';
 import UsersSearchInput from './UsersSearchInput';
+import UsersInspect from './UsersInspect';
 
 const Users = () => {
    const [users, setUsers] = useState(null);
    const [searchInput, setSearchInput] = useState('');
+   const [user, setUser] = useState();
+   const { userId } = useParams();
 
    useEffect(() => {
       getUsers();
@@ -21,13 +25,17 @@ const Users = () => {
       setUsers(dataUsers);
    };
 
-   return (
-      <div className='users'>
-         <p className='users_title'>Users</p>
-         <UsersSearchInput setSearchInput={setSearchInput} />
-         <UsersList users={users} />
-      </div>
-   );
+   if (user) {
+      return <UsersInspect user={user} />;
+   } else {
+      return (
+         <div className='users'>
+            <p className='users_title'>Users</p>
+            <UsersSearchInput setSearchInput={setSearchInput} />
+            <UsersList users={users} setUser={setUser} />
+         </div>
+      );
+   }
 };
 
 export default Users;
