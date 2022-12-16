@@ -16,6 +16,7 @@ import AlertState from './context/alert/AlertState';
 import Alerts from './components/layout/Alerts';
 import BoxMidCardState from './context/boxMidCard/BoxMidCardState';
 import BoxMidCard from './components/layout/BoxMidCard';
+import Users from './components/users/Users';
 
 axios.defaults.baseURL = 'http://localhost:5000/api/v1';
 
@@ -37,7 +38,7 @@ function App() {
                            <Route path='/' element={<PrivateRoute component={User_page_index} />} />
                            <Route path='login' element={<Login />} />
                            <Route path='register' element={<Register />} />
-
+                           <Route path='users' element={<PrivateRoute component={Users} />} />
                            <Route path='tree' element={<PrivateRoute component={Tree} />} />
                         </Routes>
                      </div>

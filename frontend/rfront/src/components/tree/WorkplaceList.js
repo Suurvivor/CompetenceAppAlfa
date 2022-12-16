@@ -18,11 +18,13 @@ const WorkplaceList = () => {
    useEffect(() => {
       if (treeState.workplaces.length > 0) {
          setCurrentWorkplace(treeDispatch, treeState.workplaces[0]._id);
+         setSelectedWorkplace(treeState.workplaces[0].name);
          getCompetences(treeDispatch, treeState.workplaces[0]._id);
       }
    }, [treeState.workplaces]);
 
-   const onChange = (id) => {
+   const onChange = (id, e) => {
+      setSelectedWorkplace(e.target.options[e.target.selectedIndex].value);
       getCompetences(treeDispatch, id);
       setCurrentWorkplace(treeDispatch, id);
    };
@@ -43,7 +45,7 @@ const WorkplaceList = () => {
                <select
                   className='tree_dashboard_workplace_select'
                   name='workplaces'
-                  onChange={(e) => onChange(e.target.options[e.target.selectedIndex].id)}
+                  onChange={(e) => onChange(e.target.options[e.target.selectedIndex].id, e)}
                >
                   {treeState.workplaces.map((workplace, index) => (
                      <option id={workplace._id} key={index} value={workplace.name}>
@@ -54,7 +56,7 @@ const WorkplaceList = () => {
             </>
          )}
 
-         {showAdd && (
+         {showAdd ? (
             <>
                <i
                   className='fa-solid fa-xmark tree_dashboard_workplace_close_icon'
@@ -70,8 +72,7 @@ const WorkplaceList = () => {
                   Stwórz
                </button>
             </>
-         )}
-         {!showAdd && (
+         ) : (
             <>
                <button onClick={() => setShowAdd(true)} className='tree_dashboard_ul_button'>
                   Stworz nowe stanowisko pracy
@@ -81,7 +82,7 @@ const WorkplaceList = () => {
                      onClick={() => deleteWorkplace(treeDispatch, treeState.currentWorkplace)}
                      className='tree_dashboard_ul_button'
                   >
-                     Usuń {treeState.currentWorkplace}
+                     Usuń stanowisko: ' {selectedWorkplace} '
                   </button>
                )}
             </>

@@ -14,10 +14,7 @@ const UserSchema = new mongoose.Schema({
       type: String,
       required: [true, 'Please add an email'],
       unique: true,
-      match: [
-         /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
-         'Please add a valid email',
-      ],
+      match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please add a valid email'],
    },
    workplace: {
       type: mongoose.Schema.ObjectId,
@@ -49,6 +46,11 @@ const UserSchema = new mongoose.Schema({
    },
 });
 
+//search User by name
+UserSchema.query.byName = function (name) {
+   return this.where({ name: new RegExp(name, 'i') });
+};
+
 //Encrypt password befor saving with bcryptjs
 UserSchema.pre('save', async function (next) {
    //isModifed jezeli hasło w tym "dokumencie noSQL" zostało zmienione podczas zapisu, ty jest !to negacja
@@ -73,21 +75,14 @@ UserSchema.methods.matchPassword = async function (enteredPassword) {
 };
 
 //check if rating of competence is already in base then update else push new rating
-UserSchema.methods.addNewRatingOrUpdateIfExists = async function (
-   competence_id,
-   ratingData,
-   updateby,
-   callback
-) {
+UserSchema.methods.addNewRatingOrUpdateIfExists = async function (competence_id, ratingData, updateby, callback) {
    const ratingArray = this.rating;
    const ratingIds = ratingArray.map((rating) => {
       return rating.competence_id;
    });
 
    if (ratingIds.includes(competence_id)) {
-      const index = ratingArray.findIndex(
-         (rating) => rating.competence_id == competence_id
-      );
+      const index = ratingArray.findIndex((rating) => rating.competence_id == competence_id);
       const ratingDataUpdate = {
          competence_id: ratingData.competence_id,
          rating: ratingData.rating,

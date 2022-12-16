@@ -785,3 +785,33 @@ input[type='checkbox'] {
 .cursor_pointer {
    cursor: pointer;
 }
+
+.users {
+   display: flex;
+   flex-direction: column;
+   gap: 50px;
+   justify-content: center;
+   align-items: center;
+}
+
+.users_title {
+   font-size: 4rem;
+}
+
+.users_search_container {
+   display: flex;
+}
+
+.users_search_input {
+   width: 600px;
+   padding: 10px 15px;
+   font-size: 1.5rem;
+}
+
+.user_search_input_icon {
+   position: relative;
+   top: 0;
+   left: 0;
+   transform: translate(-160%, 25%);
+   font-size: 1.6rem;
+}
