@@ -9,6 +9,7 @@ import {
    USERS_GET_USER,
    USERS_GET_USERS,
    USERS_CLEAR_USER,
+   USERS_GET_COMPETENCE_GROUPS,
    USERS_SET_USER,
    USERS_LOAD_FAIL,
 } from '../types';
@@ -42,6 +43,15 @@ export const setUser = (dispatch, user) => {
    dispatch({ type: USERS_SET_USER, payload: user });
 };
 
+export const getUserCompetenceGroups = async (dispatch, user) => {
+   try {
+      const groups = await axios.get(`/groupcompetences/workplace/${user.workplace._id}`);
+      dispatch({ type: USERS_GET_COMPETENCE_GROUPS, payload: { groups: groups.data.data, user } });
+   } catch (error) {
+      errorHandler(error, dispatch, USERS_LOAD_FAIL);
+   }
+};
+
 export const clearUser = (dispatch) => {
    dispatch({ type: USERS_CLEAR_USER });
 };
@@ -53,6 +63,7 @@ const UsersState = (props) => {
    const initialState = {
       users: null,
       user: null,
+      userCompetences: null,
       error: null,
       loading: true,
    };
