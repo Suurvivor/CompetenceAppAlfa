@@ -8,7 +8,7 @@ export const User_page_index = () => {
    if (!authState.user) return <Spinner />;
    return (
       <>
-         {authState.user.workplace ? (
+         {authState.user.workplace && authState.user.workplace.department ? (
             <>
                <User_Dashboard />
                <User_Competence_Board />

@@ -18,13 +18,13 @@ const Users = () => {
       }
    }, [searchInput, userId]);
 
-   if (usersState.user) {
+   if (usersState.user && usersState.user.workplace && usersState.user.workplace.department) {
       return (
          <>
             <i className='fa-solid fa-chevron-left fa-2x cursor_pointer' onClick={() => clearUser(usersDispatch)}>
                back
             </i>
-            <UsersInspect user={usersState.user} />;
+            <UsersInspect user={usersState.user} />
          </>
       );
    } else {

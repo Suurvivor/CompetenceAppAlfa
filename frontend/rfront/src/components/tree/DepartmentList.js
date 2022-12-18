@@ -8,7 +8,10 @@ import {
 } from '../../context/tree/TreeState';
 import Spinner from '../layout/Spinner';
 
+import { useBoxMidCard, setBoxMidCard } from '../../context/boxMidCard/BoxMidCardState';
+
 const DepartmentList = () => {
+   const [boxMidCardState, boxMidCardDispatch] = useBoxMidCard();
    const [treeState, treeDispatch] = useTree();
    const [showAdd, setShowAdd] = useState(false);
    const [departmentName, setDepartmentName] = useState(null);
@@ -28,6 +31,13 @@ const DepartmentList = () => {
       setCurrentDepartment(treeDispatch, departId);
    };
 
+   let sure = (department) => {
+      let accept = prompt(`Przepisz nazwe działu aby usunąc: ${department.name}`, 'nazwa dzialu');
+      if (accept === department.name.toString()) {
+         deleteDepartment(treeDispatch, department._id);
+      }
+   };
+
    if (treeState.loading) return <Spinner />;
    return (
       <>
@@ -39,10 +49,7 @@ const DepartmentList = () => {
                         <li key={department._id} id={department._id} onClick={(e) => onPick(e.target.id)}>
                            {department.name}
                         </li>
-                        <i
-                           className='fa-solid fa-circle-minus tree_delete_icon'
-                           onClick={() => deleteDepartment(treeDispatch, department._id)}
-                        ></i>
+                        <i className='fa-solid fa-circle-minus tree_delete_icon' onClick={() => sure(department)}></i>
                      </div>
                   ))}
                </ul>

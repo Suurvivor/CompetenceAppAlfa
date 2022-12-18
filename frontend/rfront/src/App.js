@@ -19,7 +19,7 @@ import BoxMidCard from './components/layout/BoxMidCard';
 import Users from './components/users/Users';
 import UsersState from './context/users/UsersState';
 
-axios.defaults.baseURL = 'http://localhost:5000/api/v1';
+axios.defaults.baseURL = 'http://192.168.0.80:5000/api/v1';
 
 function App() {
    return (

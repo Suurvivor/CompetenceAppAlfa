@@ -5,6 +5,8 @@ import {
    USERS_GET_COMPETENCE_GROUPS,
    USERS_CLEAR_USER,
    USERS_LOAD_FAIL,
+   CLEAR_ERRORS,
+   USERS_GET_DEPARTMENTS,
 } from '../types';
 
 const usersReducer = (state, action) => {
@@ -65,11 +67,22 @@ const usersReducer = (state, action) => {
             user: null,
             loading: false,
          };
+      case USERS_GET_DEPARTMENTS:
+         return {
+            ...state,
+            departments: action.payload,
+            loading: false,
+         };
       case USERS_LOAD_FAIL:
          return {
             ...state,
             error: action.payload,
             loading: false,
+         };
+      case CLEAR_ERRORS:
+         return {
+            ...state,
+            error: null,
          };
       default:
          throw new Error(`Unsupported type of: ${action.type}`);

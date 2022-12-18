@@ -12,6 +12,7 @@ import {
    USERS_GET_COMPETENCE_GROUPS,
    USERS_SET_USER,
    USERS_LOAD_FAIL,
+   USERS_GET_DEPARTMENTS,
 } from '../types';
 
 // Create a custom hook to use the auth context
@@ -56,6 +57,20 @@ export const clearUser = (dispatch) => {
    dispatch({ type: USERS_CLEAR_USER });
 };
 
+export const getDepartments = async (dispatch) => {
+   try {
+      const req = await axios.get('departments/');
+      dispatch({ type: USERS_GET_DEPARTMENTS, payload: req.data.data });
+   } catch (error) {
+      errorHandler(error, dispatch, USERS_LOAD_FAIL);
+   }
+};
+
+export const updateUser = async (dispatch, user) => {
+   const req = await axios.put(`users/${user._id}`, { ...user });
+   console.log(req);
+};
+
 const UsersState = (props) => {
    const alertContext = useContext(AlertContext);
    const { setAlert } = alertContext;
@@ -64,6 +79,7 @@ const UsersState = (props) => {
       users: null,
       user: null,
       userCompetences: null,
+      departments: null,
       error: null,
       loading: true,
    };
@@ -74,6 +90,7 @@ const UsersState = (props) => {
    useEffect(() => {
       if (error) {
          setAlert(error, 'danger');
+         setTimeout(() => setUser(dispatch, null), 5000);
          dispatch({ type: CLEAR_ERRORS });
       }
    }, [error]);

@@ -31,7 +31,7 @@ export const useBoxMidCard = () => {
 // };
 
 export const setBoxMidCard = (title, body, dispatch) => {
-   dispatch({ type: SET_BOX_MID_CARD, payload: { title: title, body: body } });
+   dispatch({ type: SET_BOX_MID_CARD, payload: { title, body } });
 };
 
 export const closeBoxMidCard = (dispatch) => {
