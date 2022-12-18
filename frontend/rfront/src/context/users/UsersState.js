@@ -13,6 +13,7 @@ import {
    USERS_SET_USER,
    USERS_LOAD_FAIL,
    USERS_GET_DEPARTMENTS,
+   USERS_UPDATE_USER,
 } from '../types';
 
 // Create a custom hook to use the auth context
@@ -67,8 +68,12 @@ export const getDepartments = async (dispatch) => {
 };
 
 export const updateUser = async (dispatch, user) => {
-   const req = await axios.put(`users/${user._id}`, { ...user });
-   console.log(req);
+   try {
+      const req = await axios.put(`users/${user._id}`, { ...user });
+      dispatch({ type: USERS_UPDATE_USER, payload: req.data.data });
+   } catch (error) {
+      errorHandler(error, dispatch, USERS_LOAD_FAIL);
+   }
 };
 
 const UsersState = (props) => {

@@ -11,11 +11,11 @@ export const UsersInspect = ({ user }) => {
    useEffect(() => {
       getDepartments(usersDisptach);
       getUserCompetenceGroups(usersDisptach, user);
-   }, []);
-   if (!usersState.userCompetences) return <Spinner />;
+   }, [usersState.user]);
+   if (!usersState.userCompetences || !usersState.departments) return <Spinner />;
    return (
       <>
-         <UsersDashboard userState={usersState} />
+         <UsersDashboard />
          <UsersCompetenceList usersState={usersState} />
       </>
    );

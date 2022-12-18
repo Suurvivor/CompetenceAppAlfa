@@ -46,6 +46,11 @@ exports.updateUser = asyncHandler(async (req, res, next) => {
    const user = await User.findByIdAndUpdate(req.params.id, req.body, {
       runValidators: true,
       new: true,
+   }).populate({
+      path: 'workplace',
+      populate: {
+         path: 'department',
+      },
    });
    if (!user) {
       return next(new ErrorResponse(`Could not find user of id ${req.params.id}`, 400));

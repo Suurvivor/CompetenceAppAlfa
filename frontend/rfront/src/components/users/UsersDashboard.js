@@ -6,36 +6,79 @@ const UsersDashboard = () => {
    const [usersState, usersDisptach] = useUsers();
    const [boxMidCardState, boxMidCardDispatch] = useBoxMidCard();
    const [editInput, setEditInput] = useState({
-      user: { name: null },
+      user: { name: usersState.user.name },
       department: usersState.user.workplace.department,
-      workplace: usersState.departments.find((depart) => depart._id === usersState.user.workplace.department._id)
+      workplaces: usersState.departments.find((depart) => depart._id === usersState.user.workplace.department._id)
          .Workplaces,
-      selectedWorkplaceId: null,
+      selectedWorkplace: usersState.user.workplace,
    });
    const { user } = usersState;
 
    const onSave = () => {
-      updateUser(usersDisptach, { name: editInput.user.name, workplace: editInput.workplace._id });
+      if (editInput.workplaces.length > 0) {
+         updateUser(usersDisptach, {
+            _id: usersState.user._id,
+            name: editInput.user.name,
+            workplace: { _id: editInput.selectedWorkplace._id, name: editInput.selectedWorkplace.name },
+         });
+      } else {
+         updateUser(usersDisptach, {
+            _id: usersState.user._id,
+            name: editInput.user.name,
+         });
+      }
+      closeBoxMidCard(boxMidCardDispatch);
    };
 
    const onChange = (e) => {
-      setEditInput({
-         ...editInput,
-         department: usersState.departments.find((dep) => dep._id === e.target.options[e.target.selectedIndex].id),
-         workplace: usersState.departments.find((dep) => dep._id === e.target.options[e.target.selectedIndex].id)
-            .Workplaces,
-      });
+      if (
+         usersState.departments.find((dep) => dep._id === e.target.options[e.target.selectedIndex].id).Workplaces
+            .length > 0
+      ) {
+         setEditInput({
+            ...editInput,
+            department: usersState.departments.find((dep) => dep._id === e.target.options[e.target.selectedIndex].id),
+            workplaces: usersState.departments.find((dep) => dep._id === e.target.options[e.target.selectedIndex].id)
+               .Workplaces,
+            selectedWorkplace: usersState.departments.find(
+               (dep) => dep._id === e.target.options[e.target.selectedIndex].id
+            ).Workplaces[0],
+         });
+      } else {
+         setEditInput({
+            ...editInput,
+            department: usersState.departments.find((dep) => dep._id === e.target.options[e.target.selectedIndex].id),
+            workplaces: usersState.departments.find((dep) => dep._id === e.target.options[e.target.selectedIndex].id)
+               .Workplaces,
+            selectedWorkplace: null,
+         });
+      }
    };
 
    const onWorkplaceChange = (e) => {
-      setEditInput({ ...editInput, selectedWorkplaceId: e.target.options[e.target.selectedIndex].id });
+      //console.log(e.target.options[e.target.selectedIndex].);
+
+      setEditInput({
+         ...editInput,
+         selectedWorkplace: {
+            _id: e.target.options[e.target.selectedIndex].id,
+            name: e.target.options[e.target.selectedIndex].value,
+         },
+      });
    };
    const editBody = () => {
       return (
          <div className='userInspect_edit_container'>
             <div>
                <label htmlFor='name'>Name:</label>
-               <input className='tree_dashboard_workplace_input' type='text' placeholder='name' />
+               <input
+                  autoFocus
+                  className='tree_dashboard_workplace_input'
+                  type='text'
+                  placeholder='name'
+                  value={editInput.user.name}
+                  onChange={(e) => setEditInput({ ...editInput, user: { name: e.target.value } })}
+               />
             </div>
             <div>
                <label htmlFor='departments'>Choose Department:</label>
@@ -47,39 +90,39 @@ const UsersDashboard = () => {
                   onChange={(e) => onChange(e)}
                >
                   {usersState.departments.map((department) => {
-                     if (department._id === usersState.user.workplace.department._id) {
+                     if (department.Workplaces.length > 0) {
                         return (
                            <option id={department._id} key={department._id}>
                               {department.name}
                            </option>
                         );
                      } else {
-                        return (
-                           <option id={department._id} key={department._id}>
-                              {department.name}
-                           </option>
-                        );
+                        return null;
                      }
                   })}
                </select>
             </div>
-            <div>
-               <label htmlFor='workplaces'>Choose Workplace:</label>
+            {editInput.workplaces.length > 0 && (
+               <div>
+                  <label htmlFor='workplaces'>Choose Workplace:</label>
+                  <select
+                     className='tree_dashboard_workplace_select'
+                     name='workplaces'
+                     onChange={(e) => onWorkplaceChange(e)}
+                     defaultValue={editInput.selectedWorkplace.name}
+                  >
+                     {editInput.workplaces.map((work) => (
+                        <option key={work._id} id={work._id} value={work.name}>
+                           {work.name}
+                        </option>
+                     ))}
+                  </select>
+               </div>
+            )}
 
-               <select
-                  className='tree_dashboard_workplace_select'
-                  name='workplaces'
-                  onChange={(e) => onWorkplaceChange(e)}
-                  defaultValue={editInput.selectedWorkplaceId}
-               >
-                  {editInput.workplace.map((work) => (
-                     <option key={work._id} id={work._id}>
-                        {work.name}
-                     </option>
-                  ))}
-               </select>
-            </div>
-            <button className='login_view_button'>SAVE</button>
+            <button className='login_view_button' onClick={onSave}>
+               SAVE
+            </button>
          </div>
       );
    };
