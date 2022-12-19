@@ -5,14 +5,14 @@ import { useUsers, getUserCompetenceGroups, getDepartments, updateUser } from '.
 import UsersDashboard from './UsersDashboard';
 import UsersCompetenceList from './UsersCompetenceList';
 
-export const UsersInspect = ({ user }) => {
+export const UsersInspect = () => {
    const [usersState, usersDisptach] = useUsers();
 
    useEffect(() => {
       getDepartments(usersDisptach);
-      getUserCompetenceGroups(usersDisptach, user);
+      getUserCompetenceGroups(usersDisptach, usersState.user);
    }, [usersState.user]);
-   if (!usersState.userCompetences || !usersState.departments) return <Spinner />;
+   if (!usersState.departments && !usersState.userCompetences) return <Spinner />;
    return (
       <>
          <UsersDashboard />

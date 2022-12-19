@@ -7,7 +7,7 @@ const UsersListItem = ({ user }) => {
       <div className='users_list_item' onClick={() => setUser(usersDispatch, user)}>
          <i className='fa-solid fa-user-tie users_list_item_icon'></i>
          <span className='users_list_item_name'>{user.shortName}</span>
-         <span className='users_list_item_position'>{user.workplace.name}</span>
+         <span className='users_list_item_position'>{user?.workplace?.name}</span>
          <button className='users_list_item_button'>more info</button>
       </div>
    );

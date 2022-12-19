@@ -84,6 +84,7 @@ const usersReducer = (state, action) => {
          return {
             ...state,
             user: null,
+            userCompetences: null,
             loading: false,
          };
       case USERS_GET_DEPARTMENTS:

@@ -7,10 +7,13 @@ const UsersDashboard = () => {
    const [boxMidCardState, boxMidCardDispatch] = useBoxMidCard();
    const [editInput, setEditInput] = useState({
       user: { name: usersState.user.name },
-      department: usersState.user.workplace.department,
-      workplaces: usersState.departments.find((depart) => depart._id === usersState.user.workplace.department._id)
-         .Workplaces,
-      selectedWorkplace: usersState.user.workplace,
+      department: usersState.user?.workplace?.department
+         ? usersState.user.workplace.department
+         : usersState.departments[0],
+      workplaces: usersState.user?.workplace?.department
+         ? usersState.departments.find((depart) => depart._id === usersState.user.workplace.department._id).Workplaces
+         : usersState.departments[0].Workplaces,
+      selectedWorkplace: usersState.user?.workplace || usersState.departments[0].Workplaces[0],
    });
    const { user } = usersState;
 
@@ -140,8 +143,10 @@ const UsersDashboard = () => {
                onClick={() => setBoxMidCard('Edit', editBody, boxMidCardDispatch)}
             ></i>
             <span id='user_dashboard_info_name'>{user.name}</span>
-            <span id='user_dashboard_info_position'>Department: {user.workplace.department.name}</span>
-            <span id='user_dashboard_info_department'>Workplace: {user.workplace.name}</span>
+            <span id='user_dashboard_info_position'>
+               Department: {user?.workplace?.department ? user.workplace.department.name : 'null'}
+            </span>
+            <span id='user_dashboard_info_department'>Workplace: {user?.workplace?.name || 'null'}</span>
          </div>
          <div id='user_dashboard_statistics'>to do</div>
       </div>

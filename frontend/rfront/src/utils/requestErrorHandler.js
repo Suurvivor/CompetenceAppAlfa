@@ -11,10 +11,9 @@ export const errorHandler = (err, dispatch, Type) => {
          payload: 'ERR_BAD_REQUEST',
       });
    } else if (err) {
-      console.log(err);
       dispatch({
          type: Type,
-         payload: err.response.data.error,
+         payload: err?.response?.data?.error,
       });
    }
 };
