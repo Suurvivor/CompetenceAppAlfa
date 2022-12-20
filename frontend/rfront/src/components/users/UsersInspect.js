@@ -12,7 +12,8 @@ export const UsersInspect = () => {
       getDepartments(usersDisptach);
       getUserCompetenceGroups(usersDisptach, usersState.user);
    }, [usersState.user]);
-   if (!usersState.departments && !usersState.userCompetences) return <Spinner />;
+   if (usersState.departments.length === 0 || (!usersState.departments && !usersState.userCompetences))
+      return <Spinner />;
    return (
       <>
          <UsersDashboard />

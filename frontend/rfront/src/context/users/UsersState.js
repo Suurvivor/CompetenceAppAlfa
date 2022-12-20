@@ -84,7 +84,7 @@ const UsersState = (props) => {
       users: null,
       user: null,
       userCompetences: null,
-      departments: null,
+      departments: [],
       error: null,
       loading: true,
    };

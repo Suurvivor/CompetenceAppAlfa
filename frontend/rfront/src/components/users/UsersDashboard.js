@@ -4,6 +4,7 @@ import { useUsers, updateUser } from '../../context/users/UsersState';
 
 const UsersDashboard = () => {
    const [usersState, usersDisptach] = useUsers();
+
    const [boxMidCardState, boxMidCardDispatch] = useBoxMidCard();
    const [editInput, setEditInput] = useState({
       user: { name: usersState.user.name },
@@ -133,7 +134,6 @@ const UsersDashboard = () => {
    useEffect(() => {
       if (boxMidCardState.show) setBoxMidCard('Edit', editBody, boxMidCardDispatch);
    }, [editInput]);
-
    return (
       <div id='user_dashboard'>
          <div id='user_dashboard_info'>
