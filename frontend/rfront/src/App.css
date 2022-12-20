@@ -286,12 +286,14 @@ tbody > tr:nth-child(even) {
 }
 
 td {
-   padding: 15px 10px;
+   padding: 20px 10px;
    position: relative;
    text-align: center;
 }
 .td_flex {
    display: flex;
+   justify-content: center;
+   align-items: center;
 }
 
 tr:hover {
@@ -442,7 +444,6 @@ svg {
    height: var(--circle-quarter);
    background: var(--circle-rating-color);
    border-top-left-radius: 100%;
-   display: none;
    opacity: var(--circle-background-opacity);
 }
 
@@ -477,6 +478,35 @@ svg {
    background: var(--circle-rating-color);
    border-bottom-right-radius: 100%;
    opacity: var(--circle-background-opacity);
+}
+
+.arrows_increase_decrease {
+   position: absolute;
+   display: flex;
+   flex-direction: column;
+   padding: 0;
+   margin: 0;
+   gap: 0.3rem;
+}
+
+.arrow_up {
+   margin: 3px;
+   font-size: 1.4rem;
+   line-height: 10rem;
+}
+.arrow_up:hover {
+   cursor: pointer;
+   color: green;
+}
+.arrow_down {
+   margin: 3px;
+   font-size: 1.4rem;
+   line-height: 10rem;
+}
+
+.arrow_down:hover {
+   cursor: pointer;
+   color: red;
 }
 
 #display_none {

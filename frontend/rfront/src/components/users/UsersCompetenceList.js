@@ -14,6 +14,7 @@ const UsersCompetenceList = ({ usersState }) => {
                            name={group.name}
                            competenceList={group.competenceListId}
                            key={uuidv4()}
+                           inspect={true}
                         />
                      );
                })}
@@ -26,6 +27,7 @@ const UsersCompetenceList = ({ usersState }) => {
                            name={group.name}
                            competenceList={group.competenceListId}
                            key={uuidv4()}
+                           inspect={true}
                         />
                      );
                })}

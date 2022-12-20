@@ -8,6 +8,7 @@ import {
    CLEAR_ERRORS,
    USERS_GET_DEPARTMENTS,
    USERS_UPDATE_USER,
+   USERS_ADD_RATING,
 } from '../types';
 
 const usersReducer = (state, action) => {
@@ -62,7 +63,34 @@ const usersReducer = (state, action) => {
             }),
             loading: false,
          };
-
+      case USERS_ADD_RATING:
+         return {
+            ...state,
+            userCompetences: state.userCompetences.map((group) => {
+               let compListEdited = group.competenceListId.map((competence) => {
+                  let rating = action.payload.user.rating.find((rat1) => rat1.competence_id === competence._id);
+                  return rating
+                     ? {
+                          ...competence,
+                          lastEdit: new Date(competence.lastEdit),
+                          createdAt: new Date(competence.createdAt),
+                          rating: {
+                             ...rating,
+                             created_at: new Date(rating.created_at),
+                             lastmodify: new Date(rating.lastmodify),
+                          },
+                       }
+                     : {
+                          ...competence,
+                          lastEdit: new Date(competence.lastEdit),
+                          createdAt: new Date(competence.createdAt),
+                          rating: null,
+                       };
+               });
+               return { ...group, competenceListId: compListEdited };
+            }),
+            loading: false,
+         };
       case USERS_UPDATE_USER:
          return {
             ...state,

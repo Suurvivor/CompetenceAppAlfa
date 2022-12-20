@@ -14,6 +14,7 @@ import {
    USERS_LOAD_FAIL,
    USERS_GET_DEPARTMENTS,
    USERS_UPDATE_USER,
+   USERS_ADD_RATING,
 } from '../types';
 
 // Create a custom hook to use the auth context
@@ -49,6 +50,24 @@ export const getUserCompetenceGroups = async (dispatch, user) => {
    try {
       const groups = await axios.get(`/groupcompetences/workplace/${user.workplace._id}`);
       dispatch({ type: USERS_GET_COMPETENCE_GROUPS, payload: { groups: groups.data.data, user } });
+   } catch (error) {
+      errorHandler(error, dispatch, USERS_LOAD_FAIL);
+   }
+};
+
+export const addRating = async (dispatch, user, competence, rating) => {
+   try {
+      const rat = await axios.post(`competences/${competence._id}/ratings/${user._id}`, { rating });
+      const userWithNewRat = {
+         ...user,
+         rating: user.rating.find((ras) => ras.competence_id === rat.data.data.competence_id)
+            ? user.rating.map((rasa) =>
+                 rasa.competence_id === rat.data.data.competence_id ? { ...rat.data.data } : rasa
+              )
+            : user.rating.concat(rat.data.data),
+      };
+
+      dispatch({ type: USERS_ADD_RATING, payload: { rating: rat.data.data, user: { ...userWithNewRat } } });
    } catch (error) {
       errorHandler(error, dispatch, USERS_LOAD_FAIL);
    }

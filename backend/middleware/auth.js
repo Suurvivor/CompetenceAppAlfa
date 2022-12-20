@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken');
 const asyncHandler = require('./async');
 const ErrorResponse = require('../utils/errorResponse');
 const User = require('../models/User');
+const PlanedTraining = require('../models/PlaningTraining');
 
 //Protect routes
 exports.protect = asyncHandler(async (req, res, next) => {
@@ -31,6 +32,10 @@ exports.protect = asyncHandler(async (req, res, next) => {
       if (!req.user) {
          return next(new ErrorResponse('Not authorized', 401));
       }
+
+      const trains = await PlanedTraining.find({ trainedUserId: req.user._id });
+      req.user.planedTraining = [...trains];
+
       next();
    } catch (err) {
       return next(new ErrorResponse('Not authrozied', 401));

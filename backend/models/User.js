@@ -38,6 +38,7 @@ const UserSchema = new mongoose.Schema({
       type: Boolean,
       default: false,
    },
+   planedTraining: [],
    notifications: [],
    rating: [],
    createdAt: {

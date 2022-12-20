@@ -5,6 +5,35 @@ import UsersSearchInput from './UsersSearchInput';
 import UsersInspect from './UsersInspect';
 import { useUsers, getUser, getUsers, clearUser } from '../../context/users/UsersState';
 
+const divEnd = (string) => {
+   let backup = Array.from(string);
+
+   let trueDivCount = 0;
+
+   const output = Array.from(string).forEach((char, index, str) => {
+      if (char === '<') {
+         let divCase = '<div>';
+         let isTrueDiv = false;
+
+         for (let i = 0; str[index + i] === divCase[i]; i++) {
+            console.log(i);
+            if (i === 4) {
+               isTrueDiv = true;
+               trueDivCount += 1;
+               i = 0;
+               if (trueDivCount === 2) {
+                  trueDivCount = 0;
+                  backup.splice(index + 1, 0, '/');
+                  console.log(backup);
+               }
+            } else {
+               isTrueDiv = false;
+            }
+         }
+      }
+   });
+};
+
 const Users = () => {
    const [usersState, usersDispatch] = useUsers();
    const [searchInput, setSearchInput] = useState('');

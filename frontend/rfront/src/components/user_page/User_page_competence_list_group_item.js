@@ -1,9 +1,11 @@
 import React from 'react';
 import returnGrade from './utils/returnGrade';
+import { useUsers, addRating } from '../../context/users/UsersState';
 
 import { useBoxMidCard, setBoxMidCard } from '../../context/boxMidCard/BoxMidCardState';
 
-export const User_page_competence_list_group_item = ({ index, competence }) => {
+export const User_page_competence_list_group_item = ({ index, competence, inspect = false }) => {
+   const [usersState, usersDispatch] = useUsers();
    const [boxMidCardState, boxMidCardDispatch] = useBoxMidCard();
 
    const { name, rating, createdAt, lastEdit } = competence;
@@ -50,14 +52,64 @@ export const User_page_competence_list_group_item = ({ index, competence }) => {
    };
    return (
       <>
-         <tr onClick={() => onClick()}>
-            <td>{index + 1}</td>
-            <td>{competence.name}</td>
-            <td>
-               {competence.rating
-                  ? returnGrade(competence.rating.rating, competence.ratingSetting)
-                  : returnGrade(null, competence.ratingSetting)}
+         <tr>
+            <td className='cursor_pointer' onClick={() => onClick()}>
+               {index + 1}
             </td>
+            <td className='cursor_pointer' onClick={() => onClick()}>
+               {competence.name}
+            </td>
+            <td className='td_flex'>
+               <div
+                  onClick={() =>
+                     competence.ratingSetting === 'from0to1' &&
+                     addRating(
+                        usersDispatch,
+                        { ...usersState.user },
+                        { ...competence },
+                        competence.rating?.rating === 1 ? null : 1
+                     )
+                  }
+                  className='cursor_pointer'
+               >
+                  {competence.rating
+                     ? returnGrade(competence.rating.rating, competence.ratingSetting)
+                     : returnGrade(null, competence.ratingSetting)}
+               </div>
+               {inspect && competence.ratingSetting === 'from0to4' && (
+                  <div className='arrows_increase_decrease'>
+                     <i
+                        className='fa-solid fa-sort-up arrow_up'
+                        onClick={() =>
+                           competence.rating.rating !== 4 &&
+                           addRating(
+                              usersDispatch,
+                              { ...usersState.user },
+                              { ...competence },
+                              competence.rating.rating + 1
+                           )
+                        }
+                     ></i>
+                     <i
+                        className='fa-solid fa-sort-down arrow_down'
+                        onClick={() =>
+                           competence.rating.rating !== 0 &&
+                           addRating(
+                              usersDispatch,
+                              { ...usersState.user },
+                              { ...competence },
+                              competence.rating.rating - 1
+                           )
+                        }
+                     ></i>
+                  </div>
+               )}
+            </td>
+            {inspect && (
+               <td>
+                  <i className='fa-solid fa-calendar-plus'></i>
+               </td>
+            )}
          </tr>
       </>
    );
