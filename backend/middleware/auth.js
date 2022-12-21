@@ -33,7 +33,14 @@ exports.protect = asyncHandler(async (req, res, next) => {
          return next(new ErrorResponse('Not authorized', 401));
       }
 
-      const trains = await PlanedTraining.find({ trainedUserId: req.user._id });
+      const trains = await PlanedTraining.find({ trainedUserId: req.user._id }).populate({
+         path: 'competenceId',
+         select: '_id name',
+         populate: {
+            path: 'createdBy',
+            select: '_id name',
+         },
+      });
       req.user.planedTraining = [...trains];
 
       next();

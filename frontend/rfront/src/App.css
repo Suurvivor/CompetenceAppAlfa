@@ -509,6 +509,40 @@ svg {
    color: red;
 }
 
+.inspect_calendar_icon {
+   font-size: 1.4rem;
+}
+
+.inspect_calendar_icon:hover {
+   cursor: pointer;
+   color: var(--thead);
+}
+
+.planTrainBox {
+   margin-top: 20px;
+   margin-bottom: 20px;
+   display: flex;
+   flex-direction: column;
+   gap: 2rem;
+}
+
+.planTrainBox_date {
+   background-color: var(--thead);
+   padding: 15px;
+   font-family: 'Roboto Mono', monospace;
+   color: #ffffff;
+   font-size: 18px;
+   border: none;
+   outline: none;
+   border-radius: 5px;
+}
+::-webkit-calendar-picker-indicator {
+   background-color: #ffffff;
+   padding: 5px;
+   cursor: pointer;
+   border-radius: 3px;
+}
+
 #display_none {
    display: none;
 }

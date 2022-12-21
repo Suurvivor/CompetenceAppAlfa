@@ -1,18 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import returnGrade from './utils/returnGrade';
 import { useUsers, addRating } from '../../context/users/UsersState';
 
-import { useBoxMidCard, setBoxMidCard } from '../../context/boxMidCard/BoxMidCardState';
+import { useBoxMidCard, setBoxMidCard, closeBoxMidCard } from '../../context/boxMidCard/BoxMidCardState';
+import { useEffect } from 'react';
+import { useAuth } from '../../context/auth/AuthState';
+import axios from 'axios';
+
+export const formatDate = (date) => {
+   return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}T${
+      date.getHours() < 10 ? 0 : ''
+   }${date.getHours()}:${date.getMinutes()}`;
+};
 
 export const User_page_competence_list_group_item = ({ index, competence, inspect = false }) => {
+   const [authState] = useAuth();
    const [usersState, usersDispatch] = useUsers();
    const [boxMidCardState, boxMidCardDispatch] = useBoxMidCard();
-
+   const [planTrainingForm, setPlanTrainingForm] = useState({ date: formatDate(new Date(Date.now())) });
    const { name, rating, createdAt, lastEdit } = competence;
-
-   const formatDate = (date) => {
-      return `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`;
-   };
 
    //console.log(competence.rating);
    const compBody = () => {
@@ -47,22 +53,67 @@ export const User_page_competence_list_group_item = ({ index, competence, inspec
       );
    };
 
+   const planTrainingBody = () => {
+      return (
+         <div className='planTrainBox'>
+            <input
+               type='datetime-local'
+               value={planTrainingForm.date}
+               min={formatDate(new Date(Date.now()))}
+               onChange={(e) => onChangePlanTrainForm(e)}
+               id='date'
+               name='date'
+               className='planTrainBox_date'
+               autoFocus
+            />
+            <div>
+               <p>Competence: {competence.name}</p>
+               <p>Student: {usersState.user.name}</p>
+               <p>Trainer: {authState.user.name}</p>
+            </div>
+
+            <button className='login_view_button' onClick={onPlanTraining}>
+               SAVE
+            </button>
+         </div>
+      );
+   };
+
+   const onChangePlanTrainForm = (e) => {
+      setPlanTrainingForm({ date: e.target.value });
+   };
+
+   const onPlanTraining = async () => {
+      const req = await axios.post(`planingtraining/`, {
+         competenceId: competence._id,
+         trainedUserId: usersState.user._id,
+         trainingDate: planTrainingForm.date,
+      });
+      closeBoxMidCard(boxMidCardDispatch);
+      console.log(req.data.data);
+   };
+
    const onClick = () => {
       setBoxMidCard('Competence info', compBody, boxMidCardDispatch);
    };
+
+   useEffect(() => {
+      if (boxMidCardState.show && inspect) setBoxMidCard('Zaplanuj szkolenie', planTrainingBody, boxMidCardDispatch);
+   }, [planTrainingForm]);
    return (
       <>
          <tr>
-            <td className='cursor_pointer' onClick={() => onClick()}>
+            <td className='cursor_pointer' onClick={onClick}>
                {index + 1}
             </td>
-            <td className='cursor_pointer' onClick={() => onClick()}>
+            <td className='cursor_pointer' onClick={onClick}>
                {competence.name}
             </td>
             <td className='td_flex'>
                <div
                   onClick={() =>
                      competence.ratingSetting === 'from0to1' &&
+                     inspect &&
                      addRating(
                         usersDispatch,
                         { ...usersState.user },
@@ -106,8 +157,8 @@ export const User_page_competence_list_group_item = ({ index, competence, inspec
                )}
             </td>
             {inspect && (
-               <td>
-                  <i className='fa-solid fa-calendar-plus'></i>
+               <td onClick={() => setBoxMidCard('Zaplanuj szkolenie', planTrainingBody, boxMidCardDispatch)}>
+                  <i className='fa-solid fa-calendar-plus inspect_calendar_icon'></i>
                </td>
             )}
          </tr>

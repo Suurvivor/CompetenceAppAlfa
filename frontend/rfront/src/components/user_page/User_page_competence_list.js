@@ -49,6 +49,7 @@ export const User_page_competence_list = () => {
                         name={group.name}
                         competenceList={group.competenceListId}
                         key={uuidv4()}
+                        inspect={false}
                      />
                   );
             })}
@@ -61,6 +62,7 @@ export const User_page_competence_list = () => {
                         name={group.name}
                         competenceList={group.competenceListId}
                         key={uuidv4()}
+                        inspect={false}
                      />
                   );
             })}
