@@ -1,8 +1,6 @@
 import React from 'react';
-import { useAuth } from '../../context/auth/AuthState';
 import { useBoxMidCard, setBoxMidCard } from '../../context/boxMidCard/BoxMidCardState';
-export const User_dashboard_user_info = () => {
-   const [authState] = useAuth();
+export const User_dashboard_user_info = ({ authState }) => {
    const [boxMidCardState, boxMidCardDispatch] = useBoxMidCard();
    const { name, role, workplace } = authState.user;
    const editProfile = () => {

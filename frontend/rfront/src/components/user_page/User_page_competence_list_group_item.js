@@ -14,13 +14,14 @@ export const formatDate = (date) => {
 };
 
 export const User_page_competence_list_group_item = ({ index, competence, inspect = false }) => {
+   //console.log(competence);
    const [authState] = useAuth();
    const [usersState, usersDispatch] = useUsers();
    const [boxMidCardState, boxMidCardDispatch] = useBoxMidCard();
    const [planTrainingForm, setPlanTrainingForm] = useState({ date: formatDate(new Date(Date.now())) });
    const { name, rating, createdAt, lastEdit } = competence;
+   //console.log(competence);
 
-   //console.log(competence.rating);
    const compBody = () => {
       return (
          <>
@@ -90,19 +91,44 @@ export const User_page_competence_list_group_item = ({ index, competence, inspec
          trainingDate: planTrainingForm.date,
       });
       closeBoxMidCard(boxMidCardDispatch);
-      console.log(req.data.data);
+      //console.log(req.data.data);
    };
 
    const onClick = () => {
       setBoxMidCard('Competence info', compBody, boxMidCardDispatch);
    };
 
+   const onIncrease = () => {
+      if (competence.rating.rating) {
+         if (competence.ratingSetting === 'from0to4') {
+            if (competence.rating.rating !== 4) {
+               addRating(usersDispatch, { ...usersState.user }, { ...competence }, competence.rating.rating + 1);
+            }
+         } else if (competence.ratingSetting === 'from0to1') {
+            addRating(usersDispatch, { ...usersState.user }, { ...competence }, competence.rating.rating === 1 ? 0 : 1);
+            console.log(`tutajh`);
+         }
+      } else {
+         addRating(usersDispatch, { ...usersState.user }, { ...competence }, 1);
+      }
+   };
+
+   const onDecrease = () => {
+      if (competence.rating.rating) {
+         if (competence.ratingSetting === 'from0to4') {
+            if (competence.rating.rating !== 0) {
+               addRating(usersDispatch, { ...usersState.user }, { ...competence }, competence.rating.rating - 1);
+            }
+         }
+      }
+   };
+   //console.log(competence.rating);
    useEffect(() => {
       if (boxMidCardState.show && inspect) setBoxMidCard('Zaplanuj szkolenie', planTrainingBody, boxMidCardDispatch);
    }, [planTrainingForm]);
    return (
       <>
-         <tr>
+         <tr className='cursor_pointer' onClick={() => inspect && onClick}>
             <td className='cursor_pointer' onClick={onClick}>
                {index + 1}
             </td>
@@ -110,49 +136,15 @@ export const User_page_competence_list_group_item = ({ index, competence, inspec
                {competence.name}
             </td>
             <td className='td_flex'>
-               <div
-                  onClick={() =>
-                     competence.ratingSetting === 'from0to1' &&
-                     inspect &&
-                     addRating(
-                        usersDispatch,
-                        { ...usersState.user },
-                        { ...competence },
-                        competence.rating?.rating === 1 ? null : 1
-                     )
-                  }
-                  className='cursor_pointer'
-               >
-                  {competence.rating
+               <div onClick={() => inspect && onIncrease()} className='cursor_pointer'>
+                  {competence.rating.rating
                      ? returnGrade(competence.rating.rating, competence.ratingSetting)
                      : returnGrade(null, competence.ratingSetting)}
                </div>
                {inspect && competence.ratingSetting === 'from0to4' && (
                   <div className='arrows_increase_decrease'>
-                     <i
-                        className='fa-solid fa-sort-up arrow_up'
-                        onClick={() =>
-                           competence.rating.rating !== 4 &&
-                           addRating(
-                              usersDispatch,
-                              { ...usersState.user },
-                              { ...competence },
-                              competence.rating.rating + 1
-                           )
-                        }
-                     ></i>
-                     <i
-                        className='fa-solid fa-sort-down arrow_down'
-                        onClick={() =>
-                           competence.rating.rating !== 0 &&
-                           addRating(
-                              usersDispatch,
-                              { ...usersState.user },
-                              { ...competence },
-                              competence.rating.rating - 1
-                           )
-                        }
-                     ></i>
+                     <i className='fa-solid fa-sort-up arrow_up' onClick={onIncrease}></i>
+                     <i className='fa-solid fa-sort-down arrow_down' onClick={onDecrease}></i>
                   </div>
                )}
             </td>

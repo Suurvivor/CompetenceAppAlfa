@@ -56,7 +56,9 @@ const usersReducer = (state, action) => {
                           ...competence,
                           lastEdit: new Date(competence.lastEdit),
                           createdAt: new Date(competence.createdAt),
-                          rating: null,
+                          rating: {
+                             rating: null,
+                          },
                        };
                });
                return { ...group, competenceListId: compListEdited };
@@ -84,7 +86,9 @@ const usersReducer = (state, action) => {
                           ...competence,
                           lastEdit: new Date(competence.lastEdit),
                           createdAt: new Date(competence.createdAt),
-                          rating: null,
+                          rating: {
+                             rating: null,
+                          },
                        };
                });
                return { ...group, competenceListId: compListEdited };

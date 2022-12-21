@@ -8,6 +8,7 @@ import Spinner from '../layout/Spinner';
 export const User_page_competence_list = () => {
    const [AuthState] = useAuth();
    const [competenceGroups, setCompetenceGroups] = useState({ groups: [], loading: true });
+
    useEffect(() => {
       const res = async () => {
          const groups = await axios.get(`/groupcompetences/workplace/${AuthState.user.workplace._id}`);

@@ -55,17 +55,33 @@ export const getUserCompetenceGroups = async (dispatch, user) => {
    }
 };
 
-export const addRating = async (dispatch, user, competence, rating) => {
+export const addRating = async (dispatch, user, competence, ratingGrade) => {
    try {
-      const rat = await axios.post(`competences/${competence._id}/ratings/${user._id}`, { rating });
-      const userWithNewRat = {
+      const rat = await axios.post(`competences/${competence._id}/ratings/${user._id}`, {
+         rating: { rating: ratingGrade },
+      });
+      let userWithNewRat = {
          ...user,
-         rating: user.rating.find((ras) => ras.competence_id === rat.data.data.competence_id)
-            ? user.rating.map((rasa) =>
-                 rasa.competence_id === rat.data.data.competence_id ? { ...rat.data.data } : rasa
-              )
-            : user.rating.concat(rat.data.data),
+         rating: [],
       };
+      if (user.rating.find((ras) => ras.competence_id === rat.data.data.competence_id)) {
+         userWithNewRat = {
+            ...userWithNewRat,
+            rating: user.rating.map((rasa) =>
+               rasa.competence_id === rat.data.data.competence_id ? { ...rat.data.data } : rasa
+            ),
+         };
+         console.log(userWithNewRat.rating);
+      } else {
+         console.log(`else`);
+         userWithNewRat.rating.push(rat.data.data);
+      }
+      console.log(userWithNewRat.rating);
+
+      // (userWi),thNewRat.rating = user.rating.find((ras) => ras.competence_id === rat.data.data.competence_id)
+      //    ? user.rating.map((rasa) => (rasa.competence_id === rat.data.data.competence_id ? { ...rat.data.data } : rasa))
+      //    : user.rating.push(rat.data.data)
+      //userWithRating to fix bad returning
 
       dispatch({ type: USERS_ADD_RATING, payload: { rating: rat.data.data, user: { ...userWithNewRat } } });
    } catch (error) {

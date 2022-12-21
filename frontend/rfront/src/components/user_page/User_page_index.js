@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { User_Dashboard } from './User_Dashboard';
 import { User_Competence_Board } from './User_Competence_Board';
 import { useAuth, loadUser } from '../../context/auth/AuthState';
 import Spinner from '../layout/Spinner';
 export const User_page_index = () => {
    const [authState, authDispath] = useAuth();
-   loadUser(authDispath);
+   //loadUser(authDispath);
+   useEffect(() => {
+      loadUser(authDispath);
+   }, []);
    if (!authState.user) return <Spinner />;
    return (
       <>
