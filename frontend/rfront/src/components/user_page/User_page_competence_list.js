@@ -10,7 +10,7 @@ export const User_page_competence_list = () => {
    const [competenceGroups, setCompetenceGroups] = useState({ groups: [], loading: true });
 
    useEffect(() => {
-      loadUser(authDispatch);
+      //loadUser(authDispatch);
       const res = async () => {
          const groups = await axios.get(`/groupcompetences/workplace/${AuthState.user.workplace._id}`);
          const groupsWithUserRating = groups.data.data.map((group) => {

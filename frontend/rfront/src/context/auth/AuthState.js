@@ -28,10 +28,11 @@ export const useAuth = () => {
 // but they remain here for ease of students transitioning
 
 // Load User
-export const loadUser = async (dispatch) => {
+export const loadUser = async (dispatch, cb) => {
    console.log(`loading`);
    try {
       const res = await axios.get('/auth/me');
+      if (cb) cb(false);
 
       dispatch({
          type: USER_LOADED,

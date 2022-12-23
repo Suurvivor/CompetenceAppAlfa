@@ -6,11 +6,10 @@ import Spinner from '../layout/Spinner';
 export const User_page_index = () => {
    const [authState, authDispath] = useAuth();
    //loadUser(authDispath);
-   useEffect(() => {
-      loadUser(authDispath);
-      setLoading(false);
-   }, []);
    const [loading, setLoading] = useState(true);
+   useEffect(() => {
+      loadUser(authDispath, setLoading);
+   }, []);
    if (loading) return <Spinner />;
    return (
       <>
