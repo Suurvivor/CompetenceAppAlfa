@@ -56,33 +56,31 @@ export const getUserCompetenceGroups = async (dispatch, user) => {
 };
 
 export const addRating = async (dispatch, user, competence, ratingGrade) => {
+   let grade = parseInt(ratingGrade, 10);
+   if (grade > 4 || grade < 0) grade = 0;
+
    try {
       const rat = await axios.post(`competences/${competence._id}/ratings/${user._id}`, {
-         rating: { rating: ratingGrade },
+         rating: grade,
+         competence_id: competence._id,
       });
+      const use = await axios.get('auth/me/');
+      console.log(use);
       let userWithNewRat = {
          ...user,
-         rating: [],
       };
       if (user.rating.find((ras) => ras.competence_id === rat.data.data.competence_id)) {
          userWithNewRat = {
             ...userWithNewRat,
             rating: user.rating.map((rasa) =>
-               rasa.competence_id === rat.data.data.competence_id ? { ...rat.data.data } : rasa
+               rasa.competence_id === rat.data.data.competence_id
+                  ? { ...rat.data.data, odbytnica: true }
+                  : { ...rasa, edited: true }
             ),
          };
-         console.log(userWithNewRat.rating);
       } else {
-         console.log(`else`);
          userWithNewRat.rating.push(rat.data.data);
       }
-      console.log(userWithNewRat.rating);
-
-      // (userWi),thNewRat.rating = user.rating.find((ras) => ras.competence_id === rat.data.data.competence_id)
-      //    ? user.rating.map((rasa) => (rasa.competence_id === rat.data.data.competence_id ? { ...rat.data.data } : rasa))
-      //    : user.rating.push(rat.data.data)
-      //userWithRating to fix bad returning
-
       dispatch({ type: USERS_ADD_RATING, payload: { rating: rat.data.data, user: { ...userWithNewRat } } });
    } catch (error) {
       errorHandler(error, dispatch, USERS_LOAD_FAIL);

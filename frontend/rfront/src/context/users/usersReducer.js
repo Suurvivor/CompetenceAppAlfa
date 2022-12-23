@@ -68,6 +68,7 @@ const usersReducer = (state, action) => {
       case USERS_ADD_RATING:
          return {
             ...state,
+            user: { ...action.payload.user },
             userCompetences: state.userCompetences.map((group) => {
                let compListEdited = group.competenceListId.map((competence) => {
                   let rating = action.payload.user.rating.find((rat1) => rat1.competence_id === competence._id);

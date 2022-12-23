@@ -1,5 +1,6 @@
 import React, { useReducer, useContext, useEffect } from 'react';
 import axios from 'axios';
+
 import AuthContext from './authContext';
 import authReducer from './authReducer';
 import setAuthToken from '../../utils/setAuthToken';
@@ -28,6 +29,7 @@ export const useAuth = () => {
 
 // Load User
 export const loadUser = async (dispatch) => {
+   console.log(`loading`);
    try {
       const res = await axios.get('/auth/me');
 

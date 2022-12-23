@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
-import { useAuth } from '../../context/auth/AuthState';
+import { useAuth, loadUser } from '../../context/auth/AuthState';
 import { User_page_competence_list_group } from './User_page_competence_list_group';
 import Spinner from '../layout/Spinner';
 
 export const User_page_competence_list = () => {
-   const [AuthState] = useAuth();
+   const [AuthState, authDispatch] = useAuth();
    const [competenceGroups, setCompetenceGroups] = useState({ groups: [], loading: true });
 
    useEffect(() => {
+      loadUser(authDispatch);
       const res = async () => {
          const groups = await axios.get(`/groupcompetences/workplace/${AuthState.user.workplace._id}`);
          const groupsWithUserRating = groups.data.data.map((group) => {
@@ -30,7 +31,7 @@ export const User_page_competence_list = () => {
                        ...competence,
                        lastEdit: new Date(competence.lastEdit),
                        createdAt: new Date(competence.createdAt),
-                       rating: null,
+                       rating: { rating: null },
                     };
             });
             return { ...group, competenceListId: compListEdited };

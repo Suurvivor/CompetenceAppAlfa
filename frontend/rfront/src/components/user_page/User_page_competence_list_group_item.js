@@ -99,6 +99,7 @@ export const User_page_competence_list_group_item = ({ index, competence, inspec
    };
 
    const onIncrease = () => {
+      //console.log(competence.rating.rating.rating);
       if (competence.rating.rating) {
          if (competence.ratingSetting === 'from0to4') {
             if (competence.rating.rating !== 4) {

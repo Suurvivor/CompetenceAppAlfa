@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { User_Dashboard } from './User_Dashboard';
 import { User_Competence_Board } from './User_Competence_Board';
 import { useAuth, loadUser } from '../../context/auth/AuthState';
@@ -8,8 +8,10 @@ export const User_page_index = () => {
    //loadUser(authDispath);
    useEffect(() => {
       loadUser(authDispath);
+      setLoading(false);
    }, []);
-   if (!authState.user) return <Spinner />;
+   const [loading, setLoading] = useState(true);
+   if (loading) return <Spinner />;
    return (
       <>
          {authState.user.workplace && authState.user.workplace.department ? (
