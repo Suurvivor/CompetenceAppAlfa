@@ -62,7 +62,7 @@ if (process.env.NODE_ENV === 'production') {
 app.use(errorHandler);
 
 //Start listen
-const server = app.listen(process.env.PORT, console.log(`Server is listening on port ${process.env.PORT}`));
+const server = app.listen(process.env.PORT || 5000, console.log(`Server is listening on port ${process.env.PORT}`));
 
 //Close app when cant connect to database
 process.on('unhandledRejection', (err, promise) => {
