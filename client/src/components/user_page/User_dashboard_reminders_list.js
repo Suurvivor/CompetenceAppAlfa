@@ -8,7 +8,9 @@ export const User_dashboard_reminders_list = ({ planedTraining = [] }) => {
    );
    return (
       <div id='user_dashboard_reminders'>
-         <span id='user_dashboard_reminders_title'>Zaplanowane szkolenia</span>
+         <span id='user_dashboard_reminders_title'>
+            {planedTrainingWithoutDeprecated.length > 0 ? 'Zaplanowane szkolenia' : 'Brak zaplanowanych szkoleń'}
+         </span>
 
          {planedTrainingWithoutDeprecated.map(
             (reminder, index) => index < 3 && <User_dashboard_reminders_list_item reminder={reminder} key={uuidv4()} />

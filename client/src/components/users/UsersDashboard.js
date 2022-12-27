@@ -149,7 +149,9 @@ const UsersDashboard = () => {
             </span>
             <span id='user_dashboard_info_department'>Workplace: {user?.workplace?.name || 'null'}</span>
          </div>
-         <User_dashboard_reminders_list planedTraining={usersState.user.planedTraining} />
+         <>
+            <User_dashboard_reminders_list planedTraining={usersState.user.planedTraining} />
+         </>
          <div id='user_dashboard_statistics'>to do</div>
       </div>
    );

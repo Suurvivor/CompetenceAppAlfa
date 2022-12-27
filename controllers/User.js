@@ -74,9 +74,27 @@ exports.updateUser = asyncHandler(async (req, res, next) => {
    if (!user) {
       return next(new ErrorResponse(`Could not find user of id ${req.params.id}`, 400));
    }
+
+   let planedTrainingForUsers = null;
+   if (req.user.role == 'trainer') {
+      console.log('trener');
+      planedTrainingForUsers = await PlaningTraining.find({ createdBy: user._id })
+         .populate({
+            path: 'competenceId',
+            select: 'name workplace',
+         })
+         .sort({ trainingDate: 1 });
+   }
+   const planedTraining = await PlaningTraining.find({ trainedUserId: user._id })
+      .populate({
+         path: 'competenceId',
+         select: 'name workplace',
+      })
+      .sort({ trainingDate: 1 });
+   const data = { ...user._doc, planedTraining, planedTrainingForUsers };
    res.status(200).json({
       succes: true,
-      data: user,
+      data: data,
    });
 });
 
