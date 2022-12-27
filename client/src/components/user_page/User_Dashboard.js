@@ -8,7 +8,7 @@ export const User_Dashboard = () => {
    return (
       <div id='user_dashboard'>
          <User_dashboard_user_info authState={authState} />
-         <User_dashboard_reminders_list authState={authState} />
+         <User_dashboard_reminders_list planedTraining={authState.user.planedTraining} />
          <div id='user_dashboard_statistics'>to do</div>
       </div>
    );

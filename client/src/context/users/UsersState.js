@@ -15,6 +15,8 @@ import {
    USERS_GET_DEPARTMENTS,
    USERS_UPDATE_USER,
    USERS_ADD_RATING,
+   USERS_USER_PLAN_TRAIN,
+   USERS_SET_LOADING,
 } from '../types';
 
 // Create a custom hook to use the auth context
@@ -27,6 +29,7 @@ export const useUsers = () => {
 export const getUser = async (dispatch, userId) => {
    try {
       const req = await axios.get(`users/${userId}`);
+
       dispatch({ type: USERS_GET_USER, payload: req.data.data });
    } catch (error) {
       errorHandler(error, dispatch, USERS_LOAD_FAIL);
@@ -107,6 +110,19 @@ export const updateUser = async (dispatch, user) => {
    } catch (error) {
       errorHandler(error, dispatch, USERS_LOAD_FAIL);
    }
+};
+
+export const planTraining = async (dispatch, planedTraining) => {
+   try {
+      const req = await axios.post(`planingtraining/`, planedTraining);
+      dispatch({ type: USERS_USER_PLAN_TRAIN, payload: req.data.data });
+   } catch (error) {
+      errorHandler(error, dispatch, USERS_LOAD_FAIL);
+   }
+};
+
+export const setLoading = (dispatch, loading) => {
+   dispatch({ type: USERS_SET_LOADING, payload: loading });
 };
 
 const UsersState = (props) => {

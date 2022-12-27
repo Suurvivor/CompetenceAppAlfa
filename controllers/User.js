@@ -25,7 +25,7 @@ exports.getUsers = asyncHandler(async (req, res, next) => {
 //@route Get /api/v1/users/:id
 //@access Private
 exports.getUser = asyncHandler(async (req, res, next) => {
-   let user = await User.findById(req.params.id).populate({
+   const user = await User.findById(req.params.id).populate({
       path: 'workplace',
       populate: {
          path: 'department',
@@ -38,20 +38,23 @@ exports.getUser = asyncHandler(async (req, res, next) => {
    let planedTrainingForUsers = null;
    if (req.user.role == 'trainer') {
       console.log('trener');
-      planedTrainingForUsers = await PlaningTraining.find({ createdBy: user._id }).populate({
+      planedTrainingForUsers = await PlaningTraining.find({ createdBy: user._id })
+         .populate({
+            path: 'competenceId',
+            select: 'name workplace',
+         })
+         .sort({ trainingDate: 1 });
+   }
+   const planedTraining = await PlaningTraining.find({ trainedUserId: user._id })
+      .populate({
          path: 'competenceId',
          select: 'name workplace',
-      });
-   }
-   const planedTraining = await PlaningTraining.find({ trainedUserId: user._id }).populate({
-      path: 'competenceId',
-      select: 'name workplace',
-   });
-   user = { ...user, planedTraining, planedTrainingForUsers };
-
+      })
+      .sort({ trainingDate: 1 });
+   const data = { ...user._doc, planedTraining, planedTrainingForUsers };
    res.status(200).json({
       succes: true,
-      data: user,
+      data: data,
    });
 });
 

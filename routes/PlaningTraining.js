@@ -6,6 +6,7 @@ const { getPlanedTraining, planTraining, aproveTraining } = require('../controll
 const router = express.Router();
 
 router.get('/', getPlanedTraining);
+router.get('/:userid', getPlanedTraining);
 router.post('/', planTraining);
 router.post('/:planedTrainingId', aproveTraining);
 

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useBoxMidCard, setBoxMidCard, closeBoxMidCard } from '../../context/boxMidCard/BoxMidCardState';
 import { useUsers, updateUser } from '../../context/users/UsersState';
+import { User_dashboard_reminders_list } from '../user_page/User_dashboard_reminders_list';
 
 const UsersDashboard = () => {
    const [usersState, usersDisptach] = useUsers();
@@ -148,6 +149,7 @@ const UsersDashboard = () => {
             </span>
             <span id='user_dashboard_info_department'>Workplace: {user?.workplace?.name || 'null'}</span>
          </div>
+         <User_dashboard_reminders_list planedTraining={usersState.user.planedTraining} />
          <div id='user_dashboard_statistics'>to do</div>
       </div>
    );

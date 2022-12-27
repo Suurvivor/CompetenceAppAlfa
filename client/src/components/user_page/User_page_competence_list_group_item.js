@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import returnGrade from './utils/returnGrade';
-import { useUsers, addRating } from '../../context/users/UsersState';
+import { useUsers, addRating, planTraining } from '../../context/users/UsersState';
 
 import { useBoxMidCard, setBoxMidCard, closeBoxMidCard } from '../../context/boxMidCard/BoxMidCardState';
 import { useEffect } from 'react';
@@ -85,13 +85,12 @@ export const User_page_competence_list_group_item = ({ index, competence, inspec
    };
 
    const onPlanTraining = async () => {
-      const req = await axios.post(`planingtraining/`, {
+      planTraining(usersDispatch, {
          competenceId: competence._id,
          trainedUserId: usersState.user._id,
          trainingDate: planTrainingForm.date,
       });
       closeBoxMidCard(boxMidCardDispatch);
-      //console.log(req.data.data);
    };
 
    const onClick = () => {

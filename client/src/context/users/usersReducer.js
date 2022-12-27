@@ -9,6 +9,8 @@ import {
    USERS_GET_DEPARTMENTS,
    USERS_UPDATE_USER,
    USERS_ADD_RATING,
+   USERS_SET_LOADING,
+   USERS_USER_PLAN_TRAIN,
 } from '../types';
 
 const usersReducer = (state, action) => {
@@ -33,6 +35,7 @@ const usersReducer = (state, action) => {
          return {
             ...state,
             user: action.payload,
+            loading: false,
          };
 
       case USERS_GET_COMPETENCE_GROUPS:
@@ -113,6 +116,12 @@ const usersReducer = (state, action) => {
             ),
             loading: false,
          };
+      case USERS_USER_PLAN_TRAIN:
+         return {
+            ...state,
+            user: { ...state.user, planedTraining: [...action.payload] },
+            loading: false,
+         };
       case USERS_CLEAR_USER:
          return {
             ...state,
@@ -136,6 +145,11 @@ const usersReducer = (state, action) => {
          return {
             ...state,
             error: null,
+         };
+      case USERS_SET_LOADING:
+         return {
+            ...state,
+            loading: action.payload.loading,
          };
       default:
          throw new Error(`Unsupported type of: ${action.type}`);
