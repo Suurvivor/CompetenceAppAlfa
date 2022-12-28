@@ -16,6 +16,7 @@ function Header() {
 
             {isAuthenticated ? (
                <>
+                  <Link to='/calendar'>Calendar</Link>
                   <Link to='/users'>Users</Link>
                   <Link to='/tree'>Tree</Link>
                   <Link to='' onClick={onLogout}>

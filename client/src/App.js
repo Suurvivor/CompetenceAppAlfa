@@ -18,6 +18,7 @@ import BoxMidCardState from './context/boxMidCard/BoxMidCardState';
 import BoxMidCard from './components/layout/BoxMidCard';
 import Users from './components/users/Users';
 import UsersState from './context/users/UsersState';
+import Calendar from './components/calendar/Calendar';
 
 axios.defaults.baseURL = 'http://192.168.0.80:5000/api/v1';
 
@@ -42,6 +43,7 @@ function App() {
                               <Route path='register' element={<Register />} />
                               <Route path='users' element={<PrivateRoute component={Users} />} />
                               <Route path='users/:userId' element={<PrivateRoute component={Users} />} />
+                              <Route path='calendar' element={<PrivateRoute component={Calendar} />} />
                               <Route path='tree' element={<PrivateRoute component={Tree} />} />
                            </Routes>
                         </div>
