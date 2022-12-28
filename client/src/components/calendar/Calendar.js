@@ -26,7 +26,6 @@ export const Calendar = () => {
       <>
          <div id='calendar_container'>
             <CalendarHeader dateDisplay={dateDisplay} onNext={() => setNav(nav + 1)} onBack={() => setNav(nav - 1)} />
-
             <div id='weekdays'>
                <div>Niedziela</div>
                <div>Poniedziałek</div>
@@ -36,7 +35,7 @@ export const Calendar = () => {
                <div>Piątek</div>
                <div>Sobota</div>
             </div>
-
+            <hr />
             <div id='calendar'>
                {days.map((d, index) => (
                   <Day

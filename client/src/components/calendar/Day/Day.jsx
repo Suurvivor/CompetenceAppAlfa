@@ -14,8 +14,10 @@ export const Day = ({ day, onClick }) => {
          {day.value === 'padding' ? '' : day.value}
          {day.event && (
             <div className='event'>
-               {day.event.competenceId.name}
-               {time}
+               {time}{' '}
+               {day.event.competenceId.name.toString().length >= 4
+                  ? `${day.event.competenceId.name.slice(0, 4)}..`
+                  : day.event.competenceId.name}
             </div>
          )}
       </div>

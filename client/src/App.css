@@ -917,6 +917,17 @@ input[type='checkbox'] {
    margin-bottom: 40px;
 }
 
+#calendar_container {
+   width: 1120px;
+   margin-top: 50px;
+}
+#calendar_container > hr {
+   border-top: none;
+   border-left: none;
+   border-right: none;
+   border-color: var(--thead);
+}
+
 .calendar_button {
    margin-right: 2.5px;
    margin-left: 2.5px;
@@ -932,7 +943,8 @@ input[type='checkbox'] {
 
 #calendar_header {
    padding: 10px;
-   color: #d36c6c;
+   margin-bottom: 30px;
+   color: var(--thead);
    font-size: 26px;
    font-family: sans-serif;
    display: flex;
@@ -940,18 +952,16 @@ input[type='checkbox'] {
 }
 #calendar_header button {
    margin-left: 10px;
-}
-#calendar_container {
-   width: 770px;
+   font-size: 1.1rem;
 }
 #weekdays {
    width: 100%;
    display: flex;
-   color: #247ba0;
 }
 #weekdays div {
-   font-size: 0.75rem;
-   width: 110px;
+   color: var(--thead);
+   font-size: 0.95rem;
+   width: 165px;
    padding: 15px;
    display: flex;
    justify-content: center;
@@ -964,9 +974,9 @@ input[type='checkbox'] {
    flex-wrap: wrap;
 }
 .day {
-   width: 100px;
+   width: 150px;
    padding: 10px;
-   height: 100px;
+   height: 105px;
    cursor: pointer;
    box-sizing: border-box;
    background-color: white;
@@ -982,19 +992,20 @@ input[type='checkbox'] {
 }
 
 .day + .currentDay {
-   font-size: 1.4rem;
-   font-weight: 700;
+   font-size: 1.6rem;
+   font-weight: bolder;
+   color: var(--thead);
    background-color: #e8f4fa;
    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
       rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 .event {
-   font-size: 10px;
+   font-size: 0.7rem;
+   font-weight: 100;
    padding: 3px;
-   background-color: #58bae4;
+   background-color: var(--thead);
    color: white;
-   border-radius: 5px;
-   max-height: 55px;
+
    overflow: hidden;
 }
 .paddingDay {
