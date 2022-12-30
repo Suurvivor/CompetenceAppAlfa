@@ -6,10 +6,10 @@ export const CalendarHeader = ({ onNext, onBack, dateDisplay }) => {
          <div id='monthDisplay'>{dateDisplay}</div>
          <div>
             <button className='users_list_item_button' onClick={onBack} id='backButton'>
-               <i class='fa-solid fa-chevron-left'></i> Poprzedni
+               <i className='fa-solid fa-chevron-left'></i> Poprzedni
             </button>
             <button className='users_list_item_button' onClick={onNext} id='nextButton'>
-               Następny <i class='fa-solid fa-chevron-right'></i>
+               Następny <i className='fa-solid fa-chevron-right'></i>
             </button>
          </div>
       </div>

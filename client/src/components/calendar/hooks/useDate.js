@@ -4,7 +4,7 @@ export const useDate = (events, nav) => {
    const [dateDisplay, setDateDisplay] = useState('');
    const [days, setDays] = useState([]);
    const eventForDate = (date) =>
-      events.find(
+      events.filter(
          (e) => new Date(e.trainingDate).toLocaleDateString('en-US') === new Date(date).toLocaleDateString('en-US')
       );
 
