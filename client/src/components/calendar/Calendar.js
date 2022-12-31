@@ -46,6 +46,7 @@ export const Calendar = () => {
                            setClicked(d.date);
                         }
                      }}
+                     userId={authState.user._id}
                   />
                ))}
             </div>

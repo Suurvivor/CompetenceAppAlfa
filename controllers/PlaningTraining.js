@@ -29,9 +29,12 @@ exports.getPlanedTraining = asyncHandler(async (req, res, next) => {
       .sort({ trainingDate: 1 });
 
    const compiled = planedTraining.concat(planedTrainingForUsers);
+   const sorted = compiled.sort((a, b) => {
+      return new Date(a.trainingDate) - new Date(b.trainingDate);
+   });
    res.status(201).json({
       succes: true,
-      data: compiled,
+      data: sorted,
    });
 });
 

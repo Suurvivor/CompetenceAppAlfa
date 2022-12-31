@@ -50,7 +50,10 @@ exports.protect = asyncHandler(async (req, res, next) => {
          .sort({ trainingDate: 1 });
 
       const compiled = planedTraining.concat(planedTrainingForUsers);
-      req.user.planedTraining = [...compiled];
+      const sorted = compiled.sort((a, b) => {
+         return new Date(a.trainingDate) - new Date(b.trainingDate);
+      });
+      req.user.planedTraining = [...sorted];
 
       next();
    } catch (err) {

@@ -52,7 +52,10 @@ exports.getUser = asyncHandler(async (req, res, next) => {
       .sort({ trainingDate: 1 });
 
    const compiled = planedTraining.concat(planedTrainingForUsers);
-   const data = { ...user._doc, planedTraining: compiled };
+   const sorted = compiled.sort((a, b) => {
+      return new Date(a.trainingDate) - new Date(b.trainingDate);
+   });
+   const data = { ...user._doc, planedTraining: sorted };
    res.status(200).json({
       succes: true,
       data: data,

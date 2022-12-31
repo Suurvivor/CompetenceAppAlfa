@@ -1,7 +1,6 @@
 import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
-export const Day = ({ day, onClick }) => {
-   console.log(day);
+export const Day = ({ day, onClick, userId }) => {
    // let time = '';
 
    // if (day.event != undefined || day.event != null) {
@@ -16,12 +15,12 @@ export const Day = ({ day, onClick }) => {
          <div>
             {day.event &&
                day.event.map((ev, index) => {
+                  let classNameForEvent = `event ${ev.createdBy == userId && 'eventTrainer'}`;
                   if (index > 2) return '';
-
                   const trainingDate = new Date(ev.trainingDate);
                   const time = `${trainingDate.getHours()}:${trainingDate.getMinutes()}`;
                   return (
-                     <div className='event' key={uuidv4()}>
+                     <div className={classNameForEvent} key={uuidv4()}>
                         {time}{' '}
                         {ev.competenceId.name.toString().length >= 10
                            ? `${ev.competenceId.name.slice(0, 10)}..`

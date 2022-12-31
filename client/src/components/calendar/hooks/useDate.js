@@ -12,6 +12,7 @@ export const useDate = (events, nav) => {
       const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
       const dt = new Date();
 
+      console.log(nav);
       if (nav !== 0) {
          dt.setMonth(new Date().getMonth() + nav);
       }

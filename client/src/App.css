@@ -1008,6 +1008,11 @@ input[type='checkbox'] {
    margin-bottom: 5px;
    overflow: hidden;
 }
+
+.eventTrainer {
+   background-color: red;
+}
+
 .paddingDay {
    cursor: default !important;
    background-color: #fffcff !important;
