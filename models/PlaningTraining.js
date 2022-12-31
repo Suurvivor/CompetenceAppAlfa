@@ -12,12 +12,12 @@ const PlaningTraining = new mongoose.Schema({
    },
    createdBy: {
       type: mongoose.Schema.ObjectId,
-      ref: 'user',
+      ref: 'User',
       required: true,
    },
    trainedUserId: {
       type: mongoose.Schema.ObjectId,
-      ref: 'user',
+      ref: 'User',
       required: true,
    },
    trainingDate: {
@@ -27,7 +27,7 @@ const PlaningTraining = new mongoose.Schema({
    lastEdit: Date,
    lastEditBy: {
       type: mongoose.Schema.ObjectId,
-      ref: 'user',
+      ref: 'User',
    },
 });
 

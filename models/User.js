@@ -112,4 +112,4 @@ UserSchema.methods.addNewRatingOrUpdateIfExists = async function (competence_id,
    }
 };
 
-module.exports = mongoose.model('user', UserSchema);
+module.exports = mongoose.model('User', UserSchema);

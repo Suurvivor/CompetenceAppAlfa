@@ -35,14 +35,14 @@ exports.getUser = asyncHandler(async (req, res, next) => {
       return next(new ErrorResponse(`Could not find user of id ${req.params.id}`, 400));
    }
 
-   const planedTrainingForUsers = await PlaningTraining.find({ createdBy: userid })
+   const planedTrainingForUsers = await PlaningTraining.find({ createdBy: user._id })
       .populate({
          path: 'competenceId',
          select: 'name workplace',
       })
       .sort({ trainingDate: 1 });
 
-   const planedTraining = await PlaningTraining.find({ trainedUserId: userid })
+   const planedTraining = await PlaningTraining.find({ trainedUserId: user._id })
       .populate({
          path: 'competenceId',
          select: 'name workplace',

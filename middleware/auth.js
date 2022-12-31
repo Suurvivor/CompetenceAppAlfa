@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 const asyncHandler = require('./async');
 const ErrorResponse = require('../utils/errorResponse');
 const User = require('../models/User');
-const PlanedTraining = require('../models/PlaningTraining');
+const PlaningTraining = require('../models/PlaningTraining');
 
 //Protect routes
 exports.protect = asyncHandler(async (req, res, next) => {
@@ -33,14 +33,14 @@ exports.protect = asyncHandler(async (req, res, next) => {
          return next(new ErrorResponse('Not authorized', 401));
       }
 
-      const planedTrainingForUsers = await PlaningTraining.find({ createdBy: userid })
+      const planedTrainingForUsers = await PlaningTraining.find({ createdBy: req.user._id })
          .populate({
             path: 'competenceId',
             select: 'name workplace',
          })
          .sort({ trainingDate: 1 });
 
-      let planedTraining = await PlaningTraining.find({ trainedUserId: userid })
+      let planedTraining = await PlaningTraining.find({ trainedUserId: req.user._id })
          .populate({
             path: 'competenceId',
             select: 'name workplace',
