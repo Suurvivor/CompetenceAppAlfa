@@ -11,27 +11,27 @@ exports.getPlanedTraining = asyncHandler(async (req, res, next) => {
    } else {
       userid = req.user.id;
    }
-   let planedTrainingForUsers = null;
-   if (req.user.role == 'trainer') {
-      console.log('trener');
-      planedTrainingForUsers = await PlaningTraining.find({ createdBy: userid })
-         .populate({
-            path: 'competenceId',
-            select: 'name workplace',
-         })
-         .sort({ trainingDate: 1 });
-   }
-   const planedTraining = await PlaningTraining.find({ trainedUserId: userid })
+
+   const planedTrainingForUsers = await PlaningTraining.find({ createdBy: userid })
       .populate({
          path: 'competenceId',
          select: 'name workplace',
       })
       .sort({ trainingDate: 1 });
 
+   let planedTraining = await PlaningTraining.find({ trainedUserId: userid })
+      .populate({
+         path: 'competenceId',
+         select: 'name workplace',
+      })
+      .populate({ path: 'createdBy', select: '_id name' })
+
+      .sort({ trainingDate: 1 });
+
+   const compiled = planedTraining.concat(planedTrainingForUsers);
    res.status(201).json({
       succes: true,
-      trainingToMakeForTeacher: planedTrainingForUsers,
-      data: planedTraining,
+      data: compiled,
    });
 });
 

@@ -33,17 +33,24 @@ exports.protect = asyncHandler(async (req, res, next) => {
          return next(new ErrorResponse('Not authorized', 401));
       }
 
-      const trains = await PlanedTraining.find({ trainedUserId: req.user._id })
+      const planedTrainingForUsers = await PlaningTraining.find({ createdBy: userid })
          .populate({
             path: 'competenceId',
-            select: '_id name',
-            populate: {
-               path: 'createdBy',
-               select: '_id name',
-            },
+            select: 'name workplace',
          })
          .sort({ trainingDate: 1 });
-      req.user.planedTraining = [...trains];
+
+      let planedTraining = await PlaningTraining.find({ trainedUserId: userid })
+         .populate({
+            path: 'competenceId',
+            select: 'name workplace',
+         })
+         .populate({ path: 'createdBy', select: '_id name' })
+
+         .sort({ trainingDate: 1 });
+
+      const compiled = planedTraining.concat(planedTrainingForUsers);
+      req.user.planedTraining = [...compiled];
 
       next();
    } catch (err) {

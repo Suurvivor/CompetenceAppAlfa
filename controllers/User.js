@@ -35,23 +35,24 @@ exports.getUser = asyncHandler(async (req, res, next) => {
       return next(new ErrorResponse(`Could not find user of id ${req.params.id}`, 400));
    }
 
-   let planedTrainingForUsers = null;
-   if (req.user.role == 'trainer') {
-      console.log('trener');
-      planedTrainingForUsers = await PlaningTraining.find({ createdBy: user._id })
-         .populate({
-            path: 'competenceId',
-            select: 'name workplace',
-         })
-         .sort({ trainingDate: 1 });
-   }
-   const planedTraining = await PlaningTraining.find({ trainedUserId: user._id })
+   const planedTrainingForUsers = await PlaningTraining.find({ createdBy: userid })
       .populate({
          path: 'competenceId',
          select: 'name workplace',
       })
       .sort({ trainingDate: 1 });
-   const data = { ...user._doc, planedTraining, planedTrainingForUsers };
+
+   const planedTraining = await PlaningTraining.find({ trainedUserId: userid })
+      .populate({
+         path: 'competenceId',
+         select: 'name workplace',
+      })
+      .populate({ path: 'createdBy', select: '_id name' })
+
+      .sort({ trainingDate: 1 });
+
+   const compiled = planedTraining.concat(planedTrainingForUsers);
+   const data = { ...user._doc, planedTraining: compiled };
    res.status(200).json({
       succes: true,
       data: data,
