@@ -12,7 +12,7 @@ export const useDate = (events, nav) => {
       const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
       const dt = new Date();
 
-      console.log(nav);
+      //console.log(nav);
       if (nav !== 0) {
          dt.setMonth(new Date().getMonth() + nav);
       }
@@ -31,6 +31,7 @@ export const useDate = (events, nav) => {
       });
 
       setDateDisplay(`${dt.toLocaleDateString('pl-PL', { month: 'long' })} ${year}`);
+      // console.log(`${dt.toLocaleDateString('pl-PL', { month: 'long' })} ${year}`);
       const paddingDays = weekdays.indexOf(dateString.split(', ')[0]);
 
       const daysArr = [];

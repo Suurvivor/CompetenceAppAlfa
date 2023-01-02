@@ -1,6 +1,9 @@
 import React from 'react';
+import { useBoxMidCard, setBoxMidCard, closeBoxMidCard } from '../../../context/boxMidCard/BoxMidCardState';
+import EventList from './EventList';
 import { v4 as uuidv4 } from 'uuid';
-export const Day = ({ day, onClick, userId }) => {
+export const Day = ({ day, userId }) => {
+   const [boxMidCardState, boxMidCardDispatch] = useBoxMidCard();
    // let time = '';
 
    // if (day.event != undefined || day.event != null) {
@@ -8,14 +11,22 @@ export const Day = ({ day, onClick, userId }) => {
    //    time = `${trainingDate.getHours()}:${trainingDate.getMinutes()}`;
    // }
 
+   const dayInfoBody = () => {
+      return EventList(day, userId);
+   };
+
+   const onClick = () => {
+      setBoxMidCard(`DATE: ${day.date}`, dayInfoBody, boxMidCardDispatch);
+   };
    const className = `day ${day.value === 'padding' ? 'paddingDay' : ''} ${day.isCurrentDay ? 'currentDay' : ''}`;
+
    return (
       <div onClick={onClick} className={className}>
          {day.value === 'padding' ? '' : day.value}
          <div>
             {day.event &&
                day.event.map((ev, index) => {
-                  let classNameForEvent = `event ${ev.createdBy == userId && 'eventTrainer'}`;
+                  let classNameForEvent = `event ${ev.createdBy._id == userId && 'eventTrainer'}`;
                   if (index > 2) return '';
                   const trainingDate = new Date(ev.trainingDate);
                   const time = `${trainingDate.getHours()}:${trainingDate.getMinutes()}`;

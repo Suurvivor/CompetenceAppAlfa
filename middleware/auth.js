@@ -38,6 +38,8 @@ exports.protect = asyncHandler(async (req, res, next) => {
             path: 'competenceId',
             select: 'name workplace',
          })
+         .populate({ path: 'createdBy', select: '_id name' })
+         .populate({ path: 'trainedUserId', select: '_id name' })
          .sort({ trainingDate: 1 });
 
       let planedTraining = await PlaningTraining.find({ trainedUserId: req.user._id })
@@ -46,7 +48,7 @@ exports.protect = asyncHandler(async (req, res, next) => {
             select: 'name workplace',
          })
          .populate({ path: 'createdBy', select: '_id name' })
-
+         .populate({ path: 'trainedUserId', select: '_id name' })
          .sort({ trainingDate: 1 });
 
       const compiled = planedTraining.concat(planedTrainingForUsers);
