@@ -20,7 +20,6 @@ export const User_page_competence_list_group_item = ({ index, competence, inspec
    const [boxMidCardState, boxMidCardDispatch] = useBoxMidCard();
    const [planTrainingForm, setPlanTrainingForm] = useState({ date: formatDate(new Date(Date.now())) });
    const { name, rating, createdAt, lastEdit } = competence;
-   //console.log(competence);
 
    const compBody = () => {
       return (
@@ -106,7 +105,6 @@ export const User_page_competence_list_group_item = ({ index, competence, inspec
             }
          } else if (competence.ratingSetting === 'from0to1') {
             addRating(usersDispatch, { ...usersState.user }, { ...competence }, competence.rating.rating === 1 ? 0 : 1);
-            console.log(`tutajh`);
          }
       } else {
          addRating(usersDispatch, { ...usersState.user }, { ...competence }, 1);
@@ -143,14 +141,14 @@ export const User_page_competence_list_group_item = ({ index, competence, inspec
                </div>
                {inspect && competence.ratingSetting === 'from0to4' && (
                   <div className='arrows_increase_decrease'>
-                     <i className='fa-solid fa-sort-up arrow_up' onClick={onIncrease}></i>
-                     <i className='fa-solid fa-sort-down arrow_down' onClick={onDecrease}></i>
+                     <i className='fa-solid fa-sort-up arrow_up' title='Increase' onClick={onIncrease}></i>
+                     <i className='fa-solid fa-sort-down arrow_down' title='Decrease' onClick={onDecrease}></i>
                   </div>
                )}
             </td>
             {inspect && (
                <td onClick={() => setBoxMidCard('Zaplanuj szkolenie', planTrainingBody, boxMidCardDispatch)}>
-                  <i className='fa-solid fa-calendar-plus inspect_calendar_icon'></i>
+                  <i className='fa-solid fa-calendar-plus inspect_calendar_icon' title='Zaplanuj szkolenie'></i>
                </td>
             )}
          </tr>

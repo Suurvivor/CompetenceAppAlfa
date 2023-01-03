@@ -4,6 +4,7 @@ import { Day } from './Day/Day';
 import { useDate } from './hooks/useDate';
 import { useAuth } from '../../context/auth/AuthState';
 import Spinner from '../layout/Spinner';
+import { v4 as uuidv4 } from 'uuid';
 
 export const Calendar = () => {
    const [authState, authDispatch] = useAuth();
@@ -35,7 +36,7 @@ export const Calendar = () => {
             <hr />
             <div id='calendar'>
                {days.map((d, index) => (
-                  <Day key={index} day={d} userId={authState.user._id} />
+                  <Day key={uuidv4()} day={d} userId={authState.user._id} />
                ))}
             </div>
          </div>

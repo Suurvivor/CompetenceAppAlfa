@@ -7,13 +7,13 @@ const returnGrade = (grade, ratingSetting) => {
          case null:
          case 'null':
          case '0':
-            return <i className='fa-solid fa-xmark red'></i>;
+            return <i className='fa-solid fa-xmark red' title='Aprove'></i>;
          case 1:
          case '1':
-            return <i className='fa-solid fa-check green'></i>;
+            return <i className='fa-solid fa-check green' title='Down grade'></i>;
 
          default:
-            return <i className='fa-solid fa-xmark red'></i>;
+            return <i className='fa-solid fa-xmark red' title='Aprove'></i>;
       }
    } else if (ratingSetting === 'from0to4') {
       switch (grade) {
@@ -21,7 +21,7 @@ const returnGrade = (grade, ratingSetting) => {
          case '0':
          case null:
             return (
-               <div id='circle'>
+               <div id='circle' title='Grade'>
                   <div id='circle_number'>0</div>
                   <div id='box_top_left display_none'></div>
                   <div id='box_top_right display_none'></div>
@@ -32,7 +32,7 @@ const returnGrade = (grade, ratingSetting) => {
          case 1:
          case '1':
             return (
-               <div id='circle'>
+               <div id='circle' title='Grade'>
                   <div id='circle_number'>1</div>
                   <div id='box_top_left display_none'></div>
                   <div id='box_top_right'></div>
@@ -43,7 +43,7 @@ const returnGrade = (grade, ratingSetting) => {
          case 2:
          case '2':
             return (
-               <div id='circle'>
+               <div id='circle' title='Grade'>
                   <div id='circle_number'>2</div>
                   <div id='box_top_left display_none'></div>
                   <div id='box_top_right'></div>
@@ -54,7 +54,7 @@ const returnGrade = (grade, ratingSetting) => {
          case 3:
          case '3':
             return (
-               <div id='circle'>
+               <div id='circle' title='Grade'>
                   <div id='circle_number'>3</div>
                   <div id='box_top_left display_none'></div>
                   <div id='box_top_right'></div>
@@ -65,7 +65,7 @@ const returnGrade = (grade, ratingSetting) => {
          case 4:
          case 4:
             return (
-               <div id='circle'>
+               <div id='circle' title='Grade'>
                   <div id='circle_number'>4</div>
                   <div id='box_top_left'></div>
                   <div id='box_top_right'></div>
@@ -74,7 +74,7 @@ const returnGrade = (grade, ratingSetting) => {
                </div>
             );
          default:
-            return <i className='fa-solid fa-xmark red'></i>;
+            return <i className='fa-solid fa-xmark red' title='Aprove'></i>;
       }
    }
 };

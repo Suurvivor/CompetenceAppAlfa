@@ -35,22 +35,38 @@ exports.getUser = asyncHandler(async (req, res, next) => {
       return next(new ErrorResponse(`Could not find user of id ${req.params.id}`, 400));
    }
 
-   const planedTrainingForUsers = await PlaningTraining.find({ createdBy: user._id })
+   const planedTrainingForUsers = await PlaningTraining.find({ createdBy: userid })
       .populate({
          path: 'competenceId',
          select: 'name workplace',
       })
-      .populate({ path: 'createdBy', select: '_id name' })
-      .populate({ path: 'trainedUserId', select: '_id name' })
+      .populate({
+         path: 'createdBy',
+         select: '_id name workplace',
+         populate: { path: 'workplace', select: '_id name' },
+      })
+      .populate({
+         path: 'trainedUserId',
+         select: '_id name workplace',
+         populate: { path: 'workplace', select: '_id name' },
+      })
       .sort({ trainingDate: 1 });
 
-   const planedTraining = await PlaningTraining.find({ trainedUserId: user._id })
+   let planedTraining = await PlaningTraining.find({ trainedUserId: userid })
       .populate({
          path: 'competenceId',
          select: 'name workplace',
       })
-      .populate({ path: 'createdBy', select: '_id name' })
-      .populate({ path: 'trainedUserId', select: '_id name' })
+      .populate({
+         path: 'createdBy',
+         select: '_id name workplace',
+         populate: { path: 'workplace', select: '_id name' },
+      })
+      .populate({
+         path: 'trainedUserId',
+         select: '_id name workplace',
+         populate: { path: 'workplace', select: '_id name' },
+      })
       .sort({ trainingDate: 1 });
 
    const compiled = planedTraining.concat(planedTrainingForUsers);

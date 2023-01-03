@@ -17,8 +17,16 @@ exports.getPlanedTraining = asyncHandler(async (req, res, next) => {
          path: 'competenceId',
          select: 'name workplace',
       })
-      .populate({ path: 'createdBy', select: '_id name' })
-      .populate({ path: 'trainedUserId', select: '_id name' })
+      .populate({
+         path: 'createdBy',
+         select: '_id name workplace',
+         populate: { path: 'workplace', select: '_id name' },
+      })
+      .populate({
+         path: 'trainedUserId',
+         select: '_id name workplace',
+         populate: { path: 'workplace', select: '_id name' },
+      })
       .sort({ trainingDate: 1 });
 
    let planedTraining = await PlaningTraining.find({ trainedUserId: userid })
@@ -26,9 +34,16 @@ exports.getPlanedTraining = asyncHandler(async (req, res, next) => {
          path: 'competenceId',
          select: 'name workplace',
       })
-      .populate({ path: 'createdBy', select: '_id name' })
-      .populate({ path: 'trainedUserId', select: '_id name' })
-
+      .populate({
+         path: 'createdBy',
+         select: '_id name workplace',
+         populate: { path: 'workplace', select: '_id name' },
+      })
+      .populate({
+         path: 'trainedUserId',
+         select: '_id name workplace',
+         populate: { path: 'workplace', select: '_id name' },
+      })
       .sort({ trainingDate: 1 });
 
    const compiled = planedTraining.concat(planedTrainingForUsers);
