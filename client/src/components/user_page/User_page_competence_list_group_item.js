@@ -1,24 +1,17 @@
 import React, { useState } from 'react';
 import returnGrade from './utils/returnGrade';
 import { useUsers, addRating, planTraining } from '../../context/users/UsersState';
-
+import { formatDateCalendar, formatDate } from './utils/formatDate';
 import { useBoxMidCard, setBoxMidCard, closeBoxMidCard } from '../../context/boxMidCard/BoxMidCardState';
 import { useEffect } from 'react';
 import { useAuth } from '../../context/auth/AuthState';
-import axios from 'axios';
-
-export const formatDate = (date) => {
-   return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}T${
-      date.getHours() < 10 ? 0 : ''
-   }${date.getHours()}:${date.getMinutes()}`;
-};
 
 export const User_page_competence_list_group_item = ({ index, competence, inspect = false }) => {
    //console.log(competence);
    const [authState] = useAuth();
    const [usersState, usersDispatch] = useUsers();
    const [boxMidCardState, boxMidCardDispatch] = useBoxMidCard();
-   const [planTrainingForm, setPlanTrainingForm] = useState({ date: formatDate(new Date(Date.now())) });
+   const [planTrainingForm, setPlanTrainingForm] = useState({ date: formatDateCalendar(new Date(Date.now())) });
    const { name, rating, createdAt, lastEdit } = competence;
 
    const compBody = () => {
@@ -30,11 +23,11 @@ export const User_page_competence_list_group_item = ({ index, competence, inspec
                   <ul>
                      <li>Rating: {rating ? rating.rating : 'null'}</li>
                      <li>
-                        Rating created at: {rating && formatDate(rating.created_at)} by {rating.created_by}
+                        Rating created at: {rating && formatDate(rating.created_at)} by {rating.created_by.name}
                      </li>
                      {rating.lastmodify_by !== null && (
                         <li>
-                           Last Edit {formatDate(rating.lastmodify)} by {rating.lastmodify_by}
+                           Last Edit {formatDate(rating.lastmodify)} by {rating.lastmodify_by.name}
                         </li>
                      )}
                   </ul>
@@ -59,7 +52,7 @@ export const User_page_competence_list_group_item = ({ index, competence, inspec
             <input
                type='datetime-local'
                value={planTrainingForm.date}
-               min={formatDate(new Date(Date.now()))}
+               min={formatDateCalendar(new Date(Date.now()))}
                onChange={(e) => onChangePlanTrainForm(e)}
                id='date'
                name='date'

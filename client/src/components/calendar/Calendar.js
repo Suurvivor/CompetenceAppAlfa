@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { CalendarHeader } from './CalendarHeader/CalendarHeader';
 import { Day } from './Day/Day';
 import { useDate } from './hooks/useDate';
-import { useAuth } from '../../context/auth/AuthState';
+import { useAuth, loadUser } from '../../context/auth/AuthState';
 import Spinner from '../layout/Spinner';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -10,15 +10,16 @@ export const Calendar = () => {
    const [authState, authDispatch] = useAuth();
    const [nav, setNav] = useState(0);
    const [events, setEvents] = useState(authState.user.planedTraining);
+   const [loading, setLoading] = useState(true);
 
    const eventForDate = (date) => events.find((e) => e.trainingDate === date);
 
    useEffect(() => {
-      localStorage.setItem('events', JSON.stringify(events));
+      loadUser(authDispatch, setLoading);
    }, [events]);
 
    const { days, dateDisplay } = useDate(events, nav);
-   if (!authState.user) return <Spinner />;
+   if (!authState.user || loading === true) return <Spinner />;
 
    return (
       <>

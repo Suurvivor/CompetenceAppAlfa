@@ -136,7 +136,6 @@ body {
 }
 
 #user_dashboard_statistics {
-   padding: 40px;
    display: flex;
    flex-direction: row;
 }
@@ -412,6 +411,14 @@ svg {
    100% {
       stroke-dashoffset: var(--offset);
    }
+}
+
+.dashboard_progresBar {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   gap: 1rem;
+   margin-left: auto;
 }
 
 #circle_number {
@@ -782,10 +789,12 @@ input[type='checkbox'] {
    left: 50%;
    transform: translate(-50%, -50%);
    min-width: 450px;
+   max-height: 800px;
    background-color: #e9ecef;
    min-height: 200px;
    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
    padding: 13px 30px;
+   overflow: scroll;
 }
 
 .boxMidCard_topBar {
@@ -1001,6 +1010,7 @@ input[type='checkbox'] {
 }
 
 .eventList {
+   max-width: 600px;
    margin-top: 30px;
 }
 

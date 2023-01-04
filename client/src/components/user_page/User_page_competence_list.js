@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { useAuth } from '../../context/auth/AuthState';
 import { User_page_competence_list_group } from './User_page_competence_list_group';
 import Spinner from '../layout/Spinner';
+import { countTotalRating } from '../../utils/countTotalRating';
 
 export const User_page_competence_list = () => {
    const [AuthState, authDispatch] = useAuth();
@@ -36,6 +37,7 @@ export const User_page_competence_list = () => {
             return { ...group, competenceListId: compListEdited };
          });
          setCompetenceGroups({ groups: groupsWithUserRating, loading: false });
+         console.log(countTotalRating(groupsWithUserRating));
       };
       res();
    }, []);

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useBoxMidCard, setBoxMidCard, closeBoxMidCard } from '../../context/boxMidCard/BoxMidCardState';
 import { useUsers, updateUser } from '../../context/users/UsersState';
 import { User_dashboard_reminders_list } from '../user_page/User_dashboard_reminders_list';
+import CircleProgresBar from '../statistics/CircleProgresBar';
 
 const UsersDashboard = () => {
    const [usersState, usersDisptach] = useUsers();
@@ -152,7 +153,12 @@ const UsersDashboard = () => {
          <>
             <User_dashboard_reminders_list planedTraining={usersState.user.planedTraining} />
          </>
-         <div id='user_dashboard_statistics'>to do</div>
+         <div id='user_dashboard_statistics'>
+            <div className='dashboard_progresBar'>
+               Total Score
+               <CircleProgresBar fill={10} />
+            </div>
+         </div>
       </div>
    );
 };
