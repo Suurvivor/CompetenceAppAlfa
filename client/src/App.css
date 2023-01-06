@@ -1040,7 +1040,7 @@ input[type='checkbox'] {
 
 .paddingDay {
    cursor: default !important;
-   background-color: #fffcff !important;
+   background-color: var(--bg-color) !important;
    box-shadow: none !important;
 }
 #newEventModal,
