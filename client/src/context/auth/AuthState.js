@@ -13,6 +13,7 @@ import {
    LOGIN_SUCCESS,
    LOGIN_FAIL,
    LOGOUT,
+   GET_GROUPED_COMPETENCES_AUTH,
    CLEAR_ERRORS,
 } from '../types';
 
@@ -28,12 +29,12 @@ export const useAuth = () => {
 // but they remain here for ease of students transitioning
 
 // Load User
-export const loadUser = async (dispatch, cb) => {
+export const loadUser = async (dispatch, load, cb) => {
    try {
       const res = await axios.get('/auth/me');
       //const planedTrain = await axios.get()
       //set load false
-      if (cb) cb(false);
+      if (load) load(false);
       dispatch({
          type: USER_LOADED,
          payload: res.data.user,
@@ -82,6 +83,16 @@ export const logout = (dispatch) => {
    dispatch({ type: LOGOUT });
 };
 
+//get grouped competence
+export const getGroupedCompetences = async (dispatch, user) => {
+   try {
+      const groups = await axios.get(`/groupcompetences/workplace/${user.workplace._id}`);
+      dispatch({ type: GET_GROUPED_COMPETENCES_AUTH, payload: { groups, user } });
+   } catch (err) {
+      errorHandler(err, dispatch, LOGIN_FAIL);
+   }
+};
+
 // Clear Errors
 export const clearErrors = (dispatch) => dispatch({ type: CLEAR_ERRORS });
 
@@ -93,6 +104,7 @@ const AuthState = (props) => {
       isAuthenticated: null,
       loading: true,
       user: null,
+      competenceGroups: { groups: [], loading: true },
       error: null,
       blur: false,
    };

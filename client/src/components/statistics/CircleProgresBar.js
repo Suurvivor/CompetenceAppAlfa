@@ -4,19 +4,19 @@ const CircleProgresBar = ({ fill = 0 }) => {
    fill = Math.round(fill);
    if (fill > 100) fill = 100;
    if (fill < 0) fill = 0;
-   const [number, setNumber] = useState();
+   const [number, setNumber] = useState(0);
    const get_fill = (procenty) => Math.round((procenty * 490) / 100);
    const get_fill_time = (fill) => Math.round((490 * 20) / fill);
 
+   let style = { '--offset': get_fill(100 - fill) };
    useEffect(() => {
       let counter = 0;
-      setNumber(counter + '%');
       setInterval(() => {
          if (counter == fill) {
             clearInterval();
          } else {
             counter += 1;
-            setNumber(counter + '%');
+            setNumber(counter);
          }
       }, get_fill_time(get_fill(fill)));
    }, []);
@@ -25,7 +25,7 @@ const CircleProgresBar = ({ fill = 0 }) => {
       <div className='skill' id='user_dashboard_statistics_skill'>
          <div className='outer'>
             <div className='inner'>
-               <div id='number'>{number}</div>
+               <div id='number'>{number}%</div>
             </div>
          </div>
          <svg

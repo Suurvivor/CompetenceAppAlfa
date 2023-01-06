@@ -67,8 +67,6 @@ export const addRating = async (dispatch, user, competence, ratingGrade) => {
          rating: grade,
          competence_id: competence._id,
       });
-      const use = await axios.get('auth/me/');
-      console.log(use);
       let userWithNewRat = {
          ...user,
       };

@@ -3,6 +3,8 @@ import { useBoxMidCard, setBoxMidCard, closeBoxMidCard } from '../../context/box
 import { useUsers, updateUser } from '../../context/users/UsersState';
 import { User_dashboard_reminders_list } from '../user_page/User_dashboard_reminders_list';
 import CircleProgresBar from '../statistics/CircleProgresBar';
+import { countTotalRating } from '../../utils/countTotalRating';
+import Spinner from '../layout/Spinner';
 
 const UsersDashboard = () => {
    const [usersState, usersDisptach] = useUsers();
@@ -136,6 +138,8 @@ const UsersDashboard = () => {
    useEffect(() => {
       if (boxMidCardState.show) setBoxMidCard('Edit', editBody, boxMidCardDispatch);
    }, [editInput]);
+   if (usersState.userCompetences === null) return <Spinner />;
+
    return (
       <div id='user_dashboard'>
          <div id='user_dashboard_info'>
@@ -156,7 +160,7 @@ const UsersDashboard = () => {
          <div id='user_dashboard_statistics'>
             <div className='dashboard_progresBar'>
                Total Score
-               <CircleProgresBar fill={10} />
+               <CircleProgresBar fill={countTotalRating(usersState.userCompetences).percent} />
             </div>
          </div>
       </div>

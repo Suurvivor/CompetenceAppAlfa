@@ -37,9 +37,11 @@ export const countTotalRatingForGroup = (group) => {
       }
 
       //add to user total rating
-      if (competence.rating.rating !== null || competence.rating.rating !== 0 || competence.rating.rating <= 4) {
-         userTotalRating += competence.rating.rating;
-      }
+      const competenceRating = parseInt(competence.rating.rating);
+      if (competenceRating <= 4 && competenceRating >= 0) userTotalRating += competenceRating;
+      // if (competence.rating.rating !== null || competence.rating.rating !== 0 || competence.rating.rating <= 4) {
+      //    userTotalRating += competence.rating.rating;
+      // }
    });
 
    return { groupName, groupTotalRating, userTotalRating };
