@@ -6,7 +6,7 @@ import { useBoxMidCard, setBoxMidCard, closeBoxMidCard } from '../../context/box
 import { useEffect } from 'react';
 import { useAuth } from '../../context/auth/AuthState';
 
-export const User_page_competence_list_group_item = ({ index, competence, inspect = false }) => {
+export const User_page_competence_list_group_item = ({ index, competence, inspect = false, loading, setLoading }) => {
    //console.log(competence);
    const [authState] = useAuth();
    const [usersState, usersDispatch] = useUsers();
@@ -89,18 +89,46 @@ export const User_page_competence_list_group_item = ({ index, competence, inspec
       setBoxMidCard('Competence info', compBody, boxMidCardDispatch);
    };
 
+   const onAddRating = (dispatch, user, competence, ratingGrade) => {
+      console.log(loading);
+      if (loading) {
+         console.log(`loading wait`);
+         return null;
+      }
+      addRating(dispatch, user, competence, ratingGrade, setLoading);
+      setLoading(true);
+   };
+
+   const Spinner = () => {
+      return (
+         <div className='spring-spinner'>
+            <div className='spring-spinner-part top'>
+               <div className='spring-spinner-rotator'></div>
+            </div>
+            <div className='spring-spinner-part bottom'>
+               <div className='spring-spinner-rotator'></div>
+            </div>
+         </div>
+      );
+   };
+
    const onIncrease = () => {
       //console.log(competence.rating.rating.rating);
       if (competence.rating.rating) {
          if (competence.ratingSetting === 'from0to4') {
             if (competence.rating.rating !== 4) {
-               addRating(usersDispatch, { ...usersState.user }, { ...competence }, competence.rating.rating + 1);
+               onAddRating(usersDispatch, { ...usersState.user }, { ...competence }, competence.rating.rating + 1);
             }
          } else if (competence.ratingSetting === 'from0to1') {
-            addRating(usersDispatch, { ...usersState.user }, { ...competence }, competence.rating.rating === 1 ? 0 : 1);
+            onAddRating(
+               usersDispatch,
+               { ...usersState.user },
+               { ...competence },
+               competence.rating.rating === 1 ? 0 : 1
+            );
          }
       } else {
-         addRating(usersDispatch, { ...usersState.user }, { ...competence }, 1);
+         onAddRating(usersDispatch, { ...usersState.user }, { ...competence }, 1);
       }
    };
 
@@ -108,7 +136,7 @@ export const User_page_competence_list_group_item = ({ index, competence, inspec
       if (competence.rating.rating) {
          if (competence.ratingSetting === 'from0to4') {
             if (competence.rating.rating !== 0) {
-               addRating(usersDispatch, { ...usersState.user }, { ...competence }, competence.rating.rating - 1);
+               onAddRating(usersDispatch, { ...usersState.user }, { ...competence }, competence.rating.rating - 1);
             }
          }
       }
@@ -127,16 +155,22 @@ export const User_page_competence_list_group_item = ({ index, competence, inspec
                {competence.name}
             </td>
             <td className='td_flex'>
-               <div onClick={() => inspect && onIncrease()} className='cursor_pointer'>
-                  {competence.rating.rating
-                     ? returnGrade(competence.rating.rating, competence.ratingSetting)
-                     : returnGrade(null, competence.ratingSetting)}
-               </div>
-               {inspect && competence.ratingSetting === 'from0to4' && (
-                  <div className='arrows_increase_decrease'>
-                     <i className='fa-solid fa-sort-up arrow_up' title='Increase' onClick={onIncrease}></i>
-                     <i className='fa-solid fa-sort-down arrow_down' title='Decrease' onClick={onDecrease}></i>
-                  </div>
+               {loading ? (
+                  <Spinner />
+               ) : (
+                  <>
+                     <div onClick={() => inspect && onIncrease()} className='cursor_pointer'>
+                        {competence.rating.rating
+                           ? returnGrade(competence.rating.rating, competence.ratingSetting)
+                           : returnGrade(null, competence.ratingSetting)}
+                     </div>
+                     {inspect && competence.ratingSetting === 'from0to4' && (
+                        <div className='arrows_increase_decrease'>
+                           <i className='fa-solid fa-sort-up arrow_up' title='Increase' onClick={onIncrease}></i>
+                           <i className='fa-solid fa-sort-down arrow_down' title='Decrease' onClick={onDecrease}></i>
+                        </div>
+                     )}
+                  </>
                )}
             </td>
             {inspect && (

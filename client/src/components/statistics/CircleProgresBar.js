@@ -3,10 +3,11 @@ export const get_fill = (procenty) => Math.round((procenty * 490) / 100);
 export const get_fill_time = (fill) => Math.round((490 * 20) / fill);
 
 const CircleProgresBar = ({ fill = 0 }) => {
+   //console.log(`fill: ${fill}`);
    fill = Math.round(fill);
    if (fill > 100) fill = 100;
    if (fill < 0) fill = 0;
-   const [number, setNumber] = useState(fill);
+   const [number, setNumber] = useState(0);
    const [style, setStyle] = useState({ '--offset': get_fill(100 - fill) });
    const prevNumber = useRef(0);
 
@@ -28,11 +29,10 @@ const CircleProgresBar = ({ fill = 0 }) => {
             //console.log(counter);
             setStyle({ '--offset': get_fill(100 - counter) });
             setNumber(counter);
-            prevNumber.current = number;
+            // prevNumber.current = number;
+            // console.log(`number: ${number} : prevNumber: ${prevNumber.current} : fill: ${fill}`);
          }
       }, get_fill_time(get_fill(fill)));
-      console.log(counter);
-      console.log(`number: ${number} : prevNumber: ${prevNumber.current}`);
    }, [fill]);
 
    return (

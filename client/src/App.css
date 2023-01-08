@@ -21,6 +21,7 @@
 
 nav {
    width: 100%;
+   min-width: 700px;
    align-self: center;
    background-color: var(--thead);
    color: white;
@@ -69,6 +70,7 @@ body {
    border-top: 2px solid var(--thead);
    width: 1380px;
    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+   gap: 1rem;
 }
 
 #user_dashboard_info {
@@ -138,6 +140,8 @@ body {
 #user_dashboard_statistics {
    display: flex;
    flex-direction: row;
+   justify-content: center;
+   align-items: center;
 }
 
 #user_dashboard_statistics_skill {
@@ -418,7 +422,6 @@ svg {
    flex-direction: column;
    align-items: center;
    gap: 1rem;
-   margin-left: auto;
 }
 
 #circle_number {
@@ -1043,19 +1046,7 @@ input[type='checkbox'] {
    background-color: var(--bg-color) !important;
    box-shadow: none !important;
 }
-#newEventModal,
-#deleteEventModal {
-   z-index: 20;
-   padding: 25px;
-   background-color: #e8f4fa;
-   box-shadow: 0px 0px 3px black;
-   border-radius: 5px;
-   width: 350px;
-   top: 100px;
-   left: calc(50% - 175px);
-   position: absolute;
-   font-family: sans-serif;
-}
+
 #eventTitleInput {
    padding: 10px;
    width: 100%;
@@ -1066,28 +1057,74 @@ input[type='checkbox'] {
    border: none;
    box-shadow: 0px 0px 3px gray;
 }
-#eventTitleInput.error {
-   border: 2px solid red;
+
+.spring-spinner,
+.spring-spinner * {
+   box-sizing: border-box;
 }
-#cancelButton,
-#deleteButton {
-   background-color: #d36c6c;
+
+.spring-spinner {
+   height: 30px;
+   width: 30px;
 }
-#saveButton,
-#closeButton {
-   background-color: #92a1d1;
+
+.spring-spinner .spring-spinner-part {
+   overflow: hidden;
+   height: calc(30px / 2);
+   width: 30px;
 }
-#eventText {
-   font-size: 14px;
+
+.spring-spinner .spring-spinner-part.bottom {
+   transform: rotate(180deg) scale(-1, 1);
 }
-#modalBackDrop {
-   top: 0px;
-   left: 0px;
-   z-index: 10;
-   width: 100vw;
-   height: 100vh;
-   position: absolute;
-   background-color: rgba(0, 0, 0, 0.8);
+
+.spring-spinner .spring-spinner-rotator {
+   width: 30px;
+   height: 30px;
+   border: calc(40px / 7) solid transparent;
+   border-right-color: #1d34ff;
+   border-top-color: #1d34ff;
+   border-radius: 50%;
+   box-sizing: border-box;
+   animation: spring-spinner-animation 2s ease-in-out infinite;
+   transform: rotate(-200deg);
+}
+
+@keyframes spring-spinner-animation {
+   0% {
+      border-width: calc(40px / 7);
+   }
+   25% {
+      border-width: calc(40px / 23.33);
+   }
+   50% {
+      transform: rotate(115deg);
+      border-width: calc(40px / 7);
+   }
+   75% {
+      border-width: calc(40px / 23.33);
+   }
+   100% {
+      border-width: calc(40px / 7);
+   }
+}
+
+@media screen and (max-width: 1200px) {
+   #calendar_container {
+      width: 500px;
+   }
+
+   .day {
+      width: 60px;
+      height: 65px;
+   }
+   #weekdays div {
+      width: 70px;
+      font-size: 0.6rem;
+   }
+   .event {
+      max-height: 1.2rem;
+   }
 }
 
 @media screen and (max-width: 1400px) {
@@ -1106,5 +1143,40 @@ input[type='checkbox'] {
 
    .users_list_container {
       grid-template-columns: repeat(3, 1fr);
+   }
+}
+
+@media screen and (max-width: 700px) {
+   #user_dashboard {
+      grid-template-columns: none;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 400px;
+      gap: 2rem;
+   }
+   #user_dashboard_info {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+   }
+
+   #container {
+      width: 400px;
+   }
+
+   .flex-column {
+      width: 400px;
+   }
+
+   .users {
+      width: 400px;
+   }
+
+   .users_search_input {
+      width: 400px;
    }
 }

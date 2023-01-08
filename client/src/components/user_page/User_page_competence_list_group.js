@@ -2,7 +2,7 @@ import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { User_page_competence_list_group_item } from './User_page_competence_list_group_item';
 
-export const User_page_competence_list_group = ({ name, competenceList, inspect = false }) => {
+export const User_page_competence_list_group = ({ name, competenceList, inspect = false, loading, setLoading }) => {
    return (
       <div className='item'>
          <table>
@@ -21,6 +21,8 @@ export const User_page_competence_list_group = ({ name, competenceList, inspect 
                      competence={competence}
                      index={index}
                      inspect={inspect}
+                     loading={loading}
+                     setLoading={setLoading}
                   />
                ))}
             </tbody>

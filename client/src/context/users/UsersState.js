@@ -58,7 +58,7 @@ export const getUserCompetenceGroups = async (dispatch, user) => {
    }
 };
 
-export const addRating = async (dispatch, user, competence, ratingGrade) => {
+export const addRating = async (dispatch, user, competence, ratingGrade, loading) => {
    let grade = parseInt(ratingGrade, 10);
    if (grade > 4 || grade < 0) grade = 0;
 
@@ -82,6 +82,7 @@ export const addRating = async (dispatch, user, competence, ratingGrade) => {
       } else {
          userWithNewRat.rating.push(rat.data.data);
       }
+      loading(false);
       dispatch({ type: USERS_ADD_RATING, payload: { rating: rat.data.data, user: { ...userWithNewRat } } });
    } catch (error) {
       errorHandler(error, dispatch, USERS_LOAD_FAIL);
