@@ -1090,6 +1090,10 @@ input[type='checkbox'] {
    transform: rotate(-200deg);
 }
 
+.treeViewContainer {
+   transform: rotate(90deg);
+}
+
 @keyframes spring-spinner-animation {
    0% {
       border-width: calc(40px / 7);

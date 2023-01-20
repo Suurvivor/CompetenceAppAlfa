@@ -12,11 +12,7 @@ export const UsersInspect = () => {
       getDepartments(usersDisptach);
       getUserCompetenceGroups(usersDisptach, usersState.user);
    }, [usersState.user]);
-   if (
-      usersState.departments.length === 0 ||
-      (usersState.departments.length === 0 && usersState.userCompetences === null)
-   )
-      return <Spinner />;
+   if (usersState.departments.length === 0) return <Spinner />;
    return (
       <>
          <UsersDashboard />

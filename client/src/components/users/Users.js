@@ -6,6 +6,7 @@ import UsersInspect from './UsersInspect';
 import { useUsers, getUser, getUsers, clearUser } from '../../context/users/UsersState';
 
 const Users = () => {
+   console.log(`users`);
    const [usersState, usersDispatch] = useUsers();
    const [searchInput, setSearchInput] = useState('');
    const { userId } = useParams();

@@ -7,6 +7,7 @@ import {
    LOGIN_FAIL,
    LOGOUT,
    GET_GROUPED_COMPETENCES_AUTH,
+   GET_GROUPED_COMPETENCES_AUTH_ERROR,
    CLEAR_ERRORS,
    NETWORK_ERROR,
    ERROR,
@@ -57,7 +58,15 @@ const authReducer = (state, action) => {
          return {
             ...state,
             competenceGroups: { groups: [...groupsWithUserRating], loading: false },
+            loading: false,
          };
+      case GET_GROUPED_COMPETENCES_AUTH_ERROR:
+         return {
+            ...state,
+            competenceGroups: { groups: [], loading: false },
+            error: action.payload,
+         };
+
       case NETWORK_ERROR:
       case ERROR:
       case REGISTER_FAIL:

@@ -6,7 +6,7 @@ import WorkplaceList from './WorkplaceList';
 import Spinner from '../layout/Spinner';
 import CompetenceList from './CompetenceList';
 
-export const Tree = () => {
+export const TreeIndex = () => {
    const [authState] = useAuth();
    const [treeState, treeDispatch] = useTree();
    const { departments, loading } = treeState;

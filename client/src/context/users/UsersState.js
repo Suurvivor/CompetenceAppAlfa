@@ -38,7 +38,9 @@ export const getUser = async (dispatch, userId) => {
 
 export const getUsers = async (dispatch, searchInput) => {
    try {
+      console.log(`start geting users ...`);
       const req = await axios.get(`users/?s=${searchInput}`);
+      console.log(`end got users !`);
       dispatch({ type: USERS_GET_USERS, payload: req.data.data });
    } catch (error) {
       errorHandler(error, dispatch, USERS_LOAD_FAIL);

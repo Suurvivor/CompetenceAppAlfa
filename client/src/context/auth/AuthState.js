@@ -1,6 +1,5 @@
 import React, { useReducer, useContext, useEffect } from 'react';
 import axios from 'axios';
-
 import AuthContext from './authContext';
 import authReducer from './authReducer';
 import setAuthToken from '../../utils/setAuthToken';
@@ -14,6 +13,7 @@ import {
    LOGIN_FAIL,
    LOGOUT,
    GET_GROUPED_COMPETENCES_AUTH,
+   GET_GROUPED_COMPETENCES_AUTH_ERROR,
    CLEAR_ERRORS,
 } from '../types';
 
@@ -89,7 +89,7 @@ export const getGroupedCompetences = async (dispatch, user) => {
       const groups = await axios.get(`/groupcompetences/workplace/${user.workplace._id}`);
       dispatch({ type: GET_GROUPED_COMPETENCES_AUTH, payload: { groups, user } });
    } catch (err) {
-      errorHandler(err, dispatch, LOGIN_FAIL);
+      errorHandler(err, dispatch, GET_GROUPED_COMPETENCES_AUTH_ERROR);
    }
 };
 

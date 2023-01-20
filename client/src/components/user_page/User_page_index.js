@@ -9,19 +9,14 @@ export const User_page_index = () => {
    const [loading, setLoading] = useState(true);
    useEffect(() => {
       loadUser(authDispatch, setLoading);
-      if (!loading) getGroupedCompetences(authDispatch, authState.user);
    }, [loading]);
-   if (loading || authState.loading || authState.competenceGroups.loading) return <Spinner />;
+   if (loading || authState.loading) return <Spinner />;
    return (
       <>
-         {authState.user.workplace && authState.user.workplace.department ? (
-            <>
-               <User_Dashboard />
-               <User_Competence_Board />
-            </>
-         ) : (
-            <div>You need to be added to some department please contact with your supervisor.</div>
-         )}
+         <>
+            <User_Dashboard />
+            <User_Competence_Board />
+         </>
       </>
    );
 };

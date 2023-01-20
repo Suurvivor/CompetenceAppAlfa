@@ -138,7 +138,7 @@ const UsersDashboard = () => {
    useEffect(() => {
       if (boxMidCardState.show) setBoxMidCard('Edit', editBody, boxMidCardDispatch);
    }, [editInput]);
-   if (usersState.userCompetences === null) return <Spinner />;
+   //if (usersState.userCompetences === null) return <Spinner />;
 
    return (
       <div id='user_dashboard'>
@@ -160,7 +160,11 @@ const UsersDashboard = () => {
          <div id='user_dashboard_statistics'>
             <div className='dashboard_progresBar'>
                Total Score
-               <CircleProgresBar fill={countTotalRating(usersState.userCompetences).percent} />
+               {usersState.userCompetences === null || usersState.userCompetences.length === 0 ? (
+                  <CircleProgresBar fill={0} />
+               ) : (
+                  <CircleProgresBar fill={countTotalRating(usersState.userCompetences).percent} />
+               )}
             </div>
          </div>
       </div>
