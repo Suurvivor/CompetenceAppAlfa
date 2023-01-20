@@ -20,7 +20,6 @@ const Users = () => {
    }, [searchInput, userId]);
 
    if (usersState.user) {
-      s;
       return (
          <>
             <i className='fa-solid fa-chevron-left fa-2x cursor_pointer' onClick={() => clearUser(usersDispatch)}>
