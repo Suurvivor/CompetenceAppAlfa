@@ -3,8 +3,8 @@ import UsersListItem from './UsersListItem';
 import Spinner from '../layout/Spinner';
 import { v4 as uuidv4 } from 'uuid';
 
-const UsersList = ({ users, setUser }) => {
-   if (!users) return <Spinner />;
+const UsersList = ({ users, loading }) => {
+   if (!users || loading) return <Spinner />;
    return (
       <div className='users_list_container'>
          {users.map((user) => {

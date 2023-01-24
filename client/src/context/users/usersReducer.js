@@ -149,7 +149,7 @@ const usersReducer = (state, action) => {
       case USERS_SET_LOADING:
          return {
             ...state,
-            loading: action.payload.loading,
+            loading: true,
          };
       default:
          throw new Error(`Unsupported type of: ${action.type}`);

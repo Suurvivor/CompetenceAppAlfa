@@ -39,6 +39,7 @@ export const getUser = async (dispatch, userId) => {
 export const getUsers = async (dispatch, searchInput) => {
    try {
       console.log(`start geting users ...`);
+      setLoading(dispatch, true);
       const req = await axios.get(`users/?s=${searchInput}`);
       console.log(`end got users !`);
       dispatch({ type: USERS_GET_USERS, payload: req.data.data });

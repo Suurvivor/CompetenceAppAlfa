@@ -4,6 +4,7 @@ import UsersList from './UsersList';
 import UsersSearchInput from './UsersSearchInput';
 import UsersInspect from './UsersInspect';
 import { useUsers, getUser, getUsers, clearUser } from '../../context/users/UsersState';
+import Spinner from '../layout/Spinner';
 
 const Users = () => {
    console.log(`users`);
@@ -33,7 +34,7 @@ const Users = () => {
          <div className='users'>
             <p className='users_title'>Users</p>
             <UsersSearchInput setSearchInput={setSearchInput} />
-            <UsersList users={usersState.users} />
+            <UsersList users={usersState.users} loading={usersState.loading} />
          </div>
       );
    }
