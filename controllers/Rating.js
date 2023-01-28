@@ -29,7 +29,7 @@ exports.addRating = asyncHandler(async (req, res, next) => {
          name: req.user.name,
          email: req.user.email,
          role: req.user.role,
-         workplace: req.user.workplace,
+         workplace: { _id: req.user.workplace._id, name: req.user.workplace.name },
       },
    };
    let pulledDataFromCallBack = '';
