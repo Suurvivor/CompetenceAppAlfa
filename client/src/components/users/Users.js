@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import UsersList from './UsersList';
 import UsersSearchInput from './UsersSearchInput';
 import UsersInspect from './UsersInspect';
-import { useUsers, getUser, getUsers, clearUser } from '../../context/users/UsersState';
+import { useUsers, getUser, getUsers, clearUser, cleanUp } from '../../context/users/UsersState';
 import Spinner from '../layout/Spinner';
 
 const Users = () => {
@@ -18,6 +18,9 @@ const Users = () => {
       } else {
          getUsers(usersDispatch, searchInput);
       }
+      return () => {
+         cleanUp(usersDispatch);
+      };
    }, [searchInput, userId]);
 
    if (usersState.user) {

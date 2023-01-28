@@ -23,7 +23,14 @@ exports.addRating = asyncHandler(async (req, res, next) => {
       lastmodify: null,
       lastmodify_by: null,
       created_at: Date.now(),
-      created_by: req.user,
+      //created_by: req.user,
+      created_by: {
+         _id: req.user._id,
+         name: req.user.name,
+         email: req.user.email,
+         role: req.user.role,
+         workplace: req.user.workplace,
+      },
    };
    let pulledDataFromCallBack = '';
    const test = await user.addNewRatingOrUpdateIfExists(req.params.competenceid, ratingData, req.user, function (data) {

@@ -4,6 +4,7 @@ import {
    USERS_SET_USER,
    USERS_GET_COMPETENCE_GROUPS,
    USERS_CLEAR_USER,
+   USERS_CLEANUP,
    USERS_LOAD_FAIL,
    CLEAR_ERRORS,
    USERS_GET_DEPARTMENTS,
@@ -127,6 +128,15 @@ const usersReducer = (state, action) => {
             ...state,
             user: null,
             userCompetences: null,
+            loading: false,
+         };
+      case USERS_CLEANUP:
+         return {
+            users: null,
+            user: null,
+            userCompetences: null,
+            departments: [],
+            error: null,
             loading: false,
          };
       case USERS_GET_DEPARTMENTS:

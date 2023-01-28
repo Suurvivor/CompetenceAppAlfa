@@ -9,6 +9,7 @@ import {
    USERS_GET_USER,
    USERS_GET_USERS,
    USERS_CLEAR_USER,
+   USERS_CLEANUP,
    USERS_GET_COMPETENCE_GROUPS,
    USERS_SET_USER,
    USERS_LOAD_FAIL,
@@ -38,10 +39,8 @@ export const getUser = async (dispatch, userId) => {
 
 export const getUsers = async (dispatch, searchInput) => {
    try {
-      console.log(`start geting users ...`);
       setLoading(dispatch, true);
       const req = await axios.get(`users/?s=${searchInput}`);
-      console.log(`end got users !`);
       dispatch({ type: USERS_GET_USERS, payload: req.data.data });
    } catch (error) {
       errorHandler(error, dispatch, USERS_LOAD_FAIL);
@@ -94,6 +93,9 @@ export const addRating = async (dispatch, user, competence, ratingGrade, loading
 
 export const clearUser = (dispatch) => {
    dispatch({ type: USERS_CLEAR_USER });
+};
+export const cleanUp = (dispatch) => {
+   dispatch({ type: USERS_CLEANUP });
 };
 
 export const getDepartments = async (dispatch) => {

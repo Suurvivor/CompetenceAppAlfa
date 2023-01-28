@@ -9,16 +9,16 @@ import { v4 as uuidv4 } from 'uuid';
 export const Calendar = () => {
    const [authState, authDispatch] = useAuth();
    const [nav, setNav] = useState(0);
-   const [events, setEvents] = useState(authState.user.planedTraining);
+   //const [events, setEvents] = useState(authState.user.planedTraining);
    const [loading, setLoading] = useState(true);
 
-   const eventForDate = (date) => events.find((e) => e.trainingDate === date);
+   //const eventForDate = (date) => authState.user.planedTraining.find((e) => e.trainingDate === date);
 
    useEffect(() => {
       loadUser(authDispatch, setLoading);
-   }, [events]);
+   }, [authState.user.planedTraining]);
 
-   const { days, dateDisplay } = useDate(events, nav);
+   const { days, dateDisplay } = useDate(authState.user.planedTraining, nav);
    if (!authState.user || loading === true) return <Spinner />;
 
    return (
