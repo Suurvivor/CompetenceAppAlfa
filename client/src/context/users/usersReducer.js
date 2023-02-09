@@ -25,11 +25,14 @@ const usersReducer = (state, action) => {
       case USERS_GET_USERS:
          return {
             ...state,
-            users: action.payload.map((user) =>
-               user.name.toString().length >= 10
-                  ? { ...user, shortName: `${user.name.slice(0, 10)}..` }
-                  : { ...user, shortName: user.name }
-            ),
+            users: {
+               ...action.payload,
+               data: action.payload.data.map((user) =>
+                  user.name.toString().length >= 10
+                     ? { ...user, shortName: `${user.name.slice(0, 10)}..` }
+                     : { ...user, shortName: user.name }
+               ),
+            },
             loading: false,
          };
       case USERS_SET_USER:

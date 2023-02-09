@@ -7,6 +7,8 @@ const PlaningTraining = require('../models/PlaningTraining');
 //@route POST /api/v1/users
 //@access Private
 exports.addUser = asyncHandler(async (req, res, next) => {
+   //fix after drop mongo db
+   //await User.syncIndexes();
    const newUser = await User.create(req.body);
    res.status(201).json({
       succes: true,

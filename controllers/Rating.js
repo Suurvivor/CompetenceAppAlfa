@@ -37,7 +37,7 @@ exports.addRating = asyncHandler(async (req, res, next) => {
       pulledDataFromCallBack = data;
    });
 
-   console.log(pulledDataFromCallBack.rating);
+   //console.log(pulledDataFromCallBack.rating);
 
    res.status(201).json({
       succes: true,

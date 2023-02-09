@@ -40,8 +40,9 @@ export const getUser = async (dispatch, userId) => {
 export const getUsers = async (dispatch, searchInput) => {
    try {
       setLoading(dispatch, true);
-      const req = await axios.get(`users/?s=${searchInput}`);
-      dispatch({ type: USERS_GET_USERS, payload: req.data.data });
+      const req = await axios.get(`users/?s=${searchInput}&&select=_id,name,email,role,workplace&&page=1`);
+      console.log(req);
+      dispatch({ type: USERS_GET_USERS, payload: req.data });
    } catch (error) {
       errorHandler(error, dispatch, USERS_LOAD_FAIL);
    }
@@ -134,7 +135,7 @@ const UsersState = (props) => {
    const { setAlert } = alertContext;
 
    const initialState = {
-      users: null,
+      users: { data: [] },
       user: null,
       userCompetences: null,
       departments: [],

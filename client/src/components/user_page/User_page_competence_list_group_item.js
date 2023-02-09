@@ -13,21 +13,20 @@ export const User_page_competence_list_group_item = ({ index, competence, inspec
    const [boxMidCardState, boxMidCardDispatch] = useBoxMidCard();
    const [planTrainingForm, setPlanTrainingForm] = useState({ date: formatDateCalendar(new Date(Date.now())) });
    const { name, rating, createdAt, lastEdit } = competence;
-
    const compBody = () => {
       return (
          <>
             <span className='BMCard_competenceTitle'>Competence name: '{name}'</span>
             <div className='BMCard_competenceContainer'>
-               {rating ? (
+               {rating?.rating != null ? (
                   <ul>
                      <li>Rating: {rating ? rating.rating : 'null'}</li>
                      <li>
-                        Rating created at: {rating && formatDate(rating.created_at)} by {rating.created_by.name}
+                        Rating created at: {rating && formatDate(rating.created_at)} by {rating.created_by?.name}
                      </li>
                      {rating.lastmodify_by !== null && (
                         <li>
-                           Last Edit {formatDate(rating.lastmodify)} by {rating.lastmodify_by.name}
+                           Last Edit {formatDate(rating.lastmodify)} by {rating.lastmodify_by?.name}
                         </li>
                      )}
                   </ul>

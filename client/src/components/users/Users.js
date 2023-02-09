@@ -4,10 +4,8 @@ import UsersList from './UsersList';
 import UsersSearchInput from './UsersSearchInput';
 import UsersInspect from './UsersInspect';
 import { useUsers, getUser, getUsers, clearUser, cleanUp } from '../../context/users/UsersState';
-import Spinner from '../layout/Spinner';
 
 const Users = () => {
-   console.log(`users`);
    const [usersState, usersDispatch] = useUsers();
    const [searchInput, setSearchInput] = useState('');
    const { userId } = useParams();
@@ -33,11 +31,12 @@ const Users = () => {
          </>
       );
    } else {
+      // console.log(usersState.users);
       return (
          <div className='users'>
             <p className='users_title'>Users</p>
             <UsersSearchInput setSearchInput={setSearchInput} />
-            <UsersList users={usersState.users} loading={usersState.loading} />
+            <UsersList users={usersState.users.data} loading={usersState.loading} />
          </div>
       );
    }

@@ -4,7 +4,6 @@ import { User_page_competence_list_group } from './User_page_competence_list_gro
 import Spinner from '../layout/Spinner';
 
 export const User_page_competence_list = ({ competenceGroups }) => {
-   console.log(competenceGroups);
    if (competenceGroups.loading) return <Spinner />;
    return (
       <>
