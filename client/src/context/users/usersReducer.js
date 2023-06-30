@@ -135,7 +135,7 @@ const usersReducer = (state, action) => {
          };
       case USERS_CLEANUP:
          return {
-            users: null,
+            users: { data: [] },
             user: null,
             userCompetences: null,
             departments: [],

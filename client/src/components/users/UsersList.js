@@ -4,6 +4,7 @@ import Spinner from '../layout/Spinner';
 import { v4 as uuidv4 } from 'uuid';
 
 const UsersList = ({ users, loading }) => {
+   console.log(users);
    if (!users || loading) return <Spinner />;
    return (
       <div className='users_list_container'>
