@@ -89,7 +89,6 @@ export const User_page_competence_list_group_item = ({ index, competence, inspec
    };
 
    const onAddRating = (dispatch, user, competence, ratingGrade) => {
-      console.log(loading);
       if (loading) {
          console.log(`loading wait`);
          return null;
