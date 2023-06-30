@@ -144,7 +144,7 @@ const UsersDashboard = () => {
       <div id='user_dashboard'>
          <div id='user_dashboard_info'>
             <i
-               className='fa-solid fa-user-tie cursor_pointer'
+               className='fa-solid fa-user-tie'
                id='user_dashborad_info_avatar'
                onClick={() => setBoxMidCard('Edit', editBody, boxMidCardDispatch)}
             ></i>

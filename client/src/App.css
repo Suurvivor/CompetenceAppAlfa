@@ -84,6 +84,12 @@ body {
 }
 #user_dashborad_info_avatar {
    font-size: 100px;
+   max-width: 100px;
+}
+
+#user_dashborad_info_avatar:hover {
+   color: var(--thead);
+   cursor: pointer;
 }
 
 #user_dashboard_info_name {
