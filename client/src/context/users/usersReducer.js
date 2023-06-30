@@ -107,7 +107,7 @@ const usersReducer = (state, action) => {
          return {
             ...state,
             user: { ...action.payload },
-            users: state.users.map((user) =>
+            users: state.users.data.map((user) =>
                user._id === action.payload._id
                   ? {
                        ...action.payload,
