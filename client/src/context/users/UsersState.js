@@ -37,11 +37,12 @@ export const getUser = async (dispatch, userId) => {
    }
 };
 
-export const getUsers = async (dispatch, searchInput) => {
+export const getUsers = async (dispatch, searchInput, page = 1) => {
    try {
       setLoading(dispatch, true);
-      const req = await axios.get(`users/?s=${searchInput}&&select=_id,name,email,role,workplace&&page=1`);
-      //console.log(req);
+      const req = await axios.get(
+         `users/?s=${searchInput}&&select=_id,name,email,role,workplace&&page=${page}&&limit=10`
+      );
       dispatch({ type: USERS_GET_USERS, payload: req.data });
    } catch (error) {
       errorHandler(error, dispatch, USERS_LOAD_FAIL);

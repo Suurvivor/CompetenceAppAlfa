@@ -935,6 +935,11 @@ input[type='checkbox'] {
    margin-bottom: 40px;
 }
 
+.users_pagination > span:hover {
+   color: var(--thead);
+   cursor: pointer;
+}
+
 #calendar_container {
    width: 1120px;
    margin-top: 50px;

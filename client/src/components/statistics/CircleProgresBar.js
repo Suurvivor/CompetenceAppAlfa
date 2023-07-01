@@ -2,34 +2,43 @@ import React, { useState, useEffect, useRef } from 'react';
 export const get_fill = (procenty) => Math.round((procenty * 490) / 100);
 export const get_fill_time = (fill) => Math.round((490 * 20) / fill);
 
-const CircleProgresBar = ({ fill = 0 }) => {
+const CircleProgresBar = ({ fill }) => {
    //console.log(`fill: ${fill}`);
    fill = Math.round(fill);
    if (fill > 100) fill = 100;
    if (fill < 0) fill = 0;
    const [number, setNumber] = useState(0);
    const [style, setStyle] = useState({ '--offset': get_fill(100 - fill) });
-   const prevNumber = useRef(0);
+   const prevNumber = useRef(fill);
+   //console.log(prevNumber);
+   //console.log(fill);
 
    //let style = { '--offset': get_fill(100 - fill) };
    useEffect(() => {
+      let clear = false;
       let counter = 0;
       if (number < prevNumber.current) {
          counter = number;
       } else if (number > prevNumber.current) {
-         //counter = prevNumber.current;
+         counter = prevNumber.current;
       }
       //console.log(prevNumber.current);
       setInterval(() => {
+         // if (number === fill) {
+         //    console.log(`clear`);
+         //    clearInterval();
+         // }
+
          if (counter == fill) {
             clearInterval();
          } else {
             // number < prevNumber.current ? (counter += 1) : (counter -= 1);
             counter += 1;
             //console.log(counter);
+
             setStyle({ '--offset': get_fill(100 - counter) });
             setNumber(counter);
-            // prevNumber.current = number;
+            //prevNumber.current = number;
             // console.log(`number: ${number} : prevNumber: ${prevNumber.current} : fill: ${fill}`);
          }
       }, get_fill_time(get_fill(fill)));
