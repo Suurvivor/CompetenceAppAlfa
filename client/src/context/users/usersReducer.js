@@ -107,17 +107,23 @@ const usersReducer = (state, action) => {
          return {
             ...state,
             user: { ...action.payload },
-            users: state.users.data.map((user) =>
-               user._id === action.payload._id
-                  ? {
-                       ...action.payload,
-                       shortName:
-                          action.payload.name.toString().length >= 10
-                             ? `${action.payload.name.slice(0, 10)}..`
-                             : action.payload.name,
-                    }
-                  : user
-            ),
+            users: {
+               count: state.users.count,
+               data: state.users.data.map((user) =>
+                  user._id === action.payload._id
+                     ? {
+                          ...action.payload,
+                          shortName:
+                             action.payload.name.toString().length >= 10
+                                ? `${action.payload.name.slice(0, 10)}..`
+                                : action.payload.name,
+                       }
+                     : user
+               ),
+               pagination: state.users.pagination,
+               success: state.users.success,
+               total: state.users.total,
+            },
             loading: false,
          };
       case USERS_USER_PLAN_TRAIN:

@@ -53,6 +53,15 @@ export const setUser = (dispatch, user) => {
    dispatch({ type: USERS_SET_USER, payload: user });
 };
 
+export const updateUser = async (dispatch, user) => {
+   try {
+      const req = await axios.put(`users/${user._id}`, { ...user });
+      dispatch({ type: USERS_UPDATE_USER, payload: req.data.data });
+   } catch (error) {
+      errorHandler(error, dispatch, USERS_LOAD_FAIL);
+   }
+};
+
 export const getUserCompetenceGroups = async (dispatch, user) => {
    try {
       const groups = await axios.get(`/groupcompetences/workplace/${user.workplace._id}`);
@@ -104,15 +113,6 @@ export const getDepartments = async (dispatch) => {
    try {
       const req = await axios.get('departments/');
       dispatch({ type: USERS_GET_DEPARTMENTS, payload: req.data.data });
-   } catch (error) {
-      errorHandler(error, dispatch, USERS_LOAD_FAIL);
-   }
-};
-
-export const updateUser = async (dispatch, user) => {
-   try {
-      const req = await axios.put(`users/${user._id}`, { ...user });
-      dispatch({ type: USERS_UPDATE_USER, payload: req.data.data });
    } catch (error) {
       errorHandler(error, dispatch, USERS_LOAD_FAIL);
    }
