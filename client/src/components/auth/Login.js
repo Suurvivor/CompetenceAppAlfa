@@ -25,13 +25,12 @@ export const Login = () => {
 
    const { email, password } = user;
 
-   const onChange = (e) =>
-      setUser({ ...user, [e.target.name]: e.target.value });
+   const onChange = (e) => setUser({ ...user, [e.target.name]: e.target.value });
 
    const onSubmit = (e) => {
       e.preventDefault();
       if (email === '' || password === '') {
-         console.log('nie moga byc puste');
+         setAlert('Wszystkie pola musza być uzupełnione', 'danger');
       } else {
          login(authDispatch, { email, password });
       }
@@ -48,6 +47,7 @@ export const Login = () => {
             placeholder='email'
             value={email}
             onChange={onChange}
+            required
          />
          <input
             className='login_input_text'
@@ -56,14 +56,10 @@ export const Login = () => {
             placeholder='passowrd'
             value={password}
             onChange={onChange}
+            required
          />
          <div className='login_view_flex_row'>
-            <a
-               className='login_view_link'
-               href='http://'
-               target='_blank'
-               rel='noopener noreferrer'
-            >
+            <a className='login_view_link' href='http://' target='_blank' rel='noopener noreferrer'>
                Forgot password
             </a>
             <button type='submit' className='login_view_button'>

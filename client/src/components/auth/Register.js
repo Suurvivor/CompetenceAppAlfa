@@ -25,16 +25,20 @@ export const Register = () => {
 
    const { name, email, password, password2 } = user;
 
-   const onChange = (e) =>
-      setUser({ ...user, [e.target.name]: e.target.value });
+   const onChange = (e) => setUser({ ...user, [e.target.name]: e.target.value });
 
    const onSubmit = (e) => {
       e.preventDefault();
       if (name === '' || email === '' || password === '' || password2 === '') {
-         console.log('');
-      } else {
-         register(authDispatch, { name, email, password });
+         setAlert('Wszystkie pola musza być uzupełnione', 'danger');
+         return;
       }
+      if (password !== password2) {
+         setAlert('Passwords must be the same !', 'danger');
+         return;
+      }
+
+      register(authDispatch, { name, email, password });
    };
 
    if (isAuthenticated) return <Navigate to='/' />;
@@ -50,6 +54,7 @@ export const Register = () => {
             placeholder='name'
             value={name}
             onChange={onChange}
+            required
          />
          <input
             className='login_input_text'
@@ -59,6 +64,7 @@ export const Register = () => {
             placeholder='email'
             value={email}
             onChange={onChange}
+            required
          />
          <input
             className='login_input_text'
@@ -67,6 +73,7 @@ export const Register = () => {
             placeholder='passowrd'
             value={password}
             onChange={onChange}
+            required
          />
          <input
             className='login_input_text'
@@ -75,10 +82,11 @@ export const Register = () => {
             placeholder='repeat passowrd'
             value={password2}
             onChange={onChange}
+            required
          />
          <div className='login_view_flex_row'>
             <div id='login_view_terms_container'>
-               <input type='checkbox' name='terms' id='terms' />
+               <input type='checkbox' name='terms' id='terms' required />
                <span className='login_view_link'>Terms of use</span>
             </div>
 

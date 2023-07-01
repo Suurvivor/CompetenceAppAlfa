@@ -4,7 +4,7 @@ export const User_dashboard_user_info = ({ authState }) => {
    const [boxMidCardState, boxMidCardDispatch] = useBoxMidCard();
    const { name, role, workplace } = authState.user;
    const editProfile = () => {
-      return <p>Hello edit your shots</p>;
+      return <p>Hello edit your profile to do</p>;
    };
 
    return (
