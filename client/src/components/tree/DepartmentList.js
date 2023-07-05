@@ -21,12 +21,10 @@ const DepartmentList = () => {
    }, []);
 
    const onCreate = () => {
-      let data = createDepartment(treeDispatch, departmentName);
-
-      console.log(data);
+      createDepartment(treeDispatch, departmentName);
+      onPick(treeState.departments[treeState.departments.length]);
       setShowAdd(false);
       setDepartmentName(null);
-      //onPick()
    };
 
    const onPick = (departId) => {

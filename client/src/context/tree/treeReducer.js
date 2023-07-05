@@ -30,6 +30,8 @@ const treeReducer = (state, action) => {
       case TREE_CREATE_DEPARTMNET:
          return {
             ...state,
+            currentDepartment: action.payload._id,
+            currentWorkplace: null,
             departments: [...state.departments, action.payload],
             loading: false,
          };
