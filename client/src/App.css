@@ -703,6 +703,9 @@ input[type='checkbox'] {
 .treeUlDepartments > div > li:hover {
    opacity: 1;
 }
+.treeUlDepartments > div > li.active {
+   opacity: 1;
+}
 
 .tree_dashboard_ul_item_input {
    border: none;

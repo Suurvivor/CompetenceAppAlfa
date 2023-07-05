@@ -32,6 +32,7 @@ const treeReducer = (state, action) => {
             ...state,
             currentDepartment: action.payload._id,
             currentWorkplace: null,
+            workplaces: [],
             departments: [...state.departments, action.payload],
             loading: false,
          };
@@ -39,12 +40,14 @@ const treeReducer = (state, action) => {
          return {
             ...state,
             departments: state.departments.filter((department) => department._id !== action.payload),
+            workplaces: [],
             loading: false,
          };
       case TREE_SET_CURRENT_DEPARTMENT:
          return {
             ...state,
             currentDepartment: action.payload,
+            currentWorkplace: null,
             loading: false,
          };
       case TREE_LOAD_WORKPLACES:
