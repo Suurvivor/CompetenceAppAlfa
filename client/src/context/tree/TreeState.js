@@ -40,6 +40,13 @@ export const getDepartments = async (dispatch) => {
    }
 };
 
+// do dokonczenia
+export const getDepartmentByName = async (name) => {
+   try {
+      const res = await axios.get('/departments/:id');
+   } catch (error) {}
+};
+
 export const createDepartment = async (dispatch, name) => {
    try {
       const res = await axios.post('/departments', { name: name });

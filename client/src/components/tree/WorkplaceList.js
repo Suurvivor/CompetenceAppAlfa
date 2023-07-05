@@ -74,9 +74,12 @@ const WorkplaceList = () => {
             </>
          ) : (
             <>
-               <button onClick={() => setShowAdd(true)} className='tree_dashboard_ul_button'>
-                  Stworz nowe stanowisko pracy
-               </button>
+               {treeState.departments.length > 0 && (
+                  <button onClick={() => setShowAdd(true)} className='tree_dashboard_ul_button'>
+                     Stworz nowe stanowisko pracy
+                  </button>
+               )}
+
                {treeState.workplaces.length > !-1 && (
                   <button
                      onClick={() => deleteWorkplace(treeDispatch, treeState.currentWorkplace)}

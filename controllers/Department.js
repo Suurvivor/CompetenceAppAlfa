@@ -33,6 +33,22 @@ exports.getDepartment = asyncHandler(async (req, res, next) => {
    });
 });
 
+//@desc Get single department by name
+//@route Get /api/v1/departments/byname/:name
+//@access Private
+exports.getDepartmentByName = asyncHandler(async (req, res, next) => {
+   const department = await Department.find({ name: req.params.name });
+   if (!department) {
+      return next(new ErrorResponse(`Could not find any department of name ${req.params.name}`, 400));
+   }
+   if (department.length === 0)
+      return next(new ErrorResponse(`Could not find any department of name ${req.params.name}`, 400));
+   res.status(200).json({
+      succes: true,
+      data: department,
+   });
+});
+
 //@desc Create department
 //@route POST /api/v1/departments
 //@access Private
