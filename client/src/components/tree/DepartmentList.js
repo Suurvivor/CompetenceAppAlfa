@@ -20,12 +20,6 @@ const DepartmentList = () => {
       //console.log(treeState.departments[0]._id);
       if (treeState.departments.length > 0) onPick(treeState.departments[0]._id);
    }, []);
-   // useEffect(() => {
-   //    if (treeState.departments.length > 0) {
-   //       console.log(treeState.currentDepartment);
-   //       onPick(treeState.currentDepartment);
-   //    }
-   // }, [treeState.currentDepartment]);
 
    const onCreate = () => {
       createDepartment(treeDispatch, departmentName);
@@ -44,6 +38,10 @@ const DepartmentList = () => {
          let index = treeState.departments.indexOf(department);
          deleteDepartment(treeDispatch, department._id);
          if (treeState.departments.length === 1) return; // if last one return
+         if (index === 0) {
+            onPick(treeState.departments[index + 1]._id);
+            return;
+         } //if frist one deleted reutrn
          onPick(treeState.departments[index - 1]._id); // select -1 from deleted one form list
       }
    };

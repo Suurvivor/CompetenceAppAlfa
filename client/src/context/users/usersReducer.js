@@ -157,6 +157,7 @@ const usersReducer = (state, action) => {
       case USERS_LOAD_FAIL:
          return {
             ...state,
+            userCompetences: [],
             error: action.payload,
             loading: false,
          };

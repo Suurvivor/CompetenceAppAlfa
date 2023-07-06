@@ -16,9 +16,11 @@ export const User_dashboard_user_info = ({ authState }) => {
          ></i>
          <span id='user_dashboard_info_name'>{name}</span>
          <span id='user_dashboard_info_position'>
-            Department: {workplace ? workplace.department.name : 'nie przypisano'}
+            Department: {workplace !== null ? workplace?.department?.name : 'nie przypisano'}
          </span>
-         <span id='user_dashboard_info_department'>Workplace: {workplace ? workplace.name : 'nie przypisano'}</span>
+         <span id='user_dashboard_info_department'>
+            Workplace: {workplace !== null ? workplace?.name : 'nie przypisano'}
+         </span>
       </div>
    );
 };

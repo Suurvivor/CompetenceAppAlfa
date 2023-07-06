@@ -150,8 +150,8 @@ const UsersState = (props) => {
    useEffect(() => {
       if (error) {
          setAlert(error, 'danger');
-         setTimeout(() => setUser(dispatch, null), 5000);
-         dispatch({ type: CLEAR_ERRORS });
+         //setTimeout(() => setUser(dispatch, null), 5000);
+         setTimeout(() => dispatch({ type: CLEAR_ERRORS }), 5000);
       }
    }, [error]);
 

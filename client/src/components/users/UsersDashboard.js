@@ -12,13 +12,18 @@ const UsersDashboard = () => {
    const [boxMidCardState, boxMidCardDispatch] = useBoxMidCard();
    const [editInput, setEditInput] = useState({
       user: { name: usersState.user.name },
-      department: usersState.user?.workplace?.department
-         ? usersState.user.workplace.department
-         : usersState.departments[0],
-      workplaces: usersState.user?.workplace?.department
-         ? usersState.departments.find((depart) => depart._id === usersState.user.workplace.department._id).Workplaces
-         : usersState.departments[0].Workplaces,
-      selectedWorkplace: usersState.user?.workplace || usersState.departments[0].Workplaces[0],
+      department:
+         usersState.user?.workplace?.department !== null
+            ? usersState.user.workplace.department
+            : usersState.departments[0],
+      workplaces:
+         usersState.user?.workplace?.department !== null
+            ? usersState.departments.find((depart) => depart._id === usersState.user.workplace.department._id)
+                 .Workplaces
+            : usersState.departments[0].Workplaces,
+      selectedWorkplace:
+         (usersState.user?.workplace && usersState.user?.workplace?.department !== null) ||
+         usersState.departments[0].Workplaces[0],
    });
    const { user } = usersState;
 
