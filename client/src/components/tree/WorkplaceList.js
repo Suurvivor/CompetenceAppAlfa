@@ -21,7 +21,7 @@ const WorkplaceList = () => {
          setSelectedWorkplace(treeState.workplaces[0].name);
          getCompetences(treeDispatch, treeState.workplaces[0]._id);
       }
-   }, [treeState.workplaces, treeState.currentDepartment]);
+   }, [treeState.workplaces]);
 
    const onChange = (id, e) => {
       setSelectedWorkplace(e.target.options[e.target.selectedIndex].value);
